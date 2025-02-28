@@ -1,6 +1,5 @@
 # Commodity
-
-A plugin for [Obsidian](https://obsidian.md).
+Commodity is a simple plugin for [Obsidian](https://obsidian.md) made for financial purposes.
 
 Ever wanted to know how worth your Obsidian Vault can be? This plugin can save your life!
 

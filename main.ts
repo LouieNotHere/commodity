@@ -42,7 +42,7 @@ class VaultValueModal extends Modal {
 
         const valueHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}` });
 
-        const timeText = contentEl.createEl("p", { text: `The calculation ${timeTaken} ms in total!` });
+        const timeText = contentEl.createEl("p", { text: `The calculation took ${timeTaken} ms in total!` });
         timeText.style.fontSize = "0.9rem";
         timeText.style.color = "var(--text-muted)";
         timeText.style.marginTop = "5px";

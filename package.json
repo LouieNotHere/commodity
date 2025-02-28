@@ -1,7 +1,7 @@
 {
 	"name": "commodity",
 	"version": "1.0.0",
-	"description": "Calculate the worth of your Obsidian Vault!",
+	"description": "Simulate the worth of your Vault!",
 	"main": "main.js",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",

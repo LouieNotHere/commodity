@@ -30,7 +30,9 @@ jobs:
       - name: Package plugin
         run: |
           mkdir release
-          cp manifest.json dist/main.js styles.css release/ || true
+          cp manifest.json release/
+          cp styles.css release/ || true
+          cp dist/main.js release/main.js
           cd release && zip -r ../plugin.zip .
 
       - name: Export Zip

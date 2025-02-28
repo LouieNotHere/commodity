@@ -27,6 +27,9 @@ jobs:
       - name: Compile TypeScript
         run: npm run build
 
+      - name: Check Directory
+        run: dir
+
       - name: Package plugin
         run: |
           mkdir release

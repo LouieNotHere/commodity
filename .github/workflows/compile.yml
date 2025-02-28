@@ -35,7 +35,7 @@ jobs:
           mkdir release
           cp manifest.json release/
           cp styles.css release/ || true
-          cp dist/main.js release/main.js
+          cp main.js release/
           cd release && zip -r ../plugin.zip .
 
       - name: Export Zip

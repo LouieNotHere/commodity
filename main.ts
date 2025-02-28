@@ -22,15 +22,22 @@ class VaultValueModal extends Modal {
 		super(app);
 		this.stats = stats;
 	}
-
+	
 	onOpen() {
-		const { contentEl } = this;
-		contentEl.empty();
+        const { contentEl } = this;
+        contentEl.empty();
 
-		const smallHeader = contentEl.createEl("h4", { text: "Vault Value" });
+        contentEl.style.textAlign = "center";
+        contentEl.style.fontFamily = "var(--default-font)";
+ 
+        const smallHeader = contentEl.createEl("h4", { text: "Vault Value" });
+        smallHeader.style.marginBottom = "10px"; // Adjust spacing
 
-		const vaultValue = calculateVaultValue(this.stats);
-		const bigHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`});
+        const vaultValue = calculateVaultValue(this.stats);
+        const bigHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}` });
+
+        bigHeader.style.fontSize = "2rem";
+        bigHeader.style.fontWeight = "bold";
 	}
 
 	onClose() {

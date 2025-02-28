@@ -24,20 +24,28 @@ class VaultValueModal extends Modal {
 	}
 	
 	onOpen() {
-        const { contentEl } = this;
-        contentEl.empty();
+    const { contentEl } = this;
+    contentEl.empty();
 
-        contentEl.style.textAlign = "center";
-        contentEl.style.fontFamily = "var(--default-font)";
- 
-        const smallHeader = contentEl.createEl("h4", { text: "Vault Value" });
-        smallHeader.style.marginBottom = "10px"; // Adjust spacing
+    contentEl.style.textAlign = "center";
+    contentEl.style.fontFamily = "var(--default-font)";
 
-        const vaultValue = calculateVaultValue(this.stats);
-        const bigHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}` });
+    const startTime = performance.now();
 
-        bigHeader.style.fontSize = "2rem";
-        bigHeader.style.fontWeight = "bold";
+    const titleHeader = contentEl.createEl("h4", { text: "Calculated Vault Value" });
+    titleHeader.style.marginBottom = "10px";
+
+    const vaultValue = calculateVaultValue(this.stats);
+
+        const endTime = performance.now();
+        const timeTaken = (endTime - startTime).toFixed(2);
+
+        const valueHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}` });
+
+        const timeText = contentEl.createEl("p", { text: `The calculation ${timeTaken} ms in total!` });
+        timeText.style.fontSize = "0.9rem";
+        timeText.style.color = "var(--text-muted)";
+        timeText.style.marginTop = "5px";
 	}
 
 	onClose() {

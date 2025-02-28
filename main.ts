@@ -4,7 +4,7 @@ export default class commodityPlugin extends Plugin {
 	async onload() {
 		console.log("commodityPlugin loaded");
 
-		this.addRibbonIcon("lucide-calculator", "Calculate Vault Value", async () => {
+		this.addRibbonIcon("lucide-calculator", "Commodity: View Vault Worth", async () => {
 			const vaultStats = await calculateVaultStats(this.app.vault);
 			new VaultValueModal(this.app, vaultStats).open();
 		});
@@ -66,5 +66,5 @@ async function calculateVaultStats(vault: Vault): Promise<VaultStats> {
 
 function calculateVaultValue(stats: VaultStats): number {
 	const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
-	return (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
+	return "$" + (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
 }

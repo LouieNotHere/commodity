@@ -1,11 +1,11 @@
 {
 	"id": "commodity",
 	"name": "Commodity",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "0.16.0",
 	"description": "Simulate the worth of your Vault!",
 	"author": "Louie Kurenai",
 	"authorUrl": "https://paytouse.github.io/new-webpage",
 	"fundingUrl": "https://ko-fi.com/paytouse1774",
-	"isDesktopOnly": true
+	"isDesktopOnly": false
 }

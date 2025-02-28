@@ -11,6 +11,7 @@
     "importHelpers": true,
     "isolatedModules": true,
     "strictNullChecks": true,
+	"outDir": "./dist",
     "lib": [
       "DOM",
       "ES5",

@@ -1,8 +1,8 @@
 import { App, Plugin, Modal, Vault, TFile } from "obsidian";
 
-export default class VaultValuePlugin extends Plugin {
+export default class commodityPlugin extends Plugin {
 	async onload() {
-		console.log("VaultValuePlugin loaded");
+		console.log("commodityPlugin loaded");
 
 		this.addRibbonIcon("lucide-calculator", "Calculate Vault Value", async () => {
 			const vaultStats = await calculateVaultStats(this.app.vault);
@@ -11,7 +11,7 @@ export default class VaultValuePlugin extends Plugin {
 	}
 
 	onunload() {
-		console.log("VaultValuePlugin unloaded");
+		console.log("commodityPlugin unloaded");
 	}
 }
 
@@ -64,7 +64,6 @@ async function calculateVaultStats(vault: Vault): Promise<VaultStats> {
 	return { totalCharacters, totalWords, totalFiles, totalSentences };
 }
 
-// Function to compute the Vault Value using the given formula
 function calculateVaultValue(stats: VaultStats): number {
 	const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
 	return (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);

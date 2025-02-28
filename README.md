@@ -1,9 +1,9 @@
 # Commodity
 Commodity is a simple plugin for [Obsidian](https://obsidian.md) made for financial purposes.
 
-Ever wanted to know how worth your Obsidian Vault can be? This plugin can save your life!
+Ever wanted to know how worth your Vault can be? This plugin can calculate how worth it can be!
 
-This plugin simulates the estimated cost of your Obsidian Vault in just a matter of seconds! Please note that the value may vary depending on how many files your vault contains.
+This plugin simulates the estimated cost of your Vault in just a matter of seconds! Please note that the value may vary depending on how many files your vault contains.
 
 # How to install it?
 1. Go to **Community Plugins > Browse**.

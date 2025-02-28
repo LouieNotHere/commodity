@@ -30,7 +30,7 @@ class VaultValueModal extends Modal {
 		const smallHeader = contentEl.createEl("h4", { text: "Vault Value" });
 
 		const vaultValue = calculateVaultValue(this.stats);
-		const bigHeader = contentEl.createEl("h1", { text: vaultValue.toFixed(2) });
+		const bigHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`});
 	}
 
 	onClose() {
@@ -66,5 +66,5 @@ async function calculateVaultStats(vault: Vault): Promise<VaultStats> {
 
 function calculateVaultValue(stats: VaultStats): number {
 	const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
-	return "$" + (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
+	return (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
 }

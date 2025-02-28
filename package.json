@@ -1,6 +1,6 @@
 {
 	"name": "commodity",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Simulate the worth of your Vault!",
 	"main": "main.js",
 	"scripts": {

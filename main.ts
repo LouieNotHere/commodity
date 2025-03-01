@@ -67,7 +67,7 @@ class VaultValueModal extends Modal {
 
 		const formatter = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 		
-		const fullValue = vaultValue.toFixed(25);
+		const fullValue = Number(vaultValue.toFixed(25));
 		const truncatedValue = Math.trunc(fullValue);
 		var formattedValue:string = formatter.format(truncatedValue);
 

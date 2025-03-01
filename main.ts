@@ -102,9 +102,16 @@ async function calculateVaultStats(vault: Vault): Promise<VaultStats> {
 function calculateVaultValue(stats: VaultStats, currency: string): number {
     const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
     let value = (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
+	let finalValue = value * (CURRENCY_MULTIPLIERS[currency] || 1);
+
+    const formatter = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
     // Apply the currency multiplier
-    return value * (CURRENCY_MULTIPLIERS[currency] || 1);
+    if (finalValue > 999) {
+		return formatter.format(finalValue);
+	} else {
+		return finalValue
+	}
 }
 
 function getCurrencySymbol(currency: string): string {
@@ -112,8 +119,9 @@ function getCurrencySymbol(currency: string): string {
         "USD": "$",
         "JPY": "¥",
         "PHP": "₱",
-        "IDR": "Rp",
+        "IDR": "RP ",
         "EUR": "€",
+		"GBP": "£"
     };
     return symbols[currency] || "$";
 }

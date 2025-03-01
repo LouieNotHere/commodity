@@ -121,7 +121,8 @@ function getCurrencySymbol(currency: string): string {
         "PHP": "₱",
         "IDR": "RP ",
         "EUR": "€",
-		"GBP": "£"
+		"GBP": "£",
+		"KRW": "₩"
     };
     return symbols[currency] || "$";
 }

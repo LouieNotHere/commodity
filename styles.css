@@ -7,36 +7,18 @@
 
 */
 
-.modal-container {
+.vault-value-modal {
     text-align: center;
     font-family: var(--default-font);
-    padding: 20px;
-    background: var(--background-primary);
-    color: var(--text-normal);
-    border-radius: 8px;
-    box-shadow: var(--shadow-elevation-medium);
+    padding: 16px;
 }
 
-.window-header {
+.vault-value-modal h4 {
     font-size: 1.2em;
     font-weight: bold;
-    margin-bottom: 10px;
 }
 
-.window-value {
+.vault-value-modal h1 {
     font-size: 2em;
-    font-weight: bold;
-    color: var(--text-accent);
-    margin: 10px 0;
-}
-
-.window-time {
-    font-size: 0.9em;
-    color: var(--text-muted);
-}
-
-.window-loading {
-    font-size: 1em;
-    color: var(--text-muted);
-    font-style: italic;
+    margin-top: 8px;
 }

@@ -1,85 +1,99 @@
-import { App, Plugin, Modal, Vault, TFile } from "obsidian";
+import { Plugin, Notice } from "obsidian";
 
-export default class commodityPlugin extends Plugin {
-	async onload() {
-		console.log("commodityPlugin loaded");
+export default class CommodityPlugin extends Plugin {
+    async onload() {
+        console.log("Commodity is loading...");
 
-		this.addRibbonIcon("lucide-calculator", "Commodity: View Vault Worth", async () => {
-			const vaultStats = await calculateVaultStats(this.app.vault);
-			new VaultValueModal(this.app, vaultStats).open();
-		});
-	}
+        requestAnimationFrame(() => {
+            this.addRibbonIcon("dollar-sign", "Commodity: Calculate Vault Value", () => {
+                new VaultValueModal(this.app, this.vaultStats).open();
+            });
+        });
 
-	onunload() {
-		console.log("commodityPlugin unloaded");
-	}
+        setTimeout(async () => {
+            this.vaultStats = await this.precomputeVaultStats();
+        }, 100);
+
+        console.log("Commodity has successfully loaded.");
+    }
+
+    async precomputeVaultStats() {
+      let preComp:string = "Precomputing vault statistics..."
+      
+        console.log(preComp);
+        new Notice(preComp);
+
+        const allFiles = this.app.vault.getFiles();
+        let totalCharacters = 0,
+            totalWords = 0,
+            totalFiles = allFiles.length,
+            totalSentences = 0;
+
+        let oldestTimestamp = Date.now();
+
+        for (const file of allFiles) {
+            const content = await this.app.vault.cachedRead(file);
+            totalCharacters += content.length;
+            totalWords += content.split(/\s+/).length;
+            totalSentences += content.split(/[.!?]+/).length;
+
+            const stat = await this.app.vault.adapter.stat(file.path);
+            if (stat.ctime < oldestTimestamp) {
+                oldestTimestamp = stat.ctime;
+            }
+        }
+
+        const daysSinceCreation = (Date.now() - oldestTimestamp) / (1000 * 60 * 60 * 24);
+
+        console.log("The vault statistics has been computed.");
+
+        return { totalCharacters, totalWords, totalFiles, totalSentences, daysSinceCreation };
+    }
 }
 
 class VaultValueModal extends Modal {
-	private stats: VaultStats;
+    stats: VaultStats;
 
-	constructor(app: App, stats: VaultStats) {
-		super(app);
-		this.stats = stats;
-	}
-	
-	onOpen() {
-    const { contentEl } = this;
-    contentEl.empty();
+    constructor(app: App, stats: VaultStats) {
+        super(app);
+        this.stats = stats;
+    }
 
-    contentEl.style.textAlign = "center";
-    contentEl.style.fontFamily = "var(--default-font)";
+    onOpen() {
+        const { contentEl } = this;
+        contentEl.empty();
 
-    const startTime = performance.now();
+        contentEl.style.textAlign = "center";
+        contentEl.style.fontFamily = "var(--default-font)";
 
-    const titleHeader = contentEl.createEl("h4", { text: "Calculated Vault Value" });
-    titleHeader.style.marginBottom = "10px";
-
-    const vaultValue = calculateVaultValue(this.stats);
-
+        const startTime = performance.now();
+        const vaultValue = calculateVaultValue(this.stats);
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);
 
-        const valueHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}` });
+        contentEl.createEl("h4", { text: "Computed Vault Value:" }).style.marginBottom = "10px";
+        contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}` });
 
-        const timeText = contentEl.createEl("p", { text: `The calculation took ${timeTaken} ms in total!` });
+        const timeText = contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms` });
         timeText.style.fontSize = "0.9rem";
         timeText.style.color = "var(--text-muted)";
         timeText.style.marginTop = "5px";
-	}
 
-	onClose() {
-		this.contentEl.empty();
-	}
-}
-
-interface VaultStats {
-	totalCharacters: number;
-	totalWords: number;
-	totalFiles: number;
-	totalSentences: number;
-}
-
-async function calculateVaultStats(vault: Vault): Promise<VaultStats> {
-	let totalCharacters = 0;
-	let totalWords = 0;
-	let totalFiles = 0;
-	let totalSentences = 0;
-
-	const files = vault.getMarkdownFiles();
-	totalFiles = files.length;
-
-	for (const file of files) {
-		const content = await vault.read(file);
-		totalCharacters += content.length;
-		totalWords += content.split(/\s+/).length;
-		totalSentences += (content.match(/[.!?]+/g) || []).length;
-	}
-
-	return { totalCharacters, totalWords, totalFiles, totalSentences };
+        // new Notice(`Commodity: Vault Value = $${vaultValue.toFixed(2)} (calculated in ${timeTaken} ms)`);
+        new Notice("The value has been calculated!");
+    }
 }
 
 function calculateVaultValue(stats: VaultStats): number {
-	const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
-	return (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
+    const { totalCharacters, totalWords, totalFiles, totalSentences, daysSinceCreation } = stats;
+
+    return (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (totalFiles / 200) + (totalSentences / 21000) + (daysSinceCreation / 60);
+}
+
+interface VaultStats {
+    totalCharacters: number;
+    totalWords: number;
+    totalFiles: number;
+    totalSentences: number;
+    daysSinceCreation: number;
 }

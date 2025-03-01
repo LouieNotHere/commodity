@@ -10,7 +10,7 @@
 */
 
 import { CommoditySettingsTab, DEFAULT_SETTINGS, CURRENCY_MULTIPLIERS, CommoditySettings } from "./options";
-import { App, Plugin, Modal, Vault, TFile } from "obsidian";
+import { App, Plugin, Modal, Vault, TFile, Notice } from "obsidian";
 
 export default class CommodityPlugin extends Plugin {
     settings: CommoditySettings;
@@ -49,6 +49,7 @@ class VaultValueModal extends Modal {
     }
 
     onOpen() {
+        new Notice("Commodity (Legacy): Calculating the vault value...");
         const { contentEl } = this;
         contentEl.empty();
         contentEl.style.textAlign = "center";

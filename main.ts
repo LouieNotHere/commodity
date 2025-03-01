@@ -68,7 +68,8 @@ class VaultValueModal extends Modal {
 		const formatter = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 		
 		const fullValue = vaultValue.toFixed(25);
-		var formattedValue:string = formatter.format(Math.trunc(fullValue));
+		const truncatedValue = Math.trunc(fullValue);
+		var fotmattedValue:string = formatter.format(truncatedValue);
 
 		var valueText:string = `${currencySymbol}${vaultValue.toFixed(2)}`;
 

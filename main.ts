@@ -14,25 +14,22 @@ export default class CommodityPlugin extends Plugin {
         }
     });
 
-    this.addRibbonIcon("file-text", "Commodity: Open Active Note Value", () => {
+    this.addRibbonIcon("file-text", "Commodity: Calculate Active Note Value", () => {
         this.openNoteStatsView();
     });
 
     openNoteStatsView() {
     const activeFile = this.app.workspace.getActiveFile();
     if (!activeFile) {
-        new Notice("Commodity: No active note found.");
+        new Notice("Commodity: There is no active note at the moment.");
         return;
     }
 
-    // Check if the leaf is already open
     const existingLeaf = this.app.workspace.getLeavesOfType("commodity-note-view")[0];
 
     if (existingLeaf) {
-        // If the view exists, focus it
         this.app.workspace.revealLeaf(existingLeaf);
     } else {
-        // Otherwise, create a new one
         const newLeaf = this.app.workspace.getRightLeaf(false);
         if (newLeaf) {
             newLeaf.setViewState({

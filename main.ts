@@ -66,7 +66,13 @@ export default class CommodityPlugin extends Plugin {
             const daysSinceCreation = Math.floor((Date.now() - stat.ctime) / (1000 * 60 * 60 * 24));
 		}
 
-		const e = daysSinceCreation / 60;
+		const creationTime = app.vault.getRoot().stat?.ctime;
+        const currentTime = Date.now();
+        const daysSinceCreation = creationTime ? (currentTime - creationTime) / (1000 * 60 * 60 * 24) : 0;
+
+        const e = daysSinceCreation / 60;
+
+        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (1 / 200) + (totalSentences / 21000) + e;
 		
         // console.log("Days Since Vault Creation:", daysSinceCreation);
 
@@ -119,6 +125,8 @@ interface VaultStats {
     daysSinceCreation: number;
 }
 
+// This piece of code is typed to make the window when "Commodity: Calculate Vault Value" is executed from the ribbon.
+// I am trying to optimize the code, fix some issues as soon as possible.
 class VaultValueModal extends Modal {
     stats: VaultStats;
 
@@ -162,6 +170,8 @@ class VaultValueModal extends Modal {
     }
 }
 
+// This piece of code is typed to make an item to the right sidebar.
+// Changes could happen if an addition is demanded.
 class NoteValueView extends ItemView {
     filePath: string;
 

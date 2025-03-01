@@ -3,7 +3,7 @@
 // I know it took me a long time to fix some things before publishing it as an obsidian community plugin.
 // I deeply apologize for that, I am just trying to add some new things to the source code.
 
-import { Plugin } from "obsidian";
+import { Plugin, Notice } from "obsidian";
 import { VaultValueRibbon } from "./ribbons/vaultValueRibbon";
 import { NoteValueRibbon } from "./ribbons/noteValueRibbon";
 import { NoteValueView } from "./views/noteValueView";

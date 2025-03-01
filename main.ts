@@ -3,18 +3,15 @@
 // I know it took me a long time to fix some things before publishing it as an obsidian community plugin.
 // I deeply apologize for that, I am just trying to add some new things to the source code.
 
-// For now, here is the optimized code, with some logic fixes made by me.
-
 import { Plugin, Notice, WorkspaceLeaf, TFile, Modal, ItemView } from "obsidian";
 
 export default class CommodityPlugin extends Plugin {
-	private stats: VaultStats | null = null;
     private vaultStats: VaultStats | null = null;
 
     async onload() {
         console.log("Commodity is loading...");
 
-        this.stats = await this.precomputeVaultStats();
+        this.vaultStats = await this.precomputeVaultStats();
 
         this.addRibbonIcon("dollar-sign", "Commodity: Calculate Vault Value", () => {
             if (this.vaultStats) {
@@ -119,8 +116,7 @@ interface VaultStats {
     daysSinceCreation: number;
 }
 
-// Here is the ValueVaultModal class, where the function from the "Commodity: Calculate Vault Value" ribbon is located.
-// Some things might change depending on the demand.
+// VaultValueModal: Displays the calculated vault value when "Commodity: Calculate Vault Value" is clicked.
 class VaultValueModal extends Modal {
     stats: VaultStats;
 
@@ -164,14 +160,10 @@ class VaultValueModal extends Modal {
     }
 }
 
-// Here is the NoteValueView class, where the source code of the "Commodity: Calculate Active Note Value" ribbon is located.
-// I will try to add some more context if possible.
+// NoteValueView: Displays the calculated active note value in a sidebar.
 class NoteValueView extends ItemView {
-    filePath: string;
-
     constructor(leaf: WorkspaceLeaf, app: any) {
         super(leaf);
-        this.filePath = "";
     }
 
     getViewType(): string {
@@ -187,13 +179,16 @@ class NoteValueView extends ItemView {
         contentEl.empty();
         contentEl.addClass("vault-value-modal");
 
-		const startTime = performance.now();
-
         const activeFile = this.app.workspace.getActiveFile();
         if (!activeFile) {
             contentEl.createEl("p", { text: "Whoops! It seems like there is no active note at the moment." });
             return;
         }
+
+        const content = await this.app.vault.cachedRead(activeFile);
+        const totalCharacters = content.length;
+        const totalWords = content.split(/\s+/).filter(Boolean).length;
+        const totalSentences = content.split(/[.!?]+/).filter(Boolean).length;
 
         const vaultFiles = this.app.vault.getFiles();
         const totalFiles = vaultFiles.length;
@@ -203,13 +198,15 @@ class NoteValueView extends ItemView {
         const currentTime = Date.now();
         const daysSinceCreation = (currentTime - creationTime) / (1000 * 60 * 60 * 24);
 
-        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (totalFiles / 200) + (totalSentences / 21000) + (daysSinceCreation / 60); 
+        const startTime = performance.now();
 
-        contentEl.createEl("h3", { text: "Calculated Active Note Value:", cls: "vault-header" });
-		
+        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) +
+            (totalFiles / 200) + (totalSentences / 21000) + (daysSinceCreation / 60);
+
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);
 
+        contentEl.createEl("h3", { text: "Calculated Active Note Value:", cls: "vault-header" });
         contentEl.createEl("h1", { text: `$${value.toFixed(2)}`, cls: "vault-value" });
         contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "vault-time" });
     }

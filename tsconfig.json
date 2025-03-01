@@ -12,6 +12,14 @@
     "isolatedModules": true,
     "strictNullChecks": true,
 	"outDir": "./dist",
+	"paths": {
+      "*": [
+        "types/*",
+		"modals/*",
+		"ribbons/*",
+		"views/*"
+	  ]
+	},
     "lib": [
       "DOM",
       "ES5",

@@ -88,22 +88,37 @@ class VaultValueModal extends Modal {
     }
 
     onOpen() {
-        const { contentEl } = this;
-        contentEl.empty();
+    const { contentEl } = this;
+    contentEl.empty();
+    contentEl.addClass("vault-value-modal");
 
+    this.displayVaultValue(contentEl);
+	}
+
+    displayVaultValue(contentEl: HTMLElement) {
         const startTime = performance.now();
 
-        const value = (this.stats.totalCharacters / 122000) * (1 + (this.stats.totalWords / 130000)) +
+        let value = (this.stats.totalCharacters / 122000) * (1 + (this.stats.totalWords / 130000)) +
             (this.stats.totalFiles / 200) +
             (this.stats.totalSentences / 21000) +
             (this.stats.daysSinceCreation / 60);
 
+        if (isNaN(value) || !isFinite(value)) {
+            value = 0;
+        }
+
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);
 
-        contentEl.createEl("h3", { text: "Calculated Vault Value:", cls: "vault-header" });
-        contentEl.createEl("h1", { text: `$${value.toFixed(2)}`, cls: "vault-value" });
-        contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "vault-time" });
+        console.log("Vault Stats:", this.stats);
+        console.log("Calculated Vault Value:", value);
+        console.log("Time Taken:", timeTaken);
+
+        setTimeout(() => {
+            contentEl.createEl("h3", { text: "Calvulated Vault Value:", cls: "vault-header" });
+            contentEl.createEl("h1", { text: `$${value.toFixed(2)}`, cls: "vault-value" });
+            contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "vault-time" });
+        }, 10);
     }
 }
 

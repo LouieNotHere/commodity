@@ -6,7 +6,7 @@ export default class CommodityPlugin extends Plugin {
     async onload() {
     console.log("Commodity is loading...");
 
-    this stats = await this.precomputeVaultStats();
+    this.stats = await this.precomputeVaultStats();
 
     this.addRibbonIcon("dollar-sign", "Commodity: Calculate Vault Value", () => {
         if (this.vaultStats) {
@@ -29,7 +29,7 @@ export default class CommodityPlugin extends Plugin {
     console.log("Commodity has successfully loaded.");
 	}
 
-    async precomputeVaultStats() Promise<VaultStats> {
+    async precomputeVaultStats(): Promise<VaultStats> {
         new Notice("Precomputing vault statistics...");
 
         const startTime = performance.now();

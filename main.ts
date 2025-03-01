@@ -11,13 +11,16 @@
 
 import { App, Plugin, Modal, Vault, TFile } from "obsidian";
 
-export default class commodityPlugin extends Plugin {
+export default class CommodityPlugin extends Plugin {
 	async onload() {
 		console.log("commodityPlugin loaded");
 
 		this.addRibbonIcon("lucide-calculator", "Commodity: Calculate Vault Value", async () => {
+			const modal = new VaultValueModal(this.app);
+			modal.open();
+
 			const vaultStats = await calculateVaultStats(this.app.vault);
-			new VaultValueModal(this.app, vaultStats).open();
+			modal.updateVaultValue(vaultStats);
 		});
 	}
 
@@ -27,30 +30,36 @@ export default class commodityPlugin extends Plugin {
 }
 
 class VaultValueModal extends Modal {
-	private stats: VaultStats;
+	private stats: VaultStats | null = null;
 
-	constructor(app: App, stats: VaultStats) {
+	constructor(app: App) {
 		super(app);
-		this.stats = stats;
 	}
-	
+
 	onOpen() {
-    const { contentEl } = this;
-    contentEl.empty();
+		const { contentEl } = this;
+		contentEl.empty();
+		contentEl.style.textAlign = "center";
+		contentEl.style.fontFamily = "var(--default-font)";
 
-    contentEl.style.textAlign = "center";
-    contentEl.style.fontFamily = "var(--default-font)";
+		contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "window-header" });
+		contentEl.createEl("p", { text: "Calculating...", cls: "window-loading" });
+	}
 
-    const startTime = performance.now();
+	updateVaultValue(stats: VaultStats) {
+		this.stats = stats;
+		const { contentEl } = this;
+		contentEl.empty();
 
-    const titleHeader = contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "window-header" });
+		contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "window-header" });
 
-    const vaultValue = calculateVaultValue(this.stats);
+		const startTime = performance.now();
+		const vaultValue = calculateVaultValue(stats);
+		const endTime = performance.now();
+		const timeTaken = (endTime - startTime).toFixed(2);
 
-        const endTime = performance.now();
-        const timeTaken = (endTime - startTime).toFixed(2);
-
-        const valueHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`, cls: "window-value" });
+		contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`, cls: "window-value" });
+		contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "window-time" });
 	}
 
 	onClose() {
@@ -87,4 +96,4 @@ async function calculateVaultStats(vault: Vault): Promise<VaultStats> {
 function calculateVaultValue(stats: VaultStats): number {
 	const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
 	return (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
-}
+} 

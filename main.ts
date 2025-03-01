@@ -106,11 +106,13 @@ function calculateVaultValue(stats: VaultStats, currency: string): number {
 
     const formatter = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
+	const formattedValue = formatter.format(finalValue);
+
     // Apply the currency multiplier
     if (finalValue > 999) {
-		return formatter.format(finalValue);
+		return formattedValue;
 	} else {
-		return finalValue
+		return finalValue;
 	}
 }
 

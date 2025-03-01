@@ -69,6 +69,7 @@ export default class CommodityPlugin extends Plugin {
 
         const daysSinceCreation = (Date.now() - oldestTimestamp) / (1000 * 60 * 60 * 24);
         return { totalCharacters, totalWords, totalFiles, totalSentences, daysSinceCreation };
+		new Notice("Successfully precomputed the vault statistics!");
     }
 }
 

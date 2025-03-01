@@ -187,26 +187,25 @@ class NoteValueView extends ItemView {
         contentEl.empty();
         contentEl.addClass("vault-value-modal");
 
+		const startTime = performance.now();
+
         const activeFile = this.app.workspace.getActiveFile();
         if (!activeFile) {
             contentEl.createEl("p", { text: "Whoops! It seems like there is no active note at the moment." });
             return;
         }
 
-        const content = await this.app.vault.cachedRead(activeFile);
-        const totalCharacters = content.length;
-        const totalWords = content.split(/\s+/).length;
-        const totalSentences = content.split(/[.!?]+/).length;
-		const totalFiles = this.stats.totalFiles;
-        const daysSinceCreation = this.stats.daysSinceCreation;
+        const vaultFiles = this.app.vault.getFiles();
+        const totalFiles = vaultFiles.length;
 
+        const rootStats = await this.app.vault.adapter.stat(".");
+        const creationTime = rootStats?.ctime ?? 0;
+        const currentTime = Date.now();
+        const daysSinceCreation = (currentTime - creationTime) / (1000 * 60 * 60 * 24);
 
+        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (totalFiles / 200) + (totalSentences / 21000) + (daysSinceCreation / 60); 
 
         contentEl.createEl("h3", { text: "Calculated Active Note Value:", cls: "vault-header" });
-
-        const startTime = performance.now();
-
-		const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (totalFiles / 200) + (totalSentences / 21000) + (daysSinceCreation / 60); 
 		
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);

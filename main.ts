@@ -1,7 +1,7 @@
 import { Plugin, Notice, WorkspaceLeaf, TFile, Modal, ItemView } from "obsidian";
 
 export default class CommodityPlugin extends Plugin {
-    private stats: VaultStats | null = null;
+    private vaultStats: VaultStats | null = null;
 
     async onload() {
     console.log("Commodity is loading...");
@@ -67,7 +67,7 @@ export default class CommodityPlugin extends Plugin {
             totalWords,
             totalSentences,
             totalFiles: files.length,
-            daysSinceCreation,
+            const daysSinceCreation = e,
         };
 
         const endTime = performance.now();

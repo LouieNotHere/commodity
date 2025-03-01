@@ -202,9 +202,7 @@ class NoteValueView extends ItemView {
 
         const startTime = performance.now();
 
-        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) +
-            (1 / 200) +
-            (totalSentences / 21000);
+        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (1 / 200) + (totalSentences / 21000);
 
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);

@@ -3,6 +3,8 @@
 // I know it took me a long time to fix some things before publishing it as an obsidian community plugin.
 // I deeply apologize for that, I am just trying to add some new things to the source code.
 
+// For now, here is the optimized code, with some logic fixes made by me.
+
 import { Plugin, Notice, WorkspaceLeaf, TFile, Modal, ItemView } from "obsidian";
 
 export default class CommodityPlugin extends Plugin {
@@ -10,30 +12,30 @@ export default class CommodityPlugin extends Plugin {
     private vaultStats: VaultStats | null = null;
 
     async onload() {
-    console.log("Commodity is loading...");
+        console.log("Commodity is loading...");
 
-    this.stats = await this.precomputeVaultStats();
+        this.stats = await this.precomputeVaultStats();
 
-    this.addRibbonIcon("dollar-sign", "Commodity: Calculate Vault Value", () => {
-        if (this.vaultStats) {
-            new VaultValueModal(this.app, this.vaultStats).open();
-        } else {
-            new Notice("Commodity: The vault statistics are not ready yet. Please wait for a short time...");
-        }
-    });
+        this.addRibbonIcon("dollar-sign", "Commodity: Calculate Vault Value", () => {
+            if (this.vaultStats) {
+                new VaultValueModal(this.app, this.vaultStats).open();
+            } else {
+                new Notice("Commodity: The vault statistics are not ready yet. Please wait for a short time...");
+            }
+        });
 
-    this.addRibbonIcon("file-text", "Commodity: Calculate Active Note Value", () => {
-        this.openNoteStatsView();
-    });
+        this.addRibbonIcon("file-text", "Commodity: Calculate Active Note Value", () => {
+            this.openNoteStatsView();
+        });
 
-    this.registerView("commodity-note-view", (leaf) => new NoteValueView(leaf, this.app));
+        this.registerView("commodity-note-view", (leaf) => new NoteValueView(leaf, this.app));
 
-    setTimeout(async () => {
-        this.vaultStats = await this.precomputeVaultStats();
-    }, 100);
+        setTimeout(async () => {
+            this.vaultStats = await this.precomputeVaultStats();
+        }, 100);
 
-    console.log("Commodity has successfully loaded.");
-	}
+        console.log("Commodity has successfully loaded.");
+    }
 
     async precomputeVaultStats(): Promise<VaultStats> {
         new Notice("Precomputing vault statistics...");
@@ -60,38 +62,29 @@ export default class CommodityPlugin extends Plugin {
         console.log("Total Words:", totalWords);
         console.log("Total Sentences:", totalSentences);
 
-        const stat = await this.app.vault.adapter.stat(".");
-
-		if (stat?.ctime !== undefined && stat?.ctime !== null) {
-            const daysSinceCreation = Math.floor((Date.now() - stat.ctime) / (1000 * 60 * 60 * 24));
-		}
-
-		const rootStats = await this.app.vault.adapter.stat("."); 
+        const rootStats = await this.app.vault.adapter.stat("."); 
         const creationTime = rootStats?.ctime ?? 0;
         const currentTime = Date.now();
         const daysSinceCreation = (currentTime - creationTime) / (1000 * 60 * 60 * 24); 
-		
-        const e = daysSinceCreation / 60;
 
-        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (1 / 200) + (totalSentences / 21000) + e;
-		
-        // console.log("Days Since Vault Creation:", daysSinceCreation);
+        console.log("Days Since Vault Creation:", daysSinceCreation);
 
-        return {
+        const vaultStats: VaultStats = {
             totalCharacters,
             totalWords,
             totalSentences,
             totalFiles: files.length,
-            daysSinceCreation: e
+            daysSinceCreation
         };
 
         const endTime = performance.now();
-
-		new Notice("Successfully precomputed the vault statistics!");
         console.log(`Vault stats computed in ${(endTime - startTime).toFixed(2)} ms`);
-	}
-	
-	openNoteStatsView() {
+
+        new Notice("Successfully precomputed the vault statistics!");
+        return vaultStats;
+    }
+
+    openNoteStatsView() {
         const activeFile = this.app.workspace.getActiveFile();
         if (!activeFile) {
             new Notice("Commodity: No active note found.");
@@ -115,7 +108,7 @@ export default class CommodityPlugin extends Plugin {
                 new Notice("Commodity: Could not create a sidebar view.");
             }
         }
-	} 
+    } 
 }
 
 interface VaultStats {
@@ -126,8 +119,8 @@ interface VaultStats {
     daysSinceCreation: number;
 }
 
-// This piece of code is typed to make the window when "Commodity: Calculate Vault Value" is executed from the ribbon.
-// I am trying to optimize the code, fix some issues as soon as possible.
+// Here is the ValueVaultModal class, where the function from the "Commodity: Calculate Vault Value" ribbon is located.
+// Some things might change depending on the demand.
 class VaultValueModal extends Modal {
     stats: VaultStats;
 
@@ -137,12 +130,12 @@ class VaultValueModal extends Modal {
     }
 
     onOpen() {
-    const { contentEl } = this;
-    contentEl.empty();
-    contentEl.addClass("vault-value-modal");
+        const { contentEl } = this;
+        contentEl.empty();
+        contentEl.addClass("vault-value-modal");
 
-    this.displayVaultValue(contentEl);
-	}
+        this.displayVaultValue(contentEl);
+    }
 
     displayVaultValue(contentEl: HTMLElement) {
         const startTime = performance.now();
@@ -171,8 +164,8 @@ class VaultValueModal extends Modal {
     }
 }
 
-// This piece of code is typed to make an item to the right sidebar.
-// Changes could happen if an addition is demanded.
+// Here is the NoteValueView class, where the source code of the "Commodity: Calculate Active Note Value" ribbon is located.
+// I will try to add some more context if possible.
 class NoteValueView extends ItemView {
     filePath: string;
 

@@ -1,26 +1,19 @@
 /*
 
-  This will be the CSS file for the Commodity plugin.
+  This will be the CSS file for the Commodity (Legacy) plugin.
   If this file is not in the plugin folder itself, it can cause some visual bugs.
 
-*/
-.vault-value-modal {
-    text-align: center;
-    font-family: var(--font-interface);
-	padding: 10px;
-}
+  Please take note that the styles.css file itself may differ from the non-legacy one, as this is only for preservation of its' old functionality.
 
-.vault-header {
+*/
+
+
+.window-header {
     font-size: 1.2em;
     font-weight: bold;
 }
 
-.vault-value {
+.window-value {
     font-size: 2em;
     font-weight: bold;
-}
-
-.vault-time {
-    font-size: 1em;
-    color: var(--text-muted);
 }

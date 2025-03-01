@@ -69,7 +69,7 @@ class VaultValueModal extends Modal {
 		
 		const fullValue = vaultValue.toFixed(25);
 		const truncatedValue = Math.trunc(fullValue);
-		var fotmattedValue:string = formatter.format(truncatedValue);
+		var formattedValue:string = formatter.format(truncatedValue);
 
 		var valueText:string = `${currencySymbol}${vaultValue.toFixed(2)}`;
 

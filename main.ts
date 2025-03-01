@@ -64,7 +64,15 @@ class VaultValueModal extends Modal {
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);
 
-        contentEl.createEl("h1", { text: `${currencySymbol}${vaultValue.toFixed(2)}`, cls: "window-value" });
+		const formatter = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+		const valueText = `${currencySymbol}${vaultValue.toFixed(2)}`;
+
+        if (vaultValue >= 1000) {
+			valueText = `${currencySymbol}${formatter.format(Math.trunc(vaultValue))}`;
+		}
+
+        contentEl.createEl("h1", { text: valueText, cls: "window-value" });
         contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "window-time" });
     }
 
@@ -102,18 +110,8 @@ async function calculateVaultStats(vault: Vault): Promise<VaultStats> {
 function calculateVaultValue(stats: VaultStats, currency: string): number {
     const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
     let value = (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
-	let finalValue = value * (CURRENCY_MULTIPLIERS[currency] || 1);
 
-    const formatter = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-
-	const formattedValue = formatter.format(finalValue);
-
-    // Apply the currency multiplier
-    if (finalValue > 999) {
-		return formattedValue;
-	} else {
-		return finalValue;
-	}
+    return value * (CURRENCY_MULTIPLIERS[currency] || 1);
 }
 
 function getCurrencySymbol(currency: string): string {

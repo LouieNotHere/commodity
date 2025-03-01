@@ -36,7 +36,8 @@ jobs:
           cp manifest.json release/
           cp styles.css release/ || true
           cp main.js release/
-          cd release && zip -r ../plugin.zip .
+          cp README.md release/
+          cd release && zip -r ../commodity-plugin.zip .
 
       - name: Export Zip
         uses: actions/upload-artifact@v4

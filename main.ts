@@ -10,7 +10,7 @@
 */
 
 import { CommoditySettingsTab, DEFAULT_SETTINGS, CURRENCY_MULTIPLIERS, CommoditySettings } from "./options";
-import { App, Plugin, Modal, Vault, Notice } from "obsidian";
+import { App, Plugin, Modal, Vault, Notice, TFile } from "obsidian";
 
 export default class CommodityPlugin extends Plugin {
     settings: CommoditySettings;

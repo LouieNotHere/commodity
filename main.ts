@@ -9,7 +9,7 @@ import { NoteValueRibbon } from "./ribbons/noteValueRibbon";
 import { NoteValueView } from "./views/noteValueView";
 
 export default class CommodityPlugin extends Plugin {
-    private vaultStats: VaultStats | null = null;
+    public vaultStats: VaultStats | null = null;
 
     async onload() {
         console.log("Commodity is loading...");

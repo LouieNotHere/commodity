@@ -9,80 +9,111 @@
 
 */
 
-import { App, Plugin, Modal, Vault } from "obsidian";
+import { CommoditySettingsTab, DEFAULT_SETTINGS, CURRENCY_MULTIPLIERS } from "./options";
+import { App, Plugin, Modal, Vault, TFile } from "obsidian";
 
-export default class CommodityLegacyPlugin extends Plugin {
-	async onload() {
-		console.log("CommodityLegacyPlugin loaded");
+export default class CommodityPlugin extends Plugin {
+    settings: CommoditySettings;
 
-		this.addRibbonIcon("lucide-calculator", "Commodity: Calculate Vault Value", async () => {
-			const vaultStats = await calculateVaultStats(this.app.vault);
-			new VaultValueModal(this.app, vaultStats).open();
-		});
-	}
+    async onload() {
+        console.log("Commodity Plugin (Legacy) Loaded");
 
-	onunload() {
-		console.log("CommodityLegacyPlugin unloaded");
-	}
+        await this.loadSettings();
+        this.addSettingTab(new CommoditySettingsTab(this.app, this));
+
+        console.log(`Current currency: ${this.settings.currency}`);
+
+        this.addRibbonIcon("lucide-calculator", "Commodity: Calculate Vault Value", async () => {
+            const vaultStats = await calculateVaultStats(this.app.vault);
+            new VaultValueModal(this.app, vaultStats, this.settings.currency).open();
+        });
+    }
+
+    async loadSettings() {
+        this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    }
+
+    async saveSettings() {
+        await this.saveData(this.settings);
+    }
 }
 
 class VaultValueModal extends Modal {
-	private stats: VaultStats;
+    private stats: VaultStats;
+    private currency: string;
 
-	constructor(app: App, stats: VaultStats) {
-		super(app);
-		this.stats = stats;
-	}
+    constructor(app: App, stats: VaultStats, currency: string) {
+        super(app);
+        this.stats = stats;
+        this.currency = currency;
+    }
 
-	onOpen() {
-		const { contentEl } = this;
-		contentEl.empty();
-		contentEl.addClass("vault-value-modal");
+    onOpen() {
+        const { contentEl } = this;
+        contentEl.empty();
+        contentEl.style.textAlign = "center";
+        contentEl.style.fontFamily = "var(--default-font)";
 
-		const startTime = performance.now();
+        const startTime = performance.now();
 
-		contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "vault-header" });
+        const titleHeader = contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "window-header" });
 
-		const vaultValue = calculateVaultValue(this.stats);
-		const endTime = performance.now();
-		const timeTaken = (endTime - startTime).toFixed(2);
+        const vaultValue = calculateVaultValue(this.stats, this.currency);
+        const currencySymbol = getCurrencySymbol(this.currency);
 
-		contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`, cls: "vault-value" });
-		contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "vault-time" });
-	}
+        const endTime = performance.now();
+        const timeTaken = (endTime - startTime).toFixed(2);
 
-	onClose() {
-		this.contentEl.empty();
-	}
+        contentEl.createEl("h1", { text: `${currencySymbol}${vaultValue.toFixed(2)}`, cls: "window-value" });
+        contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "window-time" });
+    }
+
+    onClose() {
+        this.contentEl.empty();
+    }
 }
 
 interface VaultStats {
-	totalCharacters: number;
-	totalWords: number;
-	totalFiles: number;
-	totalSentences: number;
+    totalCharacters: number;
+    totalWords: number;
+    totalFiles: number;
+    totalSentences: number;
 }
 
 async function calculateVaultStats(vault: Vault): Promise<VaultStats> {
-	let totalCharacters = 0;
-	let totalWords = 0;
-	let totalFiles = 0;
-	let totalSentences = 0;
+    let totalCharacters = 0;
+    let totalWords = 0;
+    let totalFiles = 0;
+    let totalSentences = 0;
 
-	const files = vault.getMarkdownFiles();
-	totalFiles = files.length;
+    const files = vault.getMarkdownFiles();
+    totalFiles = files.length;
 
-	for (const file of files) {
-		const content = await vault.read(file);
-		totalCharacters += content.length;
-		totalWords += content.split(/\s+/).length;
-		totalSentences += (content.match(/[.!?]+/g) || []).length;
-	}
+    for (const file of files) {
+        const content = await vault.read(file);
+        totalCharacters += content.length;
+        totalWords += content.split(/\s+/).length;
+        totalSentences += (content.match(/[.!?]+/g) || []).length;
+    }
 
-	return { totalCharacters, totalWords, totalFiles, totalSentences };
+    return { totalCharacters, totalWords, totalFiles, totalSentences };
 }
 
-function calculateVaultValue(stats: VaultStats): number {
-	const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
-	return (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
-} 
+function calculateVaultValue(stats: VaultStats, currency: string): number {
+    const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
+    let value = (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
+
+    // Apply the currency multiplier
+    return value * (CURRENCY_MULTIPLIERS[currency] || 1);
+}
+
+function getCurrencySymbol(currency: string): string {
+    const symbols: Record<string, string> = {
+        "USD": "$",
+        "JPY": "¥",
+        "PHP": "₱",
+        "IDR": "Rp",
+        "EUR": "€",
+    };
+    return symbols[currency] || "$";
+}

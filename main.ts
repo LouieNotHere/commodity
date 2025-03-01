@@ -1,4 +1,4 @@
-import { App, Plugin, Notice, Vault, WorkspaceLeaf, TFile, Modal } from "obsidian";
+import { Plugin, Notice, WorkspaceLeaf, TFile, Modal, ItemView } from "obsidian";
 
 export default class CommodityPlugin extends Plugin {
     vaultStats: VaultStats | null = null;
@@ -14,19 +14,23 @@ export default class CommodityPlugin extends Plugin {
             }
         });
 
-        this.addRibbonIcon("file-text", "Commodity: Check Current Note Value", () => {
+        this.addRibbonIcon("file-text", "Commodity: Open Active Note Value", () => {
             const activeFile = this.app.workspace.getActiveFile();
             if (!activeFile) {
-                new Notice("Commodity: The active note is not found.");
+                new Notice("Commodity: Currently, there is not active note at the moment.");
                 return;
             }
 
             const leaf = this.app.workspace.getLeaf(true);
-            leaf.setViewState({
-                type: "commodity-note-view",
-                active: true,
-                state: { filePath: activeFile.path },
-            });
+            if (leaf) {
+                leaf.setViewState({
+                    type: "commodity-note-view",
+                    active: true,
+                    state: { filePath: activeFile.path },
+                });
+            } else {
+                new Notice("Commodity: Leaf creation unsuccessful.");
+            }
         });
 
         setTimeout(async () => {
@@ -35,11 +39,12 @@ export default class CommodityPlugin extends Plugin {
 
         this.registerView("commodity-note-view", (leaf) => new NoteValueView(leaf, this.app));
 
-        console.log("Commodity has successfully loaded.");
+        console.log("Commodity Plugin loaded.");
     }
 
     async precomputeVaultStats(): Promise<VaultStats> {
-        new Notice("Precomputing the vault statistics...");
+        // console.log("Precomputing vault statistics...");
+		new Notice("Precomputing vault statistics...");
 
         const allFiles = this.app.vault.getFiles();
         let totalCharacters = 0,
@@ -62,114 +67,8 @@ export default class CommodityPlugin extends Plugin {
         }
 
         const daysSinceCreation = (Date.now() - oldestTimestamp) / (1000 * 60 * 60 * 24);
-
-        // console.log(`Vault stats computed. Days since creation: ${daysSinceCreation.toFixed(2)} days`);
-
         return { totalCharacters, totalWords, totalFiles, totalSentences, daysSinceCreation };
     }
-}
-
-class VaultValueModal extends Modal {
-    stats: VaultStats;
-
-    constructor(app: App, stats: VaultStats) {
-        super(app);
-        this.stats = stats;
-    }
-
-    onOpen() {
-        const { contentEl } = this;
-        contentEl.empty();
-
-        contentEl.style.textAlign = "center";
-        contentEl.style.fontFamily = "var(--default-font)";
-
-        const startTime = performance.now();
-        const vaultValue = calculateVaultValue(this.stats);
-        const endTime = performance.now();
-        const timeTaken = (endTime - startTime).toFixed(2);
-
-        contentEl.createEl("h4", { text: "Calculated Value:" }).style.marginBottom = "10px";
-        contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}` });
-
-        const timeText = contentEl.createEl("p", { text: `This took ${timeTaken} ms to calculate!` });
-        timeText.style.fontSize = "0.9rem";
-        timeText.style.color = "var(--text-muted)";
-        timeText.style.marginTop = "5px";
-
-        // new Notice(`Commodity: Vault Value = $${vaultValue.toFixed(2)} (calculated in ${timeTaken} ms)`);
-		new Notive("The values have been calculated!");
-    }
-}
-
-class NoteValueView extends ItemView {
-    app: App;
-    filePath: string;
-
-    constructor(leaf: WorkspaceLeaf, app: App) {
-        super(leaf);
-        this.app = app;
-        this.filePath = "";
-    }
-
-    getViewType(): string {
-        return "commodity-note-view";
-    }
-
-    getDisplayText(): string {
-        return "Active Note Value";
-    }
-
-    async setState(state: any, result: any) {
-        this.filePath = state.filePath;
-        this.renderView();
-    }
-
-    async renderView() {
-        this.contentEl.empty();
-
-        const file = this.app.vault.getAbstractFileByPath(this.filePath);
-        if (!(file instanceof TFile)) {
-            this.contentEl.createEl("p", { text: "No valid file found." });
-            return;
-        }
-
-        const content = await this.app.vault.read(file);
-        const stats = calculateNoteStats(content);
-
-        this.contentEl.style.textAlign = "center";
-        this.contentEl.style.fontFamily = "var(--default-font)";
-
-        const startTime = performance.now();
-        const noteValue = calculateVaultValue(stats);
-        const endTime = performance.now();
-        const timeTaken = (endTime - startTime).toFixed(2);
-
-        this.contentEl.createEl("h4", { text: "Note Value" }).style.marginBottom = "10px";
-        this.contentEl.createEl("h1", { text: `$${noteValue.toFixed(2)}` });
-
-        const timeText = this.contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms` });
-        timeText.style.fontSize = "0.9rem";
-        timeText.style.color = "var(--text-muted)";
-        timeText.style.marginTop = "5px";
-    }
-}
-
-function calculateVaultValue(stats: VaultStats): number {
-    const { totalCharacters, totalWords, totalFiles, totalSentences, daysSinceCreation } = stats;
-    const e = daysSinceCreation / 60;
-
-    return (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (totalFiles / 200) + (totalSentences / 21000) + e;
-}
-
-function calculateNoteStats(content: string): VaultStats {
-    const totalCharacters = content.length;
-    const totalWords = content.split(/\s+/).length;
-    const totalFiles = 1;
-    const totalSentences = content.split(/[.!?]+/).length;
-    const daysSinceCreation = 0; // Not relevant for a single note
-
-    return { totalCharacters, totalWords, totalFiles, totalSentences, daysSinceCreation };
 }
 
 interface VaultStats {
@@ -178,4 +77,79 @@ interface VaultStats {
     totalFiles: number;
     totalSentences: number;
     daysSinceCreation: number;
+}
+
+class VaultValueModal extends Modal {
+    stats: VaultStats;
+
+    constructor(app: any, stats: VaultStats) {
+        super(app);
+        this.stats = stats;
+    }
+
+    onOpen() {
+        const { contentEl } = this;
+        contentEl.empty();
+
+        const startTime = performance.now();
+
+        const value = (this.stats.totalCharacters / 122000) * (1 + (this.stats.totalWords / 130000)) +
+            (this.stats.totalFiles / 200) +
+            (this.stats.totalSentences / 21000) +
+            (this.stats.daysSinceCreation / 60);
+
+        const endTime = performance.now();
+        const timeTaken = (endTime - startTime).toFixed(2);
+
+        contentEl.createEl("h3", { text: "Calculated Vault Value:", cls: "vault-header" });
+        contentEl.createEl("h1", { text: `$${value.toFixed(2)}`, cls: "vault-value" });
+        contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "vault-time" });
+    }
+}
+
+class NoteValueView extends ItemView {
+    filePath: string;
+
+    constructor(leaf: WorkspaceLeaf, app: any) {
+        super(leaf);
+        this.filePath = "";
+    }
+
+    getViewType(): string {
+        return "commodity-note-view";
+    }
+
+    getDisplayText(): string {
+        return "Current Note Value";
+    }
+
+    async onOpen() {
+        const { contentEl } = this;
+        contentEl.empty();
+
+        const activeFile = this.app.workspace.getActiveFile();
+        if (!activeFile) {
+            contentEl.createEl("p", { text: "There is no active note at the moment." });
+            return;
+        }
+
+        const content = await this.app.vault.cachedRead(activeFile);
+        const totalCharacters = content.length;
+        const totalWords = content.split(/\s+/).length;
+        const totalSentences = content.split(/[.!?]+/).length;
+
+        contentEl.createEl("h3", { text: "Active Note Value:", cls: "vault-header" });
+
+        const startTime = performance.now();
+
+        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) +
+            (1 / 200) +
+            (totalSentences / 21000);
+
+        const endTime = performance.now();
+        const timeTaken = (endTime - startTime).toFixed(2);
+
+        contentEl.createEl("h1", { text: `$${value.toFixed(2)}`, cls: "vault-value" });
+        contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "vault-time" });
+    }
 }

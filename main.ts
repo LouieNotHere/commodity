@@ -66,12 +66,14 @@ class VaultValueModal extends Modal {
         const timeTaken = (endTime - startTime).toFixed(2);
 
 		const formatter = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+		
 		const fullValue = vaultValue.toFixed(25);
+		const formattedValue = formatter.format(Math.trunc(fullValue));
 
 		var valueText:string = `${currencySymbol}${fullValue.toFixed(2)}`;
 
         if (vaultValue >= 1000) {
-			valueText = `${currencySymbol}${formatter.format(Math.trunc(fullValue))}`;
+			valueText = `${currencySymbol}${formattedValue}`;
 		}
 
         contentEl.createEl("h1", { text: valueText, cls: "window-value" });

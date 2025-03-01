@@ -4,9 +4,9 @@ on:
   push:
     tags:
       - "v*"
-    branches: [ master ]
+    branches: [ legacy ]
   pull_request:
-    branches: [ master ]
+    branches: [ legacy ]
 
 jobs:
   build:

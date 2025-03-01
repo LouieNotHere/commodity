@@ -66,7 +66,7 @@ export default class CommodityPlugin extends Plugin {
             const daysSinceCreation = Math.floor((Date.now() - stat.ctime) / (1000 * 60 * 60 * 24));
 		}
 
-		const e = daysSinceCreation / 60
+		const e = daysSinceCreation / 60;
 		
         // console.log("Days Since Vault Creation:", daysSinceCreation);
 
@@ -75,7 +75,7 @@ export default class CommodityPlugin extends Plugin {
             totalWords,
             totalSentences,
             totalFiles: files.length,
-            daysSinceCreation: daysSinceCreation
+            daysSinceCreation: e
         };
 
         const endTime = performance.now();

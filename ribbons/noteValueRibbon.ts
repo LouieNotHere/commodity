@@ -1,3 +1,6 @@
+// ribbons/noteValueRibbon.ts
+// This is where the source code of the "Calculate Note Value" is located.
+
 import { Notice } from "obsidian";
 import CommodityPlugin from "../main";
 

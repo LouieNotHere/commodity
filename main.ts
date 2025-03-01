@@ -15,24 +15,38 @@ export default class CommodityPlugin extends Plugin {
     });
 
     this.addRibbonIcon("file-text", "Commodity: Open Active Note Value", () => {
-        const activeFile = this.app.workspace.getActiveFile();
-        if (!activeFile) {
-            new Notice("Commodity: There is no active note at the moment.");
-            return;
-        }
+        this.openNoteStatsView();
+    });
 
-        const leaf = this.app.workspace.getRightLeaf(false);
-        if (leaf) {
-            leaf.setViewState({
+    openNoteStatsView() {
+    const activeFile = this.app.workspace.getActiveFile();
+    if (!activeFile) {
+        new Notice("Commodity: No active note found.");
+        return;
+    }
+
+    // Check if the leaf is already open
+    const existingLeaf = this.app.workspace.getLeavesOfType("commodity-note-view")[0];
+
+    if (existingLeaf) {
+        // If the view exists, focus it
+        this.app.workspace.revealLeaf(existingLeaf);
+    } else {
+        // Otherwise, create a new one
+        const newLeaf = this.app.workspace.getRightLeaf(false);
+        if (newLeaf) {
+            newLeaf.setViewState({
                 type: "commodity-note-view",
                 active: true,
                 state: { filePath: activeFile.path },
             });
-            this.app.workspace.revealLeaf(leaf);
+            this.app.workspace.revealLeaf(newLeaf);
         } else {
-            new Notice("Commodity: Sidebar view creation unsuccessful, process aborted.");
+            new Notice("Commodity: Could not create a sidebar view.");
         }
-    });
+    }
+	}
+
 
     this.registerView("commodity-note-view", (leaf) => new NoteValueView(leaf, this.app));
 

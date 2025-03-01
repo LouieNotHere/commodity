@@ -4,43 +4,44 @@ export default class CommodityPlugin extends Plugin {
     vaultStats: VaultStats | null = null;
 
     async onload() {
-        console.log("Commodity is loading...");
+    console.log("Commodity is loading...");
 
-        this.addRibbonIcon("dollar-sign", "Commodity: Calculate Vault Value", () => {
-            if (this.vaultStats) {
-                new VaultValueModal(this.app, this.vaultStats).open();
-            } else {
-                new Notice("Commodity: The vault statistics are not ready yet. Please wait for a short time...");
-            }
-        });
+    this.addRibbonIcon("dollar-sign", "Commodity: Calculate Vault Value", () => {
+        if (this.vaultStats) {
+            new VaultValueModal(this.app, this.vaultStats).open();
+        } else {
+            new Notice("Commodity: The vault statistics are not ready yet. Please wait for a short time...");
+        }
+    });
 
-        this.addRibbonIcon("file-text", "Commodity: Open Active Note Value", () => {
-            const activeFile = this.app.workspace.getActiveFile();
-            if (!activeFile) {
-                new Notice("Commodity: Currently, there is not active note at the moment.");
-                return;
-            }
+    this.addRibbonIcon("file-text", "Commodity: Open Active Note Value", () => {
+        const activeFile = this.app.workspace.getActiveFile();
+        if (!activeFile) {
+            new Notice("Commodity: There is no active note at the moment.");
+            return;
+        }
 
-            const leaf = this.app.workspace.getLeaf(true);
-            if (leaf) {
-                leaf.setViewState({
-                    type: "commodity-note-view",
-                    active: true,
-                    state: { filePath: activeFile.path },
-                });
-            } else {
-                new Notice("Commodity: Leaf creation unsuccessful.");
-            }
-        });
+        const leaf = this.app.workspace.getRightLeaf(false);
+        if (leaf) {
+            leaf.setViewState({
+                type: "commodity-note-view",
+                active: true,
+                state: { filePath: activeFile.path },
+            });
+            this.app.workspace.revealLeaf(leaf);
+        } else {
+            new Notice("Commodity: Sidebar view creation unsuccessful, process aborted.");
+        }
+    });
 
-        setTimeout(async () => {
-            this.vaultStats = await this.precomputeVaultStats();
-        }, 100);
+    this.registerView("commodity-note-view", (leaf) => new NoteValueView(leaf, this.app));
 
-        this.registerView("commodity-note-view", (leaf) => new NoteValueView(leaf, this.app));
+    setTimeout(async () => {
+        this.vaultStats = await this.precomputeVaultStats();
+    }, 100);
 
-        console.log("Commodity Plugin loaded.");
-    }
+    console.log("Commodity has successfully loaded.");
+	}
 
     async precomputeVaultStats(): Promise<VaultStats> {
         // console.log("Precomputing vault statistics...");
@@ -135,16 +136,17 @@ class NoteValueView extends ItemView {
     }
 
     getDisplayText(): string {
-        return "Current Note Value";
+        return "Active Note Value";
     }
 
     async onOpen() {
         const { contentEl } = this;
         contentEl.empty();
+        contentEl.addClass("vault-value-modal");
 
         const activeFile = this.app.workspace.getActiveFile();
         if (!activeFile) {
-            contentEl.createEl("p", { text: "There is no active note at the moment." });
+            contentEl.createEl("p", { text: "Whoops! It seems like there is no active note at the moment." });
             return;
         }
 
@@ -153,7 +155,7 @@ class NoteValueView extends ItemView {
         const totalWords = content.split(/\s+/).length;
         const totalSentences = content.split(/[.!?]+/).length;
 
-        contentEl.createEl("h3", { text: "Active Note Value:", cls: "vault-header" });
+        contentEl.createEl("h3", { text: "Calculated Active Note Value:", cls: "vault-header" });
 
         const startTime = performance.now();
 

@@ -61,8 +61,8 @@ export default class CommodityPlugin extends Plugin {
             totalSentences += content.split(/[.!?]+/).length;
 
             const stat = await this.app.vault.adapter.stat(file.path);
-            if (stat.ctime < oldestTimestamp) {
-                oldestTimestamp = stat.ctime;
+            if (stat?.ctime) {
+                oldestTimestamp = Math.min(oldestTimestamp, stat.ctime);
             }
         }
 

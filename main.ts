@@ -43,7 +43,7 @@ class VaultValueModal extends Modal {
 		contentEl.style.fontFamily = "var(--default-font)";
 
 		contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "window-header" });
-		contentEl.createEl("p", { text: "Calculating...", cls: "window-loading" });
+		contentEl.createEl("p", { text: "Calculating the value...", cls: "window-loading" });
 	}
 
 	updateVaultValue(stats: VaultStats) {
@@ -51,7 +51,7 @@ class VaultValueModal extends Modal {
 		const { contentEl } = this;
 		contentEl.empty();
 
-		contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "window-header" });
+		contentEl.createEl("h4", { text: "Calculated Vault Value:", cls: "window-header" });
 
 		const startTime = performance.now();
 		const vaultValue = calculateVaultValue(stats);
@@ -59,7 +59,7 @@ class VaultValueModal extends Modal {
 		const timeTaken = (endTime - startTime).toFixed(2);
 
 		contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`, cls: "window-value" });
-		contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "window-time" });
+		contentEl.createEl("p", { text: `Total CPU Time: ${timeTaken} ms`, cls: "window-time" });
 	}
 
 	onClose() {

@@ -60,10 +60,10 @@ export default class CommodityPlugin extends Plugin {
 		if (stat?.ctime !== undefined && stat?.ctime !== null) {
             const daysSinceCreation = Math.floor((Date.now() - stat.ctime) / (1000 * 60 * 60 * 24));
 		}
+
+		const e = daysSinceCreation / 60
 		
         // console.log("Days Since Vault Creation:", daysSinceCreation);
-
-		const daysSinceCreation = e;
 
         return {
             totalCharacters,

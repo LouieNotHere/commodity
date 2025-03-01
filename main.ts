@@ -1,10 +1,12 @@
 import { Plugin, Notice, WorkspaceLeaf, TFile, Modal, ItemView } from "obsidian";
 
 export default class CommodityPlugin extends Plugin {
-    vaultStats: VaultStats | null = null;
+    private stats: VaultStats | null = null;
 
     async onload() {
     console.log("Commodity is loading...");
+
+    this stats = await this.precomputeVaultStats();
 
     this.addRibbonIcon("dollar-sign", "Commodity: Calculate Vault Value", () => {
         if (this.vaultStats) {
@@ -27,9 +29,9 @@ export default class CommodityPlugin extends Plugin {
     console.log("Commodity has successfully loaded.");
 	}
 
-    async precomputeVaultStats() {
+    async precomputeVaultStats() Promise<VaultStats> {
         new Notice("Precomputing vault statistics...");
-		
+
         const startTime = performance.now();
 
         const files = this.app.vault.getFiles();
@@ -53,12 +55,14 @@ export default class CommodityPlugin extends Plugin {
         console.log("Total Sentences:", totalSentences);
 
         const stat = await this.app.vault.adapter.stat(".");
-        const creationTime = stat.ctime ?? Date.now();
-        const daysSinceCreation = Math.floor((Date.now() - creationTime) / (1000 * 60 * 60 * 24));
 
+		if (stat?.ctime !== undefined && stat?.ctime !== null) {
+            const daysSinceCreation = Math.floor((Date.now() - stat.ctime) / (1000 * 60 * 60 * 24));
+		}
+		
         // console.log("Days Since Vault Creation:", daysSinceCreation);
 
-        this.stats = {
+        return {
             totalCharacters,
             totalWords,
             totalSentences,

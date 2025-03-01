@@ -124,10 +124,17 @@ async function calculateVaultValue(stats: VaultStats, currency: string, vault: V
 async function getVaultAgeInDays(vault: Vault): Promise<number> {
     try {
         const configFile = vault.getAbstractFileByPath(".obsidian/app.json");
-        if (!(configFile instanceof TFile)) return 0;
+
+        if (!configFile || !(configFile instanceof TFile)) {
+            console.warn("Vault creation date file not found. Returning 0.");
+            return 0;
+        }
 
         const stats = await vault.adapter.stat(configFile.path);
-        if (!stats || !stats.ctime) return 0;
+        if (!stats || stats.ctime === undefined) {
+            console.warn("Could not retrieve vault creation date. Returning 0.");
+            return 0;
+        }
 
         const creationTime = stats.ctime;
         const currentTime = Date.now();
@@ -138,7 +145,7 @@ async function getVaultAgeInDays(vault: Vault): Promise<number> {
         console.error("Error fetching vault creation date:", error);
         return 0;
     }
-}
+} 
 
 function getCurrencySymbol(currency: string): string {
     const symbols: Record<string, string> = {

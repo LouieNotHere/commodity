@@ -1,7 +1,13 @@
-// main.ts file (used as the main file for Commodity)
-// For additional context: Commodity is a term related to Obsidian (can be the material itself or the app) and finances.
-// I know it took me a long time to fix some things before publishing it as an obsidian community plugin.
-// I deeply apologize for that, I am just trying to add some new things to the source code.
+/*
+
+  main.ts file (used as the main file for Commodity (Legacy))
+  For additional context: Commodity is a term related to Obsidian (can be the material itself or the app) and finances.
+  I know it took me a long time to fix some things before publishing it as an obsidian community plugin.
+  I deeply apologize for that, I am just trying to add some new things to the source code.
+
+  This is only for the legacy version. It can differ from the non-legacy version.
+
+*/
 
 import { App, Plugin, Modal, Vault, TFile } from "obsidian";
 
@@ -9,7 +15,7 @@ export default class commodityPlugin extends Plugin {
 	async onload() {
 		console.log("commodityPlugin loaded");
 
-		this.addRibbonIcon("lucide-calculator", "Commodity: View Vault Worth", async () => {
+		this.addRibbonIcon("lucide-calculator", "Commodity: Calculate Vault Value", async () => {
 			const vaultStats = await calculateVaultStats(this.app.vault);
 			new VaultValueModal(this.app, vaultStats).open();
 		});
@@ -37,20 +43,14 @@ class VaultValueModal extends Modal {
 
     const startTime = performance.now();
 
-    const titleHeader = contentEl.createEl("h4", { text: "Calculated Vault Value" });
-    titleHeader.style.marginBottom = "10px";
+    const titleHeader = contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "window-header" });
 
     const vaultValue = calculateVaultValue(this.stats);
 
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);
 
-        const valueHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}` });
-
-        const timeText = contentEl.createEl("p", { text: `The calculation took ${timeTaken} ms in total!` });
-        timeText.style.fontSize = "0.9rem";
-        timeText.style.color = "var(--text-muted)";
-        timeText.style.marginTop = "5px";
+        const valueHeader = contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`, cls: "window-value" });
 	}
 
 	onClose() {

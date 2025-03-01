@@ -10,7 +10,7 @@
 */
 
 import { CommoditySettingsTab, DEFAULT_SETTINGS, CURRENCY_MULTIPLIERS, CommoditySettings } from "./options";
-import { App, Plugin, Modal, Vault, TFile, Notice } from "obsidian";
+import { App, Plugin, Modal, Vault, Notice } from "obsidian";
 
 export default class CommodityPlugin extends Plugin {
     settings: CommoditySettings;
@@ -25,7 +25,8 @@ export default class CommodityPlugin extends Plugin {
 
         this.addRibbonIcon("lucide-calculator", "Commodity: Calculate Vault Value", async () => {
             const vaultStats = await calculateVaultStats(this.app.vault);
-            new VaultValueModal(this.app, vaultStats, this.settings.currency).open();
+            const vaultValue = await calculateVaultValue(vaultStats, this.settings.currency, this.app.vault);
+            new VaultValueModal(this.app, vaultValue, this.settings.currency).open();
         });
     }
 
@@ -39,17 +40,17 @@ export default class CommodityPlugin extends Plugin {
 }
 
 class VaultValueModal extends Modal {
-    private stats: VaultStats;
+    private vaultValue: number;
     private currency: string;
 
-    constructor(app: App, stats: VaultStats, currency: string) {
+    constructor(app: App, vaultValue: number, currency: string) {
         super(app);
-        this.stats = stats;
+        this.vaultValue = vaultValue;
         this.currency = currency;
     }
 
     onOpen() {
-        new Notice("Commodity (Legacy): Calculating the vault value...");
+        new Notice("Commodity (Legacy): Successfully calculated the vault value.");
         const { contentEl } = this;
         contentEl.empty();
         contentEl.style.textAlign = "center";
@@ -57,28 +58,26 @@ class VaultValueModal extends Modal {
 
         const startTime = performance.now();
 
-        const titleHeader = contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "window-header" });
+        const titleHeader = contentEl.createEl("h4", { text: "Calculated Vault Value:", cls: "window-header" });
 
-        const vaultValue = calculateVaultValue(this.stats, this.currency);
         const currencySymbol = getCurrencySymbol(this.currency);
-
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);
 
-		const formatter = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-		
-		const fullValue = Number(vaultValue.toFixed(25));
-		const truncatedValue = Math.trunc(fullValue);
-		var formattedValue:string = formatter.format(truncatedValue);
+        const formatter = new Intl.NumberFormat("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
-		var valueText:string = `${currencySymbol}${vaultValue.toFixed(2)}`;
+        const fullValue = Number(this.vaultValue.toFixed(25));
+        const truncatedValue = Math.trunc(fullValue);
+        var formattedValue: string = formatter.format(truncatedValue);
 
-        if (vaultValue >= 1000) {
-			valueText = `${currencySymbol}${formattedValue}`;
-		}
+        var valueText: string = `${currencySymbol}${this.vaultValue.toFixed(2)}`;
+
+        if (this.vaultValue >= 1000) {
+            valueText = `${currencySymbol}${formattedValue}`;
+        }
 
         contentEl.createEl("h1", { text: valueText, cls: "window-value" });
-        contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "window-time" });
+        contentEl.createEl("p", { text: `Total CPU Time: ${timeTaken} ms`, cls: "window-time" });
     }
 
     onClose() {
@@ -112,12 +111,31 @@ async function calculateVaultStats(vault: Vault): Promise<VaultStats> {
     return { totalCharacters, totalWords, totalFiles, totalSentences };
 }
 
-function calculateVaultValue(stats: VaultStats, currency: string): number {
+async function calculateVaultValue(stats: VaultStats, currency: string, vault: Vault): Promise<number> {
     const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
     let value = (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
-	
-	const finalValue = value * (CURRENCY_MULTIPLIERS[currency] || 1);
-	return Number(finalValue.toFixed(50));
+
+    const e = await getVaultAgeInDays(vault) / 60;
+
+    const finalValue = (value + e) * (CURRENCY_MULTIPLIERS[currency] || 1);
+    return Number(finalValue.toFixed(50));
+}
+
+async function getVaultAgeInDays(vault: Vault): Promise<number> {
+    try {
+        const vaultPath = vault.adapter.getBasePath();
+        const stats = await vault.adapter.stat(vaultPath);
+        if (!stats || !stats.ctime) return 0;
+
+        const creationTime = stats.ctime;
+        const currentTime = Date.now();
+        const daysSinceCreation = (currentTime - creationTime) / (1000 * 60 * 60 * 24);
+
+        return daysSinceCreation;
+    } catch (error) {
+        console.error("Error fetching vault creation date:", error);
+        return 0;
+    }
 }
 
 function getCurrencySymbol(currency: string): string {
@@ -127,8 +145,8 @@ function getCurrencySymbol(currency: string): string {
         "PHP": "₱",
         "IDR": "RP ",
         "EUR": "€",
-		"GBP": "£",
-		"KRW": "₩"
+        "GBP": "£",
+        "KRW": "₩"
     };
     return symbols[currency] || "$";
 }

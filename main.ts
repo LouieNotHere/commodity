@@ -4,7 +4,7 @@
 // I deeply apologize for that, I am just trying to add some new things to the source code.
 
 import { Modal, App } from "obsidian";
-import { VaultStats } from "./types/vaultStats.js"; // Strict check just in case the compilation fails
+import { VaultStats } from "./types/vaultStats";
 
 export class VaultValueModal extends Modal {
     stats: VaultStats;

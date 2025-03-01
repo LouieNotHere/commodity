@@ -1,3 +1,6 @@
+// ribbons/vaultValueRibbon.ts
+// This is where the source code of the "Calculate Vault Value" is located.
+
 import { Notice } from "obsidian";
 import CommodityPlugin from "../main";
 import { VaultValueModal } from "../modals/vaultValueModal";

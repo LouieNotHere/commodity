@@ -67,7 +67,7 @@ export default class CommodityPlugin extends Plugin {
             totalWords,
             totalSentences,
             totalFiles: files.length,
-            const daysSinceCreation = e,
+            daysSinceCreation: e
         };
 
         const endTime = performance.now();

@@ -30,6 +30,9 @@ jobs:
       - name: Check Directory
         run: dir
 
+      - name: Redetect Files
+        run: tsc --noEmit
+
       - name: Pack necessary plugin files
         run: |
           mkdir release

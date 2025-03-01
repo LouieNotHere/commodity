@@ -123,8 +123,10 @@ async function calculateVaultValue(stats: VaultStats, currency: string, vault: V
 
 async function getVaultAgeInDays(vault: Vault): Promise<number> {
     try {
-        const vaultPath = vault.adapter.getBasePath();
-        const stats = await vault.adapter.stat(vaultPath);
+        const configFile = vault.getAbstractFileByPath(".obsidian/app.json");
+        if (!(configFile instanceof TFile)) return 0;
+
+        const stats = await vault.adapter.stat(configFile.path);
         if (!stats || !stats.ctime) return 0;
 
         const creationTime = stats.ctime;

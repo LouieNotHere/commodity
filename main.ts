@@ -1,3 +1,8 @@
+// main.ts file (used as the main file for Commodity)
+// For additional context: Commodity is a term related to Obsidian (can be the material itself or the app) and finances.
+// I know it took me a long time to fix some things before publishing it as an obsidian community plugin.
+// I deeply apologize for that, I am just trying to add some new things to the source code.
+
 import { Plugin, Notice, WorkspaceLeaf, TFile, Modal, ItemView } from "obsidian";
 
 export default class CommodityPlugin extends Plugin {

@@ -116,7 +116,7 @@ function calculateVaultValue(stats: VaultStats, currency: string): number {
     const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
     let value = (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000);
 	
-	const finalValue * (CURRENCY_MULTIPLIERS[currency] || 1);
+	const finalValue = * (CURRENCY_MULTIPLIERS[currency] || 1);
 	return Number(finalValue.toFixed(50));
 }
 

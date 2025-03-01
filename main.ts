@@ -66,10 +66,11 @@ export default class CommodityPlugin extends Plugin {
             const daysSinceCreation = Math.floor((Date.now() - stat.ctime) / (1000 * 60 * 60 * 24));
 		}
 
-		const creationTime = this.app.vault.getRoot().stat?.ctime;
+		const rootStats = await this.app.vault.adapter.stat("."); 
+        const creationTime = rootStats?.ctime ?? 0;
         const currentTime = Date.now();
-        const daysSinceCreation = creationTime ? (currentTime - creationTime) / (1000 * 60 * 60 * 24) : 0;
-
+        const daysSinceCreation = (currentTime - creationTime) / (1000 * 60 * 60 * 24); 
+		
         const e = daysSinceCreation / 60;
 
         const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (1 / 200) + (totalSentences / 21000) + e;

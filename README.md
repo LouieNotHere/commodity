@@ -6,8 +6,8 @@ Ever wanted to know how worth your Vault can be? This plugin can calculate how w
 This plugin simulates the estimated cost of your Vault in just a matter of seconds! Please note that the value may vary depending on how many files your vault contains.
 
 # Features
-- The **Active Note Value** feature, which redirects you to the right sidebar when clicked from the ribbon.
-- The **Vault Value** feature, which pops up a window when clicked from the window.
+- The **Active Note Value** feature, which redirects you to the right sidebar when clicked from the list of ribbons.
+- The **Vault Value** feature, which pops up a window when clicked from the list of ribbons.
 
 # How to install it?
 1. Go to **Community Plugins > Browse**.

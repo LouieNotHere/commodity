@@ -99,25 +99,25 @@ class VaultValueModal extends Modal {
     displayVaultValue(contentEl: HTMLElement) {
         const startTime = performance.now();
 
-        let value = (this.stats.totalCharacters / 122000) * (1 + (this.stats.totalWords / 130000)) +
+        let vaultValue = (this.stats.totalCharacters / 122000) * (1 + (this.stats.totalWords / 130000)) +
             (this.stats.totalFiles / 200) +
             (this.stats.totalSentences / 21000) +
             (this.stats.daysSinceCreation / 60);
 
-        if (isNaN(value) || !isFinite(value)) {
-            value = 0;
+        if (isNaN(vaultValue) || !isFinite(vaultValue)) {
+            vaultValue = 0;
         }
 
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);
 
         console.log("Vault Stats:", this.stats);
-        console.log("Calculated Vault Value:", value);
+        console.log("Calculated Vault Value:", vaultValue);
         console.log("Time Taken:", timeTaken);
 
         setTimeout(() => {
-            contentEl.createEl("h3", { text: "Calvulated Vault Value:", cls: "vault-header" });
-            contentEl.createEl("h1", { text: `$${value.toFixed(2)}`, cls: "vault-value" });
+            contentEl.createEl("h3", { text: "Calculated Vault Value:", cls: "vault-header" });
+            contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`, cls: "vault-value" });
             contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "vault-time" });
         }, 10);
     }

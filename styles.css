@@ -7,13 +7,36 @@
 
 */
 
+.modal-container {
+    text-align: center;
+    font-family: var(--default-font);
+    padding: 20px;
+    background: var(--background-primary);
+    color: var(--text-normal);
+    border-radius: 8px;
+    box-shadow: var(--shadow-elevation-medium);
+}
 
 .window-header {
     font-size: 1.2em;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
 .window-value {
     font-size: 2em;
     font-weight: bold;
+    color: var(--text-accent);
+    margin: 10px 0;
+}
+
+.window-time {
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+.window-loading {
+    font-size: 1em;
+    color: var(--text-muted);
+    font-style: italic;
 }

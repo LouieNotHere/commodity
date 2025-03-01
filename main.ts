@@ -197,13 +197,17 @@ class NoteValueView extends ItemView {
         const totalCharacters = content.length;
         const totalWords = content.split(/\s+/).length;
         const totalSentences = content.split(/[.!?]+/).length;
+		const totalFiles = this.stats.totalFiles;
+        const daysSinceCreation = this.stats.daysSinceCreation;
+
+
 
         contentEl.createEl("h3", { text: "Calculated Active Note Value:", cls: "vault-header" });
 
         const startTime = performance.now();
 
-        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (1 / 200) + (totalSentences / 21000);
-
+		const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) + (totalFiles / 200) + (totalSentences / 21000) + (daysSinceCreation / 60); 
+		
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);
 

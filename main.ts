@@ -9,57 +9,46 @@
 
 */
 
-import { App, Plugin, Modal, Vault, TFile } from "obsidian";
+import { App, Plugin, Modal, Vault } from "obsidian";
 
-export default class CommodityPlugin extends Plugin {
+export default class CommodityLegacyPlugin extends Plugin {
 	async onload() {
-		console.log("commodityPlugin loaded");
+		console.log("CommodityLegacyPlugin loaded");
 
 		this.addRibbonIcon("lucide-calculator", "Commodity: Calculate Vault Value", async () => {
-			const modal = new VaultValueModal(this.app);
-			modal.open();
-
 			const vaultStats = await calculateVaultStats(this.app.vault);
-			modal.updateVaultValue(vaultStats);
+			new VaultValueModal(this.app, vaultStats).open();
 		});
 	}
 
 	onunload() {
-		console.log("commodityPlugin unloaded");
+		console.log("CommodityLegacyPlugin unloaded");
 	}
 }
 
 class VaultValueModal extends Modal {
-	private stats: VaultStats | null = null;
+	private stats: VaultStats;
 
-	constructor(app: App) {
+	constructor(app: App, stats: VaultStats) {
 		super(app);
+		this.stats = stats;
 	}
 
 	onOpen() {
 		const { contentEl } = this;
 		contentEl.empty();
-		contentEl.style.textAlign = "center";
-		contentEl.style.fontFamily = "var(--default-font)";
-
-		contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "window-header" });
-		contentEl.createEl("p", { text: "Calculating the value...", cls: "window-loading" });
-	}
-
-	updateVaultValue(stats: VaultStats) {
-		this.stats = stats;
-		const { contentEl } = this;
-		contentEl.empty();
-
-		contentEl.createEl("h4", { text: "Calculated Vault Value:", cls: "window-header" });
+		contentEl.addClass("vault-value-modal");
 
 		const startTime = performance.now();
-		const vaultValue = calculateVaultValue(stats);
+
+		contentEl.createEl("h4", { text: "Calculated Vault Value", cls: "vault-header" });
+
+		const vaultValue = calculateVaultValue(this.stats);
 		const endTime = performance.now();
 		const timeTaken = (endTime - startTime).toFixed(2);
 
-		contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`, cls: "window-value" });
-		contentEl.createEl("p", { text: `Total CPU Time: ${timeTaken} ms`, cls: "window-time" });
+		contentEl.createEl("h1", { text: `$${vaultValue.toFixed(2)}`, cls: "vault-value" });
+		contentEl.createEl("p", { text: `Calculated in ${timeTaken} ms`, cls: "vault-time" });
 	}
 
 	onClose() {

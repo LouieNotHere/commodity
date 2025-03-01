@@ -18,33 +18,6 @@ export default class CommodityPlugin extends Plugin {
         this.openNoteStatsView();
     });
 
-    openNoteStatsView() {
-        const activeFile = this.app.workspace.getActiveFile();
-        if (!activeFile) {
-            new Notice("Commodity: There is no active note at the moment.");
-            return;
-        }
-
-        const existingLeaf = this.app.workspace.getLeavesOfType("commodity-note-view")[0];
-
-        if (existingLeaf) {
-            this.app.workspace.revealLeaf(existingLeaf);
-        } else {
-            const newLeaf = this.app.workspace.getRightLeaf(false);
-            if (newLeaf) {
-                newLeaf.setViewState({
-                    type: "commodity-note-view",
-                    active: true,
-                    state: { filePath: activeFile.path },
-                });
-                this.app.workspace.revealLeaf(newLeaf);
-            } else {
-                new Notice("Commodity: Could not create a sidebar view.");
-            }
-        }
-	}
-
-
     this.registerView("commodity-note-view", (leaf) => new NoteValueView(leaf, this.app));
 
     setTimeout(async () => {
@@ -82,6 +55,32 @@ export default class CommodityPlugin extends Plugin {
         return { totalCharacters, totalWords, totalFiles, totalSentences, daysSinceCreation };
 		new Notice("Successfully precomputed the vault statistics!");
     }
+	
+	openNoteStatsView() {
+        const activeFile = this.app.workspace.getActiveFile();
+        if (!activeFile) {
+            new Notice("Commodity: No active note found.");
+            return;
+        }
+
+        const existingLeaf = this.app.workspace.getLeavesOfType("commodity-note-view")[0];
+
+        if (existingLeaf) {
+            this.app.workspace.revealLeaf(existingLeaf);
+        } else {
+            const newLeaf = this.app.workspace.getRightLeaf(false);
+            if (newLeaf) {
+                newLeaf.setViewState({
+                    type: "commodity-note-view",
+                    active: true,
+                    state: { filePath: activeFile.path },
+                });
+                this.app.workspace.revealLeaf(newLeaf);
+            } else {
+                new Notice("Commodity: Could not create a sidebar view.");
+            }
+        }
+	} 
 }
 
 interface VaultStats {

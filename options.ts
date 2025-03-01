@@ -8,13 +8,12 @@ export const DEFAULT_SETTINGS: CommoditySettings = {
     currency: "USD",
 };
 
-// Currency Multipliers (informal exchange rates)
 export const CURRENCY_MULTIPLIERS: Record<string, number> = {
-    "USD": 1,    // Base currency
-    "JPY": 150,  // 1 USD ≈ 150 JPY
-    "PHP": 50,   // 1 USD ≈ 50 PHP
-    "IDR": 15000,// 1 USD ≈ 15000 IDR
-    "EUR": 0.9   // 1 USD ≈ 0.9 EUR
+    "USD": 1,
+    "JPY": 150,
+    "PHP": 50,
+    "IDR": 15000,
+    "EUR": 0.9
 };
 
 export class CommoditySettingsTab extends PluginSettingTab {
@@ -32,8 +31,8 @@ export class CommoditySettingsTab extends PluginSettingTab {
         containerEl.createEl("h2", { text: "Commodity Plugin Settings" });
 
         new Setting(containerEl)
-            .setName("Currency")
-            .setDesc("Select the currency for calculation (informal exchange rate)")
+            .setName("Currency Preference")
+            .setDesc("Select the preferred currency that can be used for the value calculation")
             .addDropdown(dropdown => {
                 dropdown.addOptions({
                     "USD": "USD - US Dollar",

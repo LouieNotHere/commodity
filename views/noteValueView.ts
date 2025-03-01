@@ -37,10 +37,7 @@ export class NoteValueView extends ItemView {
         const startTime = performance.now();
 
         const vaultStats = await this.getVaultStats();
-        const value = (totalCharacters / 122000) * (1 + (totalWords / 130000)) +
-            (vaultStats.totalFiles / 200) +
-            (totalSentences / 21000) +
-            (vaultStats.daysSinceCreation / 60);
+        const value = (totalCharacters / 63000) * (1 + (totalWords / 21000)) + (totalSentences / 9500);
 
         const endTime = performance.now();
         const timeTaken = (endTime - startTime).toFixed(2);

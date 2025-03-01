@@ -27,34 +27,50 @@ export default class CommodityPlugin extends Plugin {
     console.log("Commodity has successfully loaded.");
 	}
 
-    async precomputeVaultStats(): Promise<VaultStats> {
-        // console.log("Precomputing vault statistics...");
-		new Notice("Precomputing vault statistics...");
+    async precomputeVaultStats() {
+        new Notice("Precomputing vault statistics...");
+		
+        const startTime = performance.now();
 
-        const allFiles = this.app.vault.getFiles();
-        let totalCharacters = 0,
-            totalWords = 0,
-            totalFiles = allFiles.length,
-            totalSentences = 0;
+        const files = this.app.vault.getFiles();
+        console.log("Total Files:", files.length);
 
-        let oldestTimestamp = Date.now();
+        let totalCharacters = 0;
+        let totalWords = 0;
+        let totalSentences = 0;
 
-        for (const file of allFiles) {
-            const content = await this.app.vault.cachedRead(file);
-            totalCharacters += content.length;
-            totalWords += content.split(/\s+/).length;
-            totalSentences += content.split(/[.!?]+/).length;
-
-            const stat = await this.app.vault.adapter.stat(file.path);
-            if (stat?.ctime) {
-                oldestTimestamp = Math.min(oldestTimestamp, stat.ctime);
+        for (const file of files) {
+            if (file.extension === "md") {
+                const content = await this.app.vault.read(file);
+                totalCharacters += content.length;
+                totalWords += content.split(/\s+/).filter(Boolean).length;
+                totalSentences += content.split(/[.!?]+/).filter(Boolean).length;
             }
         }
 
-        const daysSinceCreation = (Date.now() - oldestTimestamp) / (1000 * 60 * 60 * 24);
-        return { totalCharacters, totalWords, totalFiles, totalSentences, daysSinceCreation };
+        console.log("Total Characters:", totalCharacters);
+        console.log("Total Words:", totalWords);
+        console.log("Total Sentences:", totalSentences);
+
+        const stat = await this.app.vault.adapter.stat(".");
+        const creationTime = stat.ctime ?? Date.now();
+        const daysSinceCreation = Math.floor((Date.now() - creationTime) / (1000 * 60 * 60 * 24));
+
+        // console.log("Days Since Vault Creation:", daysSinceCreation);
+
+        this.stats = {
+            totalCharacters,
+            totalWords,
+            totalSentences,
+            totalFiles: files.length,
+            daysSinceCreation,
+        };
+
+        const endTime = performance.now();
+
 		new Notice("Successfully precomputed the vault statistics!");
-    }
+        console.log(`Vault stats computed in ${(endTime - startTime).toFixed(2)} ms`);
+	}
 	
 	openNoteStatsView() {
         const activeFile = this.app.workspace.getActiveFile();

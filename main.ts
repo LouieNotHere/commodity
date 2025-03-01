@@ -19,29 +19,29 @@ export default class CommodityPlugin extends Plugin {
     });
 
     openNoteStatsView() {
-    const activeFile = this.app.workspace.getActiveFile();
-    if (!activeFile) {
-        new Notice("Commodity: There is no active note at the moment.");
-        return;
-    }
-
-    const existingLeaf = this.app.workspace.getLeavesOfType("commodity-note-view")[0];
-
-    if (existingLeaf) {
-        this.app.workspace.revealLeaf(existingLeaf);
-    } else {
-        const newLeaf = this.app.workspace.getRightLeaf(false);
-        if (newLeaf) {
-            newLeaf.setViewState({
-                type: "commodity-note-view",
-                active: true,
-                state: { filePath: activeFile.path },
-            });
-            this.app.workspace.revealLeaf(newLeaf);
-        } else {
-            new Notice("Commodity: Could not create a sidebar view.");
+        const activeFile = this.app.workspace.getActiveFile();
+        if (!activeFile) {
+            new Notice("Commodity: There is no active note at the moment.");
+            return;
         }
-    }
+
+        const existingLeaf = this.app.workspace.getLeavesOfType("commodity-note-view")[0];
+
+        if (existingLeaf) {
+            this.app.workspace.revealLeaf(existingLeaf);
+        } else {
+            const newLeaf = this.app.workspace.getRightLeaf(false);
+            if (newLeaf) {
+                newLeaf.setViewState({
+                    type: "commodity-note-view",
+                    active: true,
+                    state: { filePath: activeFile.path },
+                });
+                this.app.workspace.revealLeaf(newLeaf);
+            } else {
+                new Notice("Commodity: Could not create a sidebar view.");
+            }
+        }
 	}
 
 

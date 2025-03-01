@@ -1,7 +1,7 @@
 {
-	"id": "commodity",
-	"name": "Commodity",
-	"version": "1.1.0",
+	"id": "commodity-legacy",
+	"name": "Commodity (Legacy)",
+	"version": "1.0.0",
 	"minAppVersion": "1.6.0",
 	"description": "Simulate the worth of your Vault!",
 	"author": "Louie Kurenai",

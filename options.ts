@@ -13,7 +13,9 @@ export const CURRENCY_MULTIPLIERS: Record<string, number> = {
     "JPY": 150,
     "PHP": 50,
     "IDR": 15000,
-    "EUR": 0.9
+    "EUR": 0.9,
+	"GBP": 0.8,
+	"KRW": 1400,
 };
 
 export class CommoditySettingsTab extends PluginSettingTab {
@@ -40,6 +42,8 @@ export class CommoditySettingsTab extends PluginSettingTab {
                     "PHP": "PHP - Philippine Peso",
                     "IDR": "IDR - Indonesian Rupiah",
                     "EUR": "EUR - Euro",
+					"GBP": "GBP - British Pound",
+					"KRW": "KRW - South Korean Won"
                 });
 
                 dropdown.setValue(this.plugin.settings.currency);

@@ -56,7 +56,13 @@ export default class CommodityPlugin extends Plugin {
     let leaf = workspace.getLeavesOfType(VIEW_TYPE_COMMODITY)[0];
 
     if (!leaf) {
-        leaf = workspace.getRightLeaf(false);
+        const newLeaf = workspace.getRightLeaf(false);
+        if (!newLeaf) {
+            console.error("Failed to create a sidebar view: No available leaf.");
+            return;
+        }
+        leaf = newLeaf;
+
         await leaf.setViewState({
             type: VIEW_TYPE_COMMODITY,
             active: true,

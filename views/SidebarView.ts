@@ -6,9 +6,9 @@
 */
 
 import { ItemView, WorkspaceLeaf, TFile, Notice } from "obsidian";
-import { getLocalizedText } from "./localization";
-import { calculateNoteValue } from "./values/activeNoteValue";
-import CommodityPlugin from "./main";
+import { getLocalizedText } from "../localization";
+import { calculateNoteValue } from "../values/activeNoteValue";
+import CommodityPlugin from "../main";
 
 export const VIEW_TYPE_COMMODITY = "commodity-sidebar";
 

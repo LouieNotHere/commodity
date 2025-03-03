@@ -20,7 +20,7 @@ export function getLocalizedText(key: string, language: string): string {
     "ribbonTooltip": {
       "en": "Commodity: Calculate Vault Value",
       "ja": "Commodity：ボールトの価値を計算",
-      "id": "Commodity: Cacatan Nilai Berangkas",
+      "id": "Commodity: Kalkulasi Nilai Berangkas",
       "tl": "Commodity: Kalkulahin ang Halaga ng Vault",
       "vi": "Commodity: Tính giá trị của ví",
       "es": "Commodity: Calcular el Valor de la Bóveda"
@@ -28,7 +28,7 @@ export function getLocalizedText(key: string, language: string): string {
     "modalTitle": {
       "en": "Calculated Vault Value:",
       "ja": "計算されたボールトの価値:",
-      "id": "Nilai Cacatan Berangkas:",
+      "id": "Nilai Kalkulasi Berangkas:",
       "tl": "Kalkuladong Halaga ng Vault:",
       "vi": "Giá trị của ví đã tính được:",
       "es": "Valor Calculado de la Bóveda:"
@@ -36,7 +36,7 @@ export function getLocalizedText(key: string, language: string): string {
     "calculatingNotice": {
       "en": "Commodity: Calculating the vault value...",
       "ja": "Commodity：ボールトの価値を計算中...",
-      "id": "Commodity: Cacatan nilai vault...",
+      "id": "Commodity: Menghitung nilai berangkas...",
       "tl": "Commodity: Kinakalkula ang Halaga ng Vault...",
       "vi": "Commodity: Đang tính giá trị của ví...",
       "es": "Commodity: Calculando el Valor de la Bóveda..."
@@ -112,6 +112,14 @@ export function getLocalizedText(key: string, language: string): string {
 	  "tl": "Wala ang aktibong tala.",
 	  "vi": "There is no active note.",
 	  "es": "No tienes ninguna nota actualmente."
+	},
+	"noteValue": {
+      "en": "Note Value:",
+	  "ja": "ノートの価値:",
+	  "id": "Nilai Catatan:",
+	  "tl": "Halaga ng Tala:",
+	  "vi": "Note Value:",
+	  "es": "Valor de la Nota:"
 	}
   };
 

@@ -11,7 +11,7 @@ import { CommoditySettingsTab, DEFAULT_SETTINGS, CURRENCY_MULTIPLIERS, Commodity
 import { getLocalizedText } from "./localization";
 import { App, Plugin, Modal, Vault, WorkspaceLeaf, Notice, TFile } from "obsidian";
 import { abbreviateNumber } from "./abbrNum";
-import { CommoditySidebarView } from "./views/SidebarView";
+import { CommoditySidebarView, VIEW_TYPE_COMMODITY } from "./views/SidebarView";
 
 export default class CommodityPlugin extends Plugin {
   settings: CommoditySettings;

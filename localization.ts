@@ -87,7 +87,7 @@ export function getLocalizedText(key: string, language: string): string {
    	  "id": "Commodity: View Active Note Value",
 	    "tl": "Commodity: Tignan ang Halaga ng Aktibong Tala",
   	  "vi": "Commodity: View Active Note Value",
-	    "es": "Commodity: View Active Note Value"
+	    "es": "Commodity: Ver Valor de la Nota Actual"
 		},
     "sidebarTitle": {
 			"en": "Active Note Value",
@@ -95,7 +95,7 @@ export function getLocalizedText(key: string, language: string): string {
 		  "id": "Active Note Value",
 		  "tl": "Halaga ng Aktibong Tala",
 		  "vi": "Active Note Value",
-		  "es": "Active Note Value"
+		  "es": "Valor de la Nota Actual"
     },
     "sidebarLoading": {
 			"en": "Loading the value of the active note...",
@@ -103,7 +103,7 @@ export function getLocalizedText(key: string, language: string): string {
 			"id": "Loading the value of the active note...",
 			"tl": "Nagloload ang halaga ng aktibong tala...",
 			"vi": "Loading the value of the active note...",
-			"es": "Loading the value of the active note..."
+			"es": "Cargando el valor de la nota actual..."
 		},
 		"sidebarNoNote": {
 			"en": "There is no active note.",
@@ -111,7 +111,7 @@ export function getLocalizedText(key: string, language: string): string {
 			"id": "There is no active note.",
 			"tl": "Wala ang aktibong tala.",
 			"vi": "There is no active note.",
-			"es": "There is no active note."
+			"es": "No tienes ninguna nota actualmente."
 		}
   };
 

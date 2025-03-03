@@ -1,4 +1,4 @@
-)/*
+/*
 
   SidebarView.ts: the file for the "Commodity: View Active Note Value" ribbon
   otherwise known as the "Active Note Value" sidebar view.

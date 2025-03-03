@@ -50,6 +50,22 @@ export default class CommodityPlugin extends Plugin {
 	});
   }
 
+  async activateView() {
+    const { workspace } = this.app;
+
+    let leaf = workspace.getLeavesOfType(VIEW_TYPE_COMMODITY)[0];
+
+    if (!leaf) {
+        leaf = workspace.getRightLeaf(false);
+        await leaf.setViewState({
+            type: VIEW_TYPE_COMMODITY,
+            active: true,
+        });
+    }
+
+    workspace.revealLeaf(leaf);
+  }
+
   async loadSettings() {
     this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
   }

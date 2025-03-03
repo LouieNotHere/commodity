@@ -9,15 +9,21 @@
 
 import { CommoditySettingsTab, DEFAULT_SETTINGS, CURRENCY_MULTIPLIERS, CommoditySettings } from "./options";
 import { getLocalizedText } from "./localization";
-import { App, Plugin, Modal, Vault, Notice, TFile } from "obsidian";
+import { App, Plugin, Modal, Vault, WorkspaceLeaf, Notice, TFile } from "obsidian";
 import { abbreviateNumber } from "./abbrNum";
+import { CommoditySidebarView } from "./views/SidebarView";
 
 export default class CommodityPlugin extends Plugin {
   settings: CommoditySettings;
   language: string;
 
   async onload() {
-  console.log("Commodity Plugin Loaded");
+	  this.registerView(
+          VIEW_TYPE_COMMODITY,
+		  (leaf) => new CommoditySidebarView(leaf, this)
+	  );
+	  
+      console.log("Commodity Plugin Loaded");
 
   await this.loadSettings();
   this.language = this.settings.language || "en";
@@ -35,6 +41,13 @@ export default class CommodityPlugin extends Plugin {
       new VaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
     }
   );
+
+  this.addRibbonIcon(
+    "lucide-dollar-sign",
+	getLocalizedText("sidebarRibbonTitle", this.language),
+    async () => {
+	  await this.activateView();
+	});
   }
 
   async loadSettings() {

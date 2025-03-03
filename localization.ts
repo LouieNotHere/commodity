@@ -80,7 +80,39 @@ export function getLocalizedText(key: string, language: string): string {
       "tl": "Pumili ng gustong wika para sa interface ng plugin",
       "vi": "Chọn ngôn ngữ làm ngôn ngữ chính cho giao diện của plugin",
       "es": "Seleccione el idioma a usar para la interfaz del plugin"
-    }
+    },
+	  "sidevarViewTitle": {
+  	  "en": "Commodity: View Active Note Value",
+	    "ja": "Commodity: アクティブノートの価値を表示",
+   	  "id": "Commodity: View Active Note Value",
+	    "tl": "Commodity: Tignan ang Halaga ng Aktibong Tala",
+  	  "vi": "Commodity: View Active Note Value",
+	    "es": "Commodity: View Active Note Value"
+		},
+    "sidebarTitle": {
+			"en": "Active Note Value"
+			"ja": "アクティブノートの価値",
+		  "id": "Active Note Value",
+		  "tl": "Halaga ng Aktibong Tala",
+		  "vi": "Active Note Value",
+		  "es": "Active Note Value"
+    },
+    "sidebarLoading": {
+			"en": "Loading the value of the active note...",
+			"ja": "アクティブノートの価値を読み込み中...",
+			"id": "Loading the value of the active note...",
+			"tl": "Nagloload ang halaga ng aktibong tala...",
+			"vi": "Loading the value of the active note...",
+			"es": "Loading the value of the active note..."
+		},
+		"sidebarNoNote": {
+			"en": "There is no active note.",
+			"ja": "アクティブノートがありません。",
+			"id": "There is no active note.",
+			"tl": "Wala ang aktibong tala.",
+			"vi": "There is no active note.",
+			"es": "There is no active note."
+		}
   };
 
   return LOCALIZED_STRINGS[key]?.[language] || LOCALIZED_STRINGS[key]?.["en"] || key;

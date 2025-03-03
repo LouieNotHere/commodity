@@ -1,4 +1,4 @@
-/*
+)/*
 
   SidebarView.ts: the file for the "Commodity: View Active Note Value" ribbon
   otherwise known as the "Active Note Value" sidebar view.
@@ -60,8 +60,11 @@ export class CommoditySidebarView extends ItemView {
 
         const currencySymbol = this.getCurrencySymbol(this.plugin.settings.currency);
         this.containerEl.createEl("p", {
-            text: `${getLocalizedText("noteValue", this.plugin.settings.language)} ${currencySymbol}${value.toFixed(2)}`,
+            text: `${getLocalizedText("noteValue", this.plugin.settings.language)}`
         });
+        this.containerEl.createEl("h2", {
+			text: `${currencySymbol}${value.toFixed(2)}`
+		});
     }
 
     handleFileOpen = () => {

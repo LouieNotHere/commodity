@@ -81,7 +81,7 @@ export function getLocalizedText(key: string, language: string): string {
       "vi": "Chọn ngôn ngữ làm ngôn ngữ chính cho giao diện của plugin",
       "es": "Seleccione el idioma a usar para la interfaz del plugin"
     },
-	"sidevarViewTitle": {
+	"sidebarRibbonTitle": {
   	  "en": "Commodity: View Active Note Value",
       "ja": "Commodity: アクティブノートの価値を表示",
    	  "id": "Commodity: Lahat Cacatan Nilai Aktif",

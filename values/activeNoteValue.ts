@@ -1,5 +1,5 @@
 import { TFile, Vault } from "obsidian";
-import { CURRENCY_MULTIPLIERS } from "./options";
+import { CURRENCY_MULTIPLIERS } from "../options";
 
 export async function calculateNoteValue(file: TFile, vault: Vault, currency: string): Promise<number> {
     const content = await vault.read(file);

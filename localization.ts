@@ -90,7 +90,7 @@ export function getLocalizedText(key: string, language: string): string {
 	    "es": "Commodity: View Active Note Value"
 		},
     "sidebarTitle": {
-			"en": "Active Note Value"
+			"en": "Active Note Value",
 			"ja": "アクティブノートの価値",
 		  "id": "Active Note Value",
 		  "tl": "Halaga ng Aktibong Tala",

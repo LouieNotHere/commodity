@@ -7,7 +7,6 @@
 
   Instructions in Translating:
   - There is no need to translate Commodity, just leave it be.
-  - The term "Legacy" could be voluntary, meaning that it's your choice whether to translate it or not.
 
   Huge thanks to:
   - @cookedfish01 and @kntdys for the Indonesian localization
@@ -35,12 +34,12 @@ export function getLocalizedText(key: string, language: string): string {
       "es": "Valor Calculado de la Bóveda:"
     },
     "calculatingNotice": {
-      "en": "Commodity (Legacy): Calculating the vault value...",
-      "ja": "Commodity（レガシー）：ボールトの価値を計算中...",
-      "id": "Commodity (Warisan): Menghitung nilai vault...",
-      "tl": "Commodity (Legacy): Kinakalkula ang Halaga ng Vault...",
-      "vi": "Commodity (cũ): Đang tính giá trị của ví...",
-      "es": "Commodity (Legacy): Calculando el Valor de la Bóveda..."
+      "en": "Commodity: Calculating the vault value...",
+      "ja": "Commodity：ボールトの価値を計算中...",
+      "id": "Commodity: Menghitung nilai vault...",
+      "tl": "Commodity: Kinakalkula ang Halaga ng Vault...",
+      "vi": "Commodity: Đang tính giá trị của ví...",
+      "es": "Commodity: Calculando el Valor de la Bóveda..."
     },
     "calculatedTime": {
       "en": "Total CPU Time:",

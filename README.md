@@ -8,6 +8,8 @@ This plugin simulates the estimated cost of your Vault in just a matter of secon
 # Why Legacy?
 This is not only for minor updates, but add some minor features and preserve the old functionality of this plugin. I wanted to make this respond way simpler and faster.
 
+The `legacy` branch is no longer in use. Why not check out [Commodity (Legacy)](https://github.com/LouieNotHere/commodity-legacy)?
+
 # Features
 - The **Active Note Value** feature, which redirects you to the right sidebar when clicked from the list of ribbons.
 

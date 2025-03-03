@@ -1,11 +1,9 @@
 /*
 
-  main.ts file (used as the main file for Commodity (Legacy))
+  main.ts file (used as the main file for Commodity )
   For additional context: Commodity is a term related to Obsidian (can be the material itself or the app) and finances.
   I know it took me a long time to fix some things before publishing it as an obsidian community plugin.
   I deeply apologize for that, I am just trying to add some new things to the source code.
-
-  This is only for the legacy version. It can differ from the non-legacy version.
 
 */
 
@@ -19,10 +17,10 @@ export default class CommodityPlugin extends Plugin {
   language: string;
 
   async onload() {
-  console.log("Commodity Plugin (Legacy) Loaded");
+  console.log("Commodity Plugin Loaded");
 
   await this.loadSettings();
-  this.language = this.settings.language || "en"; // Load user's preferred language or default to 'en'
+  this.language = this.settings.language || "en";
   this.addSettingTab(new CommoditySettingsTab(this.app, this));
 
   console.log(`Current currency: ${this.settings.currency}`);

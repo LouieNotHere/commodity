@@ -31,7 +31,7 @@ export class CommoditySidebarView extends ItemView {
 
     async onOpen() {
         this.containerEl.empty();
-		this.containerEl.addClass("view-note-value");
+		this.containerEl.addClass("note-value-view");
 		
         this.containerEl.createEl("h3", {
             text: getLocalizedText("sidebarTitle", this.plugin.settings.language),

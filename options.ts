@@ -85,5 +85,5 @@ export class CommoditySettingsTab extends PluginSettingTab {
           await this.plugin.saveSettings();
         });
       });
-  });
+  }
  }

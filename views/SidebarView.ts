@@ -26,7 +26,7 @@ export class CommoditySidebarView extends ItemView {
     }
 
     getDisplayText(): string {
-        return getLocalizedText("sidebarTitle", this.plugin.settings.language);
+        return getLocalizedText("sidebarTitle", this.language);
     }
 
     async onOpen() {
@@ -34,7 +34,7 @@ export class CommoditySidebarView extends ItemView {
 		this.containerEl.addClass("note-value-view");
 		
         this.containerEl.createEl("h3", {
-            text: getLocalizedText("sidebarTitle", this.plugin.settings.language),
+            text: getLocalizedText("sidebarTitle", this.language),
         });
 
         this.updateView();
@@ -46,7 +46,7 @@ export class CommoditySidebarView extends ItemView {
     async updateView() {
         const file = this.app.workspace.getActiveFile();
         if (!file) {
-            this.containerEl.setText(getLocalizedText("noActiveNote", this.plugin.settings.language));
+            this.containerEl.setText(getLocalizedText("noActiveNote", this.plugin.language));
             return;
         }
 
@@ -55,12 +55,12 @@ export class CommoditySidebarView extends ItemView {
 
         this.containerEl.empty();
         this.containerEl.createEl("h3", {
-            text: getLocalizedText("sidebarTitle", this.plugin.settings.language),
+            text: getLocalizedText("sidebarTitle", this.language),
         });
 
         const currencySymbol = this.getCurrencySymbol(this.plugin.settings.currency);
         this.containerEl.createEl("p", {
-            text: `${getLocalizedText("noteValue", this.plugin.settings.language)}`
+            text: `${getLocalizedText("noteValue", this.language)}`
         });
         this.containerEl.createEl("h2", {
 			text: `${currencySymbol}${value.toFixed(2)}`

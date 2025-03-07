@@ -54,8 +54,7 @@ export class CommoditySettingsTab extends PluginSettingTab {
     const { containerEl } = this;
 
     containerEl.empty();
-    containerEl.createEl("h2", { text: "Plugin Preferences" });
-
+	  
     new Setting(containerEl)
       .setName(getLocalizedText("currencySetting", this.plugin.settings.language))
       .setDesc(getLocalizedText("currencyDescription", this.plugin.settings.language))

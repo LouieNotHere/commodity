@@ -2,7 +2,7 @@ import { TFile, Vault } from "obsidian";
 import { CURRENCY_MULTIPLIERS } from "../options";
 
 export async function calculateNoteValue(file: TFile, vault: Vault, currency: string): Promise<number> {
-    const content = await vault.read(file);
+    const content = await vault.cachedRead(file);
     const totalCharacters = content.length;
     const totalWords = content.split(/\s+/).length;
     const totalSentences = (content.match(/[.!?]+/g) || []).length;

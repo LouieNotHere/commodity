@@ -10,13 +10,13 @@ import { getLocalizedText } from "../localization";
 import { calculateNoteValue } from "../values/activeNoteValue";
 import CommodityPlugin from "../main";
 
+this.language = this.app.getLanguage();
+
 export const VIEW_TYPE_COMMODITY = "commodity-sidebar";
 
 export class CommoditySidebarView extends ItemView {
     private plugin: CommodityPlugin;
     private currentFile: TFile | null = null;
-
-	this.language = this.app.getLanguage();
 
     constructor(leaf: WorkspaceLeaf, plugin: CommodityPlugin) {
         super(leaf);
@@ -36,7 +36,7 @@ export class CommoditySidebarView extends ItemView {
 		this.containerEl.addClass("note-value-view");
 		
         this.containerEl.createEl("h3", {
-            text: getLocalizedText("sidebarTitle", this.language),
+            text: getLocalizedText("sidebarTitle", this.language)
         });
 
         this.updateView();

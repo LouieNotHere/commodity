@@ -19,7 +19,7 @@ export class CommoditySidebarView extends ItemView {
     constructor(leaf: WorkspaceLeaf, plugin: CommodityPlugin) {
         super(leaf);
         this.plugin = plugin;
-		this.language = this.app.getLanguage();
+		this.language = this.app.vault.getConfig("language") || "en";
     }
 
     getViewType(): string {

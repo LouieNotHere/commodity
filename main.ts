@@ -173,7 +173,7 @@ async function calculateVaultValue(stats: VaultStats, currency: string, vault: V
 
 async function getVaultAgeInDays(vault: Vault): Promise<number> {
   try {
-    const configFile = vault.getAbstractFileByPath(".obsidian/app.json");
+    const configFile = vault.getAbstractFileByPath(`${this.app.vault.configDir}/app.json`);
 
     if (!configFile || !(configFile instanceof TFile)) {
       console.warn("Vault creation date file not found. Returning 0.");

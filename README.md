@@ -3,7 +3,7 @@ Commodity is a simple plugin for [Obsidian](https://obsidian.md) made for financ
 
 Ever wanted to know how worth your Vault can be? This plugin can calculate how worth it can be!
 
-This plugin simulates the estimated cost of your Vault in just a matter of seconds! Please note that the value may vary depending on how many files your vault contains.
+This plugin simulates the estimated cost of your Vault in just a matter of seconds! Please note that the factors used to calculate depend on the total characters, files, words, and the total sentences from your vault.
 
 # Features
 - The **Active Note Value** feature, which redirects you to the right sidebar when clicked from the list of ribbons.

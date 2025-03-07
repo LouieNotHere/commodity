@@ -54,8 +54,8 @@ export class CommoditySettingsTab extends PluginSettingTab {
     containerEl.empty();
 	  
     new Setting(containerEl)
-      .setName(getLocalizedText("currencySetting", this.plugin.settings.language))
-      .setDesc(getLocalizedText("currencyDescription", this.plugin.settings.language))
+      .setName(getLocalizedText("currencySetting", this.language))
+      .setDesc(getLocalizedText("currencyDescription", this.language))
       .addDropdown(dropdown => {
         dropdown.addOptions({
           "USD": "USD - US Dollar",
@@ -85,12 +85,6 @@ export class CommoditySettingsTab extends PluginSettingTab {
           await this.plugin.saveSettings();
         });
       });
-
-    dropdown.setValue(this.plugin.settings.language);
-    dropdown.onChange(async (value) => {
-      this.plugin.settings.language = value;
-      await this.plugin.saveSettings();
-    });
   });
  }
 }

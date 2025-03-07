@@ -29,9 +29,6 @@ export default class CommodityPlugin extends Plugin {
   this.language = this.settings.language || "en";
   this.addSettingTab(new CommoditySettingsTab(this.app, this));
 
-  console.log(`Current currency: ${this.settings.currency}`);
-  console.log(`Selected Language: ${this.language}`);
-
   this.addRibbonIcon(
     "lucide-calculator",
     getLocalizedText("ribbonTooltip", this.language),

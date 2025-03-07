@@ -16,6 +16,8 @@ export class CommoditySidebarView extends ItemView {
     private plugin: CommodityPlugin;
     private currentFile: TFile | null = null;
 
+	this.language = this.app.getLanguage();
+
     constructor(leaf: WorkspaceLeaf, plugin: CommodityPlugin) {
         super(leaf);
         this.plugin = plugin;

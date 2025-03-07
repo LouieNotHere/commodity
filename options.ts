@@ -12,12 +12,10 @@ import { getLocalizedText } from "./localization";
 
 export interface CommoditySettings {
   currency: string;
-  language: string;
 }
 
 export const DEFAULT_SETTINGS: CommoditySettings = {
   currency: "USD",
-  language: "en",
 };
 
 export const CURRENCY_MULTIPLIERS: Record<string, number> = {
@@ -87,19 +85,6 @@ export class CommoditySettingsTab extends PluginSettingTab {
           await this.plugin.saveSettings();
         });
       });
-
-    new Setting(containerEl)
-  .setName(getLocalizedText("languageSetting", this.plugin.settings.language))
-  .setDesc(getLocalizedText("languageDescription", this.plugin.settings.language))
-  .addDropdown(dropdown => {
-    dropdown.addOptions({
-      "en": "EN - English",
-      "ja": "JA - 日本語",
-      "id": "ID - Bahasa Indonesia",
-      "tl": "TL - Wikang Pilipino",
-      "vi": "VI - Tiếng Việt",
-      "es": "ES - Español"
-    });
 
     dropdown.setValue(this.plugin.settings.language);
     dropdown.onChange(async (value) => {

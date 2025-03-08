@@ -15,6 +15,7 @@ export const VIEW_TYPE_COMMODITY = "commodity-sidebar";
 export class CommoditySidebarView extends ItemView {
     private plugin: CommodityPlugin;
     private currentFile: TFile | null = null;
+	private language: string;
 
     constructor(leaf: WorkspaceLeaf, plugin: CommodityPlugin) {
         super(leaf);

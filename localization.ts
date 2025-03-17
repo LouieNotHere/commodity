@@ -18,79 +18,90 @@
 export function getLocalizedText(key: string, language: string): string {
   const LOCALIZED_STRINGS: Record<string, Record<string, string>> = {
     "ribbonTooltip": {
-      "en": "Commodity: Calculate vault value",
+      "en": "Commodity: Calculate Vault Value",
       "ja": "Commodity：ボールトの価値を計算",
-      "id": "Commodity: Kalkulasi nilai berangkas",
+      "id": "Commodity: Kalkulasi Nilai Berangkas",
+      "tl": "Commodity: Kalkulahin ang Halaga ng Vault",
       "vi": "Commodity: Tính giá trị của ví",
       "es": "Commodity: Calcular el Valor de la Bóveda"
     },
     "modalTitle": {
-      "en": "Calculated vault value:",
+      "en": "Calculated Vault Value:",
       "ja": "計算されたボールトの価値:",
-      "id": "Nilai kalkulasi berangkas:",
+      "id": "Nilai Kalkulasi Berangkas:",
+      "tl": "Kalkuladong Halaga ng Vault:",
       "vi": "Giá trị của ví đã tính được:",
-      "es": "Valor calculado de la bóveda:"
+      "es": "Valor Calculado de la Bóveda:"
     },
     "calculatingNotice": {
       "en": "Commodity: Calculating the vault value...",
       "ja": "Commodity：ボールトの価値を計算中...",
       "id": "Commodity: Menghitung nilai berangkas...",
+      "tl": "Commodity: Kinakalkula ang Halaga ng Vault...",
       "vi": "Commodity: Đang tính giá trị của ví...",
       "es": "Commodity: Calculando el Valor de la Bóveda..."
     },
     "calculatedTime": {
-      "en": "Total CPU time:",
+      "en": "Total CPU Time:",
       "ja": "合計CPU時間:",
-      "id": "Total waktu CPU:",
+      "id": "Total Waktu CPU:",
+      "tl": "Kabuuang Oras ng CPU:",
       "vi": "Tổng thời gian CPU:",
-      "es": "Tiempo de CPU en total:"
+      "es": "Tiempo de CPU en Total:"
     },
     "currencySetting": {
-      "en": "Currency preference",
+      "en": "Currency Preference",
       "ja": "通貨の設定",
-      "id": "Preferensi mata uang",
+      "id": "Preferensi Mata Uang",
+      "tl": "Kagustuhan sa Pera",
       "vi": "Đơn vị tiền ảo",
-      "es": "Moneda a usar"
+      "es": "Moneda a Usar"
     },
     "currencyDescription": {
       "en": "Select the preferred currency that can be used for the value calculation",
       "ja": "価値計算に使用する優先通貨を選択してください",
       "id": "Pilih preferensi mata uang yang bisa digunakan untuk perhitungan",
+      "tl": "Pumili ng gustong pera na pwedeng magamit sa pagkalkula ng halaga",
       "vi": "Chọn loại đơn vị tiền ảo có thể dùng để tính giá trị của ví",
       "es": "Seleccione la moneda que desea usar para el cálculo de la bóveda."
     },
     "languageSetting": {
-      "en": "Language preference",
+      "en": "Language Preference",
       "ja": "言語の設定",
-      "id": "Preferensi bahasa",
+      "id": "Preferensi Bahasa",
+      "tl": "Kagustuhan sa Wika",
       "vi": "Ngôn ngữ",
-      "es": "Idioma a usar"
+      "es": "Idioma a Usar"
     },
     "languageDescription": {
       "en": "Select the preferred language for the plugin interface",
       "ja": "プラグインのインターフェースに使用する優先言語を選択してください",
       "id": "Pilih preferensi bahasa untuk antarmuka plugin",
+      "tl": "Pumili ng gustong wika para sa interface ng plugin",
       "vi": "Chọn ngôn ngữ làm ngôn ngữ chính cho giao diện của plugin",
       "es": "Seleccione el idioma a usar para la interfaz del plugin"
     },
 	"sidebarRibbonTitle": {
-  	  "en": "Commodity: View active note value",
+  	  "en": "Commodity: View Active Note Value",
       "ja": "Commodity: アクティブノートの価値を表示",
-   	  "id": "Commodity: Lahat cacatan nilai aktif",
-  	  "vi": "Commodity: View active note value",
-	  "es": "Commodity: Ver valor de la nota actual"
+   	  "id": "Commodity: Lahat Cacatan Nilai Aktif",
+	  "tl": "Commodity: Tignan ang Halaga ng Aktibong Tala",
+  	  "vi": "Commodity: View Active Note Value",
+	  "es": "Commodity: Ver Valor de la Nota Actual"
 	},
     "sidebarTitle": {
-	  "en": "Active note value",
+	  "en": "Active Note Value",
 	  "ja": "アクティブノートの価値",
-	  "id": "Cacatan nilai aktif",
-	  "vi": "Active note nalue",
-	  "es": "Valor de la nota actual"
+	  "id": "Cacatan Nilai Aktif",
+	  "tl": "Halaga ng Aktibong Tala",
+	  "vi": "Active Note Value",
+	  "es": "Valor de la Nota Actual"
     },
     "sidebarLoading": {
 	  "en": "Loading the value of the active note...",
 	  "ja": "アクティブノートの価値を読み込み中...",
 	  "id": "Memuat nilai dari cacatan aktif...",
+	  "tl": "Nagloload ang halaga ng aktibong tala...",
 	  "vi": "Loading the value of the active note...",
 	  "es": "Cargando el valor de la nota actual..."
 	},
@@ -98,15 +109,17 @@ export function getLocalizedText(key: string, language: string): string {
 	  "en": "There is no active note.",
 	  "ja": "アクティブノートがありません。",
 	  "id": "Tidak ada cacatan aktif.",
+	  "tl": "Wala ang aktibong tala.",
 	  "vi": "There is no active note.",
 	  "es": "No tienes ninguna nota actualmente."
 	},
 	"noteValue": {
-      "en": "Note value:",
+      "en": "Note Value:",
 	  "ja": "ノートの価値:",
-	  "id": "Nilai catatan:",
-	  "vi": "Note value:",
-	  "es": "Valor de la nota:"
+	  "id": "Nilai Catatan:",
+	  "tl": "Halaga ng Tala:",
+	  "vi": "Note Value:",
+	  "es": "Valor de la Nota:"
 	}
   };
 

@@ -15,12 +15,10 @@ export const VIEW_TYPE_COMMODITY = "commodity-sidebar";
 export class CommoditySidebarView extends ItemView {
     private plugin: CommodityPlugin;
     private currentFile: TFile | null = null;
-	private language: string;
 
     constructor(leaf: WorkspaceLeaf, plugin: CommodityPlugin) {
         super(leaf);
         this.plugin = plugin;
-		this.language = this.app.vault.getConfig("language") || "en";
     }
 
     getViewType(): string {
@@ -28,16 +26,15 @@ export class CommoditySidebarView extends ItemView {
     }
 
     getDisplayText(): string {
-        return getLocalizedText("sidebarTitle", this.language);
+        return getLocalizedText("sidebarTitle", this.plugin.settings.language);
     }
 
     async onOpen() {
-		
         this.containerEl.empty();
 		this.containerEl.addClass("note-value-view");
 		
         this.containerEl.createEl("h3", {
-            text: getLocalizedText("sidebarTitle", this.language)
+            text: getLocalizedText("sidebarTitle", this.plugin.settings.language),
         });
 
         this.updateView();
@@ -49,7 +46,7 @@ export class CommoditySidebarView extends ItemView {
     async updateView() {
         const file = this.app.workspace.getActiveFile();
         if (!file) {
-            this.containerEl.setText(getLocalizedText("noActiveNote", this.language));
+            this.containerEl.setText(getLocalizedText("noActiveNote", this.plugin.settings.language));
             return;
         }
 
@@ -58,12 +55,12 @@ export class CommoditySidebarView extends ItemView {
 
         this.containerEl.empty();
         this.containerEl.createEl("h3", {
-            text: getLocalizedText("sidebarTitle", this.language),
+            text: getLocalizedText("sidebarTitle", this.plugin.settings.language),
         });
 
         const currencySymbol = this.getCurrencySymbol(this.plugin.settings.currency);
         this.containerEl.createEl("p", {
-            text: `${getLocalizedText("noteValue", this.language)}`
+            text: `${getLocalizedText("noteValue", this.plugin.settings.language)}`
         });
         this.containerEl.createEl("h2", {
 			text: `${currencySymbol}${value.toFixed(2)}`

@@ -27,7 +27,7 @@ export default class CommodityPlugin extends Plugin {
       console.log("Commodity Plugin Loaded");
 
   await this.loadSettings();
-  this.language = this.settings.language || "en";
+  this.language = this.app.getLanguage();
   this.addSettingTab(new CommoditySettingsTab(this.app, this));
 
   this.addRibbonIcon(
@@ -174,7 +174,7 @@ async function calculateVaultValue(stats: VaultStats, currency: string, vault: V
 
 async function getVaultAgeInDays(vault: Vault): Promise<number> {
   try {
-    const configFile = vault.getAbstractFileByPath(".obsidian/app.json");
+    const configFile = vault.getAbstractFileByPath(`${this.app.vault.configDir}/app.json`);
 
     if (!configFile || !(configFile instanceof TFile)) {
       console.warn("Vault creation date file not found. Returning 0.");

@@ -2,7 +2,8 @@
 
   main.ts file (used as the main file for Commodity )
   For additional context: Commodity is a term related to Obsidian (can be the material itself or the app) and finances.
-  I know for a fact that it took me a long time to fix some things before publishing it as an obsidian community plugin.
+  I know it took me a long time to fix some things before publishing it as an obsidian community plugin.
+  However, since I am making this plugin, I will not plan to release this publicly, but the development will still remain.
   I deeply apologize for that, I am just trying to add some new things to the source code.
 
 */
@@ -26,7 +27,7 @@ export default class CommodityPlugin extends Plugin {
       console.log("Commodity Plugin Loaded");
 
   await this.loadSettings();
-  this.language = this.app.getLanguage();
+  this.language = this.settings.language || "en";
   this.addSettingTab(new CommoditySettingsTab(this.app, this));
 
   this.addRibbonIcon(
@@ -173,7 +174,7 @@ async function calculateVaultValue(stats: VaultStats, currency: string, vault: V
 
 async function getVaultAgeInDays(vault: Vault): Promise<number> {
   try {
-    const configFile = vault.getAbstractFileByPath(`${this.app.vault.configDir}/app.json`);
+    const configFile = vault.getAbstractFileByPath(".obsidian/app.json");
 
     if (!configFile || !(configFile instanceof TFile)) {
       console.warn("Vault creation date file not found. Returning 0.");

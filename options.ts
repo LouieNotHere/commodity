@@ -3,7 +3,8 @@
   options.ts
   This is a part of the main.ts file, but this adds the plugin options.
   If you're willing to add more currencies, please add some options to the dropdown.
-  Once done, edit the main.ts file and add the symbol of the added currency.
+  If you're willing to translate instead of doing the task above, please refer to this link here (reading the top comment of the file is recommended): https://github.com/LouieNotHere/commodity/tree/master/localization.ts
+  Once adding dropdown option/s is/are done, kindly edit the main.ts file and add the symbol of the added currency.
 
 */
 
@@ -12,10 +13,12 @@ import { getLocalizedText } from "./localization";
 
 export interface CommoditySettings {
   currency: string;
+  language: string;
 }
 
 export const DEFAULT_SETTINGS: CommoditySettings = {
   currency: "USD",
+  language: "en",
 };
 
 export const CURRENCY_MULTIPLIERS: Record<string, number> = {
@@ -54,8 +57,8 @@ export class CommoditySettingsTab extends PluginSettingTab {
     containerEl.empty();
 	  
     new Setting(containerEl)
-      .setName(getLocalizedText("currencySetting", this.language))
-      .setDesc(getLocalizedText("currencyDescription", this.language))
+      .setName(getLocalizedText("currencySetting", this.plugin.settings.language))
+      .setDesc(getLocalizedText("currencyDescription", this.plugin.settings.language))
       .addDropdown(dropdown => {
         dropdown.addOptions({
           "USD": "USD - US Dollar",
@@ -85,5 +88,25 @@ export class CommoditySettingsTab extends PluginSettingTab {
           await this.plugin.saveSettings();
         });
       });
-  }
+
+    new Setting(containerEl)
+  .setName(getLocalizedText("languageSetting", this.plugin.settings.language))
+  .setDesc(getLocalizedText("languageDescription", this.plugin.settings.language))
+  .addDropdown(dropdown => {
+    dropdown.addOptions({
+      "en": "EN - English",
+      "ja": "JA - 日本語",
+      "id": "ID - Bahasa Indonesia",
+      "tl": "TL - Wikang Pilipino",
+      "vi": "VI - Tiếng Việt",
+      "es": "ES - Español"
+    });
+
+    dropdown.setValue(this.plugin.settings.language);
+    dropdown.onChange(async (value) => {
+      this.plugin.settings.language = value;
+      await this.plugin.saveSettings();
+    });
+  });
  }
+}

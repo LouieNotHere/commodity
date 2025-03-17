@@ -27,7 +27,7 @@ export default class CommodityPlugin extends Plugin {
       console.log("Commodity Plugin Loaded");
 
   await this.loadSettings();
-  this.language = this.app.getLanguage();
+  this.language = "this.settings.language || "en";
   this.addSettingTab(new CommoditySettingsTab(this.app, this));
 
   this.addRibbonIcon(

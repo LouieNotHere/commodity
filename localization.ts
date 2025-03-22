@@ -65,7 +65,7 @@ export function getLocalizedText(key: string, language: string): string {
       "id": "Commodity: Menghitung itu ditingkatkan nilai dari sang berangkas...",
       "tl": "Commodity: Kinakalkula ang napabuting halaga ng iyong Vault...",
       "vi": "Commodity: Tính giá trị của cái ví cải thiện tại đây...",
-      "es": "Commodity: Calculando el valor de la bóveda..."
+      "es": "Commodity: Calculando el valor mejorado de la bóveda..."
     },
     "calculatedTime": {
       "en": "Total CPU Time:",

@@ -10,7 +10,7 @@
 
 import { App, PluginSettingTab, Setting } from "obsidian";
 import { getLocalizedText } from "./localization";
-import {createPromotionsSection } from "./promotions";
+import { createPromotionsSection } from "./promotions";
 
 export interface CommoditySettings {
   currency: string;

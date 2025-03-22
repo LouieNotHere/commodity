@@ -59,6 +59,12 @@ export class CommoditySettingsTab extends PluginSettingTab {
     new Setting(containerEl)
       .setName(getLocalizedText("currencySetting", this.plugin.settings.language))
       .setDesc(getLocalizedText("currencyDescription", this.plugin.settings.language))
+	  .addButton((button) =>
+        button.setButtonText(getLocalizedText("promotionButtonText", this.plugin.settings.language))
+        .onClick(() => {
+		  this.app.setting.openTabById("commodity-promotions-tab")
+		})
+	  );
       .addDropdown(dropdown => {
         dropdown.addOptions({
           "USD": "USD - US Dollar",

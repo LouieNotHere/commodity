@@ -4,19 +4,21 @@
   This is where the localizations go. If you wish to add some translations in your language, please contact me via these methods:
   - E-mail: paytousebloxy1774@gmail.com or louiesoulenkurenai@gmail.com
   - Discord: @paytouse
+  
+  Just a small warning that the translations may be inaccurate, and it depends on the translators.
 
   Instructions in Translating:
   - There is no need to translate Commodity, just leave it be.
 
   Huge thanks to:
-  - @cookedfish01 and @kntdys for the Indonesian localization
+  - @luminepokee, @anatasim, @cookedfish01 and @kntdys for the Indonesian localization
   - @nekorin727 for the Vietnamese localization
   - @operagx0535 for the Spanish localization
 
 */
 
 export function getLocalizedText(key: string, language: string): string {
-  const LOCALIZED_STRINGS: Record<string, Record<string, string>> = {
+  const LOCALIZED_STRINGS: Record < string, Record < string, string >> = {
     "ribbonTooltip": {
       "en": "Commodity: Calculate Vault Value",
       "ja": "Commodity：ボールトの価値を計算",
@@ -25,14 +27,14 @@ export function getLocalizedText(key: string, language: string): string {
       "vi": "Commodity: Tính giá trị của ví",
       "es": "Commodity: Calcular el Valor de la Bóveda"
     },
-	"ribbonReworkedTooltip": {
-	  "en": "Commodity: Calculate Vault Value (Reworked)",
-	  "ja": "Commodity: ボールトの価値を計算 (改良された)",
+    "ribbonReworkedTooltip": {
+      "en": "Commodity: Calculate Vault Value (Reworked)",
+      "ja": "Commodity: ボールトの価値を計算 (改良された)",
       "id": "Commodity: Kalkulasu Nilai Berangkas (Ditingkatkan)",
-	  "tl": "Commodity: Kalkulahin ang Halaga ng Vault (Napabuti)",
-	  "vi": "Commodity: Tính giá trị của ví (Được cải thiện)",
-	  "es": "Commodity: Calcular el Valor de la Bóveda (Mejorado)"
-	},
+      "tl": "Commodity: Kalkulahin ang Halaga ng Vault (Napabuti)",
+      "vi": "Commodity: Tính giá trị của ví (Được cải thiện)",
+      "es": "Commodity: Calcular el Valor de la Bóveda (Mejorado)"
+    },
     "modalTitle": {
       "en": "Calculated Vault Value:",
       "ja": "計算されたボールトの価値:",
@@ -41,7 +43,7 @@ export function getLocalizedText(key: string, language: string): string {
       "vi": "Giá trị của ví đã tính được:",
       "es": "Valor Calculado de la Bóveda:"
     },
-	"modalReworkedTitle": {
+    "modalReworkedTitle": {
       "en": "Calculated Vault Value (Reworked):",
       "ja": "計算されたボールトの価値 (改良された):",
       "id": "Nilai Kalkulasi Berangkas (Ditingkatkan):",
@@ -52,17 +54,17 @@ export function getLocalizedText(key: string, language: string): string {
     "calculatingNotice": {
       "en": "Commodity: Calculating the vault value...",
       "ja": "Commodity：ボールトの価値を計算中...",
-      "id": "Commodity: Menghitung nilai berangkas...",
+      "id": "Commodity: Menghitung itu nilai dari sang berangkas...",
       "tl": "Commodity: Kinakalkula ang halaga ng iyong Vault...",
       "vi": "Commodity: Đang tính giá trị của ví...",
       "es": "Commodity: Calculando el valor de la bóveda..."
     },
-	"calculatingReworkedNotice": {
+    "calculatingReworkedNotice": {
       "en": "Commodity: Calculating the reworked vault value...",
       "ja": "Commodity：改良された保管庫の価値を計算中...",
-      "id": "Commodity: Menghitung ditingkatkan nilai berangkas...",
+      "id": "Commodity: Menghitung itu ditingkatkan nilai dari sang berangkas...",
       "tl": "Commodity: Kinakalkula ang napabuting halaga ng iyong Vault...",
-      "vi": "Commodity: Đang tính giá trị của ví...",
+      "vi": "Commodity: Tính giá trị của cái ví cải thiện tại đây...",
       "es": "Commodity: Calculando el valor de la bóveda..."
     },
     "calculatedTime": {
@@ -105,47 +107,47 @@ export function getLocalizedText(key: string, language: string): string {
       "vi": "Chọn ngôn ngữ làm ngôn ngữ chính cho giao diện của plugin",
       "es": "Seleccione el idioma a usar para la interfaz del plugin"
     },
-	"sidebarRibbonTitle": {
-  	  "en": "Commodity: View Active Note Value",
+    "sidebarRibbonTitle": {
+      "en": "Commodity: View Active Note Value",
       "ja": "Commodity: アクティブノートの価値を表示",
-   	  "id": "Commodity: Lahat Cacatan Nilai Aktif",
-	  "tl": "Commodity: Tignan ang Halaga ng Aktibong Tala",
-  	  "vi": "Commodity: View Active Note Value",
-	  "es": "Commodity: Ver Valor de la Nota Actual"
-	},
+      "id": "Commodity: Lahat Cacatan Nilai Aktif",
+      "tl": "Commodity: Tignan ang Halaga ng Aktibong Tala",
+      "vi": "Commodity: View Active Note Value",
+      "es": "Commodity: Ver Valor de la Nota Actual"
+    },
     "sidebarTitle": {
-	  "en": "Active Note Value",
-	  "ja": "アクティブノートの価値",
-	  "id": "Cacatan Nilai Aktif",
-	  "tl": "Halaga ng Aktibong Tala",
-	  "vi": "Active Note Value",
-	  "es": "Valor de la Nota Actual"
+      "en": "Active Note Value",
+      "ja": "アクティブノートの価値",
+      "id": "Cacatan Nilai Aktif",
+      "tl": "Halaga ng Aktibong Tala",
+      "vi": "Active Note Value",
+      "es": "Valor de la Nota Actual"
     },
     "sidebarLoading": {
-	  "en": "Loading the value of the active note...",
-	  "ja": "アクティブノートの価値を読み込み中...",
-	  "id": "Memuat nilai dari cacatan aktif...",
-	  "tl": "Nagloload ang halaga ng aktibong tala...",
-	  "vi": "Loading the value of the active note...",
-	  "es": "Cargando el valor de la nota actual..."
-	},
-	"sidebarNoNote": {
-	  "en": "There is no active note.",
-	  "ja": "アクティブノートがありません。",
-	  "id": "Tidak ada cacatan aktif.",
-	  "tl": "Wala ang aktibong tala.",
-	  "vi": "There is no active note.",
-	  "es": "No tienes ninguna nota actualmente."
-	},
-	"noteValue": {
+      "en": "Loading the value of the active note...",
+      "ja": "アクティブノートの価値を読み込み中...",
+      "id": "Memuat nilai dari cacatan aktif...",
+      "tl": "Nagloload ang halaga ng aktibong tala...",
+      "vi": "Loading the value of the active note...",
+      "es": "Cargando el valor de la nota actual..."
+    },
+    "sidebarNoNote": {
+      "en": "There is no active note.",
+      "ja": "アクティブノートがありません。",
+      "id": "Tidak ada cacatan aktif.",
+      "tl": "Wala ang aktibong tala.",
+      "vi": "There is no active note.",
+      "es": "No tienes ninguna nota actualmente."
+    },
+    "noteValue": {
       "en": "Note Value:",
-	  "ja": "ノートの価値:",
-	  "id": "Nilai Catatan:",
-	  "tl": "Halaga ng Tala:",
-	  "vi": "Note Value:",
-	  "es": "Valor de la Nota:"
-	}
+      "ja": "ノートの価値:",
+      "id": "Nilai Catatan:",
+      "tl": "Halaga ng Tala:",
+      "vi": "Note Value:",
+      "es": "Valor de la Nota:"
+    }
   };
-
+  
   return LOCALIZED_STRINGS[key]?.[language] || LOCALIZED_STRINGS[key]?.["en"] || key;
 }

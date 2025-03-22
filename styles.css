@@ -34,3 +34,7 @@
     height: 100%;
     padding: 10px;
 }
+
+#commodity-promotions-tab {
+  display: none;
+}

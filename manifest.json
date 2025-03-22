@@ -1,9 +1,9 @@
 {
 	"id": "commodity",
 	"name": "Commodity",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"minAppVersion": "1.8.0",
-	"description": "Simulate the worth of your Vault!",
+	"description": "Calculate the estimated value of your Vault! (May be inaccurate)",
 	"author": "Louie Kurenai",
 	"authorUrl": "https://paytouse.github.io/new-webpage",
 	"fundingUrl": "https://ko-fi.com/paytouse1774",

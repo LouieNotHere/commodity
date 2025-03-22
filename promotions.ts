@@ -1,45 +1,28 @@
 import { App, PluginSettingTab } from "obsidian";
 import { getLocalizedText } from "./localization";
 
-export class CommodityPromotionsTab extends PluginSettingTab {
-  id = "commodity-promotions-tab";
-	
-  plugin: any;
-  language: string;
+export function createPromotionsSection(containerEl: HTMLElement, language: string) {
+  containerEl.createEl("h2", { text: getLocalizedText("supportText", language) });
 
-	
-  constructor(app: App, plugin: any) {
-    super(app, plugin);
-    this.plugin = plugin;
-    this.language = this.plugin.settings.language || "en";
-  }
+  containerEl.createEl("p", {
+    text: getLocalizedText("promotionText", language)
+  });
 
-  display(): void {
-    const { containerEl } = this;
-    containerEl.empty();
+  const linkEl = containerEl.createEl("a", {
+    attr: {
+      href: "https://ko-fi.com/paytouse1774",
+      target: "_blank"
+    }
+  });
 
-    containerEl.createEl("h2", { text: getLocalizedText("supportText", this.language) });
+  const imageEl = linkEl.createEl("img", {
+    attr: {
+      src: "https://storage.ko-fi.com/cdn/kofi5.png?v=6",
+      alt: "Ko-fi"
+    }
+  });
 
-    containerEl.createEl("p", {
-      text: getLocalizedText("promotionText", this.language)
-    });
-
-    const linkEl = containerEl.createEl("a", {
-      attr: {
-        href: "https://ko-fi.com/paytouse1774",
-        target: "_blank"
-      }
-    });
-
-    const imageEl = linkEl.createEl("img", {
-      attr: {
-        src: "https://storage.ko-fi.com/cdn/kofi5.png?v=6",
-        alt: "Ko-fi",
-      },
-    });
-
-    imageEl.style.width = "100%";
-    imageEl.style.borderRadius = "8px";
-    imageEl.style.marginTop = "10px";
-  }
+  imageEl.style.width = "100%";
+  imageEl.style.borderRadius = "8px";
+  imageEl.style.marginTop = "10px";
 }

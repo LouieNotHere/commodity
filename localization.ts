@@ -146,7 +146,23 @@ export function getLocalizedText(key: string, language: string): string {
       "tl": "Halaga ng Tala:",
       "vi": "Note Value:",
       "es": "Valor de la Nota:"
-    }
+    },
+	"promotionText": {
+	  "en": "Enjoy having the plugin? If you wish to show your generosity, please consider donating to my Ko-fi page!",
+	  "ja": "プラグインを楽しんでいますか？ご厚意を示したい場合は、ぜひ私の Ko-fi ページへの寄付をご検討ください！",
+	  "id": "",
+	  "tl": "Nasisiyahan ka sa plugin? Kung nais mo ipakita ang iyong pagkabukas-palad, maari kang magbigay ng donasyon sa aking Ko-fi page!",
+	  "vi": "",
+	  "es": ""
+	},
+    "supportText": {
+	  "en": "Support the developer!",
+	  "ja": "開発者を応援しよう！",
+	  "id": "",
+      "tl": "I-suporta and developer!",
+	  "vi": "",
+	  "es": ""
+	}
   };
   
   return LOCALIZED_STRINGS[key]?.[language] || LOCALIZED_STRINGS[key]?.["en"] || key;

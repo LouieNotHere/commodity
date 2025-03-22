@@ -30,6 +30,22 @@ export default class CommodityPlugin extends Plugin {
   this.language = this.settings.language || "en";
   this.addSettingTab(new CommoditySettingsTab(this.app, this));
 
+  this.addCommand({
+    id: "calculate-vault-value",
+    name: "Calculate Vault Value",
+    callback: async () => {
+        const vaultStats = await calculateVaultStats(this.app.vault);
+        const vaultValue = await calculateVaultValue(vaultStats, this.settings.currency, this.app.vault);
+        new VaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
+    },
+    hotkeys: [
+        {
+            modifiers: ["Mod", "Shift"],
+            key: "V",
+        },
+    ],
+});
+
   this.addRibbonIcon(
     "lucide-calculator",
     getLocalizedText("ribbonTooltip", this.language),
@@ -39,6 +55,18 @@ export default class CommodityPlugin extends Plugin {
       new VaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
     }
   );
+
+  this.addCommand({
+    id: "activate-commodity-sidebar",
+    name: "Open Commodity Sidebar",
+    callback: async () => await this.activateView(),
+    hotkeys: [
+        {
+            modifiers: ["Mod", "Shift"],
+            key: "B",
+        },
+    ],
+});
 
   this.addRibbonIcon(
     "lucide-dollar-sign",

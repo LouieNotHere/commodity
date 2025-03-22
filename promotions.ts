@@ -42,10 +42,4 @@ export class CommodityPromotionsTab extends PluginSettingTab {
     imageEl.style.borderRadius = "8px";
     imageEl.style.marginTop = "10px";
   }
-
-  hideNav() {
-	if (this.navEl) {
-	  this.navEl.hide();
-	} 
-  }
 }

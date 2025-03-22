@@ -1,4 +1,4 @@
-# Commodity Plugin v1.1.0 (Beta) - Precautions & Instructions    
+# Commodity Plugin v1.2.0 (Beta) - Precautions & Instructions    
 
 ### ⚠️ Notes Before Using
 - You are running Commodity in version v1.1.0b, meaning that you are running a beta version of this plugin before the release.
@@ -16,7 +16,7 @@ We recommend you to do some things before you proceed to install the plugin:
 - If you notice any **lag** or run into **issues**, try running the plugin in a smaller test vault first.
 
 ### 3️⃣ Compatibility  
-- **Commodity v1.1.0** is developed for **Obsidian v1.6.0+**. Using it on older versions **may cause errors**.  
+- **Commodity v1.2.0** is developed for **Obsidian v1.8.0** and above. Using it on older versions **may cause errors**.  
 - If you encounter issues, check the **Obsidian console by pressing `Ctrl+Shift+I`** for error logs.
 
 ### 4️⃣ Reporting Issues  
@@ -25,7 +25,7 @@ We recommend you to do some things before you proceed to install the plugin:
 
 ### 5️⃣ Installation Guide  
 1. Download the `main.js`, `manifest.json`, and `styles.css` files.  
-2. Place them in your vault's `.obsidian/plugins/commodity-legacy/` folder.  
+2. Place them in your vault's `.obsidian/plugins/commodity/` folder.  
 3. Restart Obsidian and enable the plugin from **Settings → Community Plugins**.
 
 ### 6️⃣ Feature Limitations  
@@ -34,7 +34,7 @@ We recommend you to do some things before you proceed to install the plugin:
 
 ---
 
-## 🚀 Thank You for Testing Commodity v1.1.0!  
+## 🚀 Thank You for Testing Commodity v1.2.0!  
 We appreciate your testing on the beta version of this plugin. If you wish to provide feedback, please do so, it can help improve the stability and performance of this plugin.  
 
 For questions or bug reports, visit:  

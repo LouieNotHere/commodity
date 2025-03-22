@@ -62,7 +62,7 @@ export class CommoditySettingsTab extends PluginSettingTab {
 	  .addButton((button) =>
         button.setButtonText(getLocalizedText("promotionButtonText", this.plugin.settings.language))
         .onClick(() => {
-		  this.app.setting.openTabById("commodity-promotions-tab")
+		  this.app.setting.openTabById("commodity-promotions-tab");
 		})
 	  );
       .addDropdown(dropdown => {

@@ -152,7 +152,7 @@ export function getLocalizedText(key: string, language: string): string {
 	  "ja": "プラグインを楽しんでいますか？ご厚意を示したい場合は、ぜひ私の Ko-fi ページへの寄付をご検討ください！",
 	  "id": "",
 	  "tl": "Nasisiyahan ka sa plugin? Kung nais mo ipakita ang iyong pagkabukas-palad, maari kang magbigay ng donasyon sa aking Ko-fi page!",
-	  "vi": "",
+	  "vi": "Người anh em, thích cái plugion này chứ? Nếu người anh em muốn chia sẻ sự hào phóng của mình, hãy donate đến trang ko-fi của tui nhá!",
 	  "es": ""
 	},
     "supportText": {
@@ -160,7 +160,7 @@ export function getLocalizedText(key: string, language: string): string {
 	  "ja": "開発者を応援しよう！",
 	  "id": "",
       "tl": "I-suporta and developer!",
-	  "vi": "",
+	  "vi": "Ủng hộ nhà phát triển đê!",
 	  "es": ""
 	}
   };

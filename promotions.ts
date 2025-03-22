@@ -3,12 +3,13 @@ import { getLocalizedText } from "./localization";
 
 export class CommodityPromotionsTab extends PluginSettingTab {
   plugin: any;
+  language: string;
 
-  this.language = this.settings.language || "en";
-
+	
   constructor(app: App, plugin: any) {
     super(app, plugin);
     this.plugin = plugin;
+    this.language = this.plugin.settings.language || "en";
   }
 
   display(): void {
@@ -18,15 +19,15 @@ export class CommodityPromotionsTab extends PluginSettingTab {
     containerEl.createEl("h2", { text: getLocalizedText("supportText", this.language) });
 
     containerEl.createEl("p", {
-      text: getLocalizedText("promotionText", this.language);
+      text: getLocalizedText("promotionText", this.language)
     });
 
-    const linkEl = containerel.createEl("a", {
+    const linkEl = containerEl.createEl("a", {
       attr: {
         href: "https://ko-fi.com/paytouse1774",
         target: "_blank"
       }
-    }
+    });
 
     const imageEl = linkEl.createEl("img", {
       attr: {

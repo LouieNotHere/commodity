@@ -2,6 +2,8 @@ import { App, PluginSettingTab } from "obsidian";
 import { getLocalizedText } from "./localization";
 
 export class CommodityPromotionsTab extends PluginSettingTab {
+  id = "commodity-promotions-tab";
+	
   plugin: any;
   language: string;
 

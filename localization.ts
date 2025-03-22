@@ -25,7 +25,7 @@ export function getLocalizedText(key: string, language: string): string {
       "vi": "Commodity: Tính giá trị của ví",
       "es": "Commodity: Calcular el Valor de la Bóveda"
     },
-	"ribbonReworkToolTip": {
+	"ribbonReworkedTooltip": {
 	  "en": "Commodity: Calculate Vault Value (Reworked)",
 	  "ja": "Commodity: ボールトの価値を計算 (改良された)",
       "id": "Commodity: Kalkulasu Nilai Berangkas (Ditingkatkan)",
@@ -41,13 +41,29 @@ export function getLocalizedText(key: string, language: string): string {
       "vi": "Giá trị của ví đã tính được:",
       "es": "Valor Calculado de la Bóveda:"
     },
+	"modalReworkedTitle": {
+      "en": "Calculated Vault Value (Reworked):",
+      "ja": "計算されたボールトの価値 (改良された):",
+      "id": "Nilai Kalkulasi Berangkas (Ditingkatkan):",
+      "tl": "Kalkuladong Halaga ng Vault (Napabuti):",
+      "vi": "Giá trị của ví đã tính được (Được cải thiện):",
+      "es": "Valor Calculado de la Bóveda (Mejorado):"
+    },
     "calculatingNotice": {
       "en": "Commodity: Calculating the vault value...",
       "ja": "Commodity：ボールトの価値を計算中...",
       "id": "Commodity: Menghitung nilai berangkas...",
-      "tl": "Commodity: Kinakalkula ang Halaga ng Vault...",
+      "tl": "Commodity: Kinakalkula ang halaga ng iyong Vault...",
       "vi": "Commodity: Đang tính giá trị của ví...",
-      "es": "Commodity: Calculando el Valor de la Bóveda..."
+      "es": "Commodity: Calculando el valor de la bóveda..."
+    },
+	"calculatingReworkedNotice": {
+      "en": "Commodity: Calculating the reworked vault value...",
+      "ja": "Commodity：改良された保管庫の価値を計算中...",
+      "id": "Commodity: Menghitung ditingkatkan nilai berangkas...",
+      "tl": "Commodity: Kinakalkula ang napabuting halaga ng iyong Vault...",
+      "vi": "Commodity: Đang tính giá trị của ví...",
+      "es": "Commodity: Calculando el valor de la bóveda..."
     },
     "calculatedTime": {
       "en": "Total CPU Time:",

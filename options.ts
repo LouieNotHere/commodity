@@ -64,7 +64,7 @@ export class CommoditySettingsTab extends PluginSettingTab {
         .onClick(() => {
 		  this.app.setting.openTabById("commodity-promotions-tab");
 		})
-	  );
+	  )
       .addDropdown(dropdown => {
         dropdown.addOptions({
           "USD": "USD - US Dollar",

@@ -16,6 +16,7 @@ import { getLocalizedText } from "./localization";
 import { App, Plugin, Modal, Vault, WorkspaceLeaf, Notice, TFile } from "obsidian";
 import { abbreviateNumber } from "./abbrNum";
 import { CommoditySidebarView, VIEW_TYPE_COMMODITY } from "./views/SidebarView";
+import { CommodityPromotionsTab } from "./promotions";
 
 export default class CommodityPlugin extends Plugin {
   settings: CommoditySettings;
@@ -32,6 +33,7 @@ export default class CommodityPlugin extends Plugin {
     await this.loadSettings();
     this.language = this.settings.language || "en";
     this.addSettingTab(new CommoditySettingsTab(this.app, this));
+	this.addSettingTab(new CommodityPromotionsTab(this.app, this));
     
     this.addCommand({
       id: "calculate-vault-value",

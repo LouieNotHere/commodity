@@ -32,8 +32,7 @@ export default class CommodityPlugin extends Plugin {
     await this.loadSettings();
     this.language = this.settings.language || "en";
     this.addSettingTab(new CommoditySettingsTab(this.app, this));
-	this.addSettingTab(new CommodityPromotionsTab(this.app, this));
-    
+
     this.addCommand({
       id: "calculate-vault-value",
       name: "Calculate Vault Value",

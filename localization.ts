@@ -25,6 +25,14 @@ export function getLocalizedText(key: string, language: string): string {
       "vi": "Commodity: Tính giá trị của ví",
       "es": "Commodity: Calcular el Valor de la Bóveda"
     },
+	"ribbonReworkToolTip": {
+	  "en": "Commodity: Calculate Vault Value (Reworked)",
+	  "ja": "Commodity: ボールトの価値を計算 (改良された)",
+      "id": "Commodity: Kalkulasu Nilai Berangkas (Ditingkatkan)",
+	  "tl": "Commodity: Kalkulahin ang Halaga ng Vault (Napabuti)",
+	  "vi": "Commodity: Tính giá trị của ví (Được cải thiện)",
+	  "es": "Commodity: Calcular el Valor de la Bóveda (Mejorado)"
+	},
     "modalTitle": {
       "en": "Calculated Vault Value:",
       "ja": "計算されたボールトの価値:",

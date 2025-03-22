@@ -6,6 +6,9 @@
   However, since I am making this plugin, I will not plan to release this publicly, but the development will still remain.
   I deeply apologize for that, I am just trying to add some new things to the source code.
 
+  As of v1.2.0, the original and improved vault values use a separate function.
+  The entire code of this file is formatted alongside, optimizing everything, including the removal of unnecessary spaces.
+
 */
 
 import { CommoditySettingsTab, DEFAULT_SETTINGS, CURRENCY_MULTIPLIERS, CommoditySettings } from "./options";
@@ -61,7 +64,7 @@ export default class CommodityPlugin extends Plugin {
       callback: async () => {
         const vaultStats = await calculateVaultStats(this.app.vault);
         const vaultValue = await calculateReworkedValue(vaultStats, this.settings.currency, this.app.vault);
-        new VaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
+        new ReworkedVaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
       },
       hotkeys: [
       {
@@ -76,7 +79,7 @@ export default class CommodityPlugin extends Plugin {
       async () => {
         const vaultStats = await calculateVaultStats(this.app.vault);
         const vaultValue = await calculateReworkedValue(vaultStats, this.settings.currency, this.app.vault);
-        new VaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
+        new ReworkedVaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
       }
     );
     
@@ -148,12 +151,69 @@ class VaultValueModal extends Modal {
     const { contentEl } = this;
     contentEl.empty();
     contentEl.style.textAlign = "center";
-    contentEl.style.fontFamily = "var(--default-font)";
+    contentEl.style.fontFamily = "var(--font-interface, var(--default-font))";
     
     const startTime = performance.now();
     
     contentEl.createEl("h4", {
       text: getLocalizedText("modalTitle", this.language),
+      cls: "window-header",
+    });
+    
+    const currencySymbol = getCurrencySymbol(this.currency);
+    const endTime = performance.now();
+    const timeTaken = (endTime - startTime).toFixed(2);
+    
+    const formatter = new Intl.NumberFormat(this.language, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    
+    const fullValue = Number(this.vaultValue.toFixed(25));
+    const truncatedValue = Math.trunc(fullValue);
+    var formattedValue: string = formatter.format(truncatedValue);
+    
+    var valueText: string = `${currencySymbol}${this.vaultValue.toFixed(2)}`;
+    
+    if (this.vaultValue >= 1000000) {
+      valueText = `${currencySymbol}${abbreviateNumber(truncatedValue)}`;
+    } else if (this.vaultValue >= 1000) {
+      valueText = `${currencySymbol}${formattedValue}`;
+    }
+    
+    contentEl.createEl("h1", { text: valueText, cls: "window-value" });
+    contentEl.createEl("p", {
+      text: `${getLocalizedText("calculatedTime", this.language)} ${timeTaken} ms`,
+      cls: "window-time",
+    });
+  }
+  
+  onClose() {
+    this.contentEl.empty();
+  }
+}
+
+class ReworkedVaultValueModal extends Modal {
+  private vaultValue: number;
+  private currency: string;
+  private language: string;
+  
+  constructor(app: App, vaultValue: number, currency: string, language: string) {
+    super(app);
+    this.vaultValue = vaultValue;
+    this.currency = currency;
+    this.language = language;
+  }
+  
+  onOpen() {
+    new Notice(getLocalizedText("calculatingReworkedNotice", this.language));
+    
+    const { contentEl } = this;
+    contentEl.empty();
+    contentEl.style.textAlign = "center";
+    contentEl.style.fontFamily = "var(--font-interface, var(--default-font))";
+    
+    const startTime = performance.now();
+    
+    contentEl.createEl("h4", {
+      text: getLocalizedText("modalReworkedTitle", this.language),
       cls: "window-header",
     });
     

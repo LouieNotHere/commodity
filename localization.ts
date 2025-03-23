@@ -12,7 +12,7 @@
 
   Huge thanks to:
   - @luminepokee, @anatasim, @cookedfish01 and @kntdys for the Indonesian localization
-  - @nekorin727 for the Vietnamese localization
+  - @nekorin727 and @maideprofessor for the Vietnamese localization
   - @operagx0535 for the Spanish localization
 
 */

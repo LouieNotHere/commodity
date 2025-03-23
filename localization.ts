@@ -112,7 +112,7 @@ export function getLocalizedText(key: string, language: string): string {
       "ja": "Commodity: アクティブノートの価値を表示",
       "id": "Commodity: Lahat Cacatan Nilai Aktif",
       "tl": "Commodity: Tignan ang Halaga ng Aktibong Tala",
-      "vi": "Commodity: View Active Note Value",
+      "vi": "Commodity: Xem ghi chú hiện hành",
       "es": "Commodity: Ver Valor de la Nota Actual"
     },
     "sidebarTitle": {
@@ -120,7 +120,7 @@ export function getLocalizedText(key: string, language: string): string {
       "ja": "アクティブノートの価値",
       "id": "Cacatan Nilai Aktif",
       "tl": "Halaga ng Aktibong Tala",
-      "vi": "Active Note Value",
+      "vi": "Giá trị ghi chú đang hoạt động",
       "es": "Valor de la Nota Actual"
     },
     "sidebarLoading": {
@@ -128,23 +128,15 @@ export function getLocalizedText(key: string, language: string): string {
       "ja": "アクティブノートの価値を読み込み中...",
       "id": "Memuat nilai dari cacatan aktif...",
       "tl": "Nagloload ang halaga ng aktibong tala...",
-      "vi": "Loading the value of the active note...",
+      "vi": "Hiện đang truy xuất giá trị ghi chú hiện hành...",
       "es": "Cargando el valor de la nota actual..."
-    },
-    "sidebarNoNote": {
-      "en": "There is no active note.",
-      "ja": "アクティブノートがありません。",
-      "id": "Tidak ada cacatan aktif.",
-      "tl": "Wala ang aktibong tala.",
-      "vi": "There is no active note.",
-      "es": "No tienes ninguna nota actualmente."
     },
     "noteValue": {
       "en": "Note Value:",
       "ja": "ノートの価値:",
       "id": "Nilai Catatan:",
       "tl": "Halaga ng Tala:",
-      "vi": "Note Value:",
+      "vi": "Giá trị ghi chú:",
       "es": "Valor de la Nota:"
     },
     "promotionText": {
@@ -153,7 +145,7 @@ export function getLocalizedText(key: string, language: string): string {
       "id": "Apakah anda menikmati plugin ini? Jika ya, anda dapat menunjukkan dukungan dengan memberikan donasi melalui halaman Ko-fi saya!",
       "tl": "Tintangkilik mo ba ang plugin? Kung gayon, ito ang iyong desisyon na ipakita ang iyong pagkabukas-palad sa pamamagitan ng pagsasaalang-alang ang isang donasyon sa aking pahina sa Ko-fi!",
       "vi": "Người anh em, thích cái plugion này chứ? Nếu người anh em muốn chia sẻ sự hào phóng của mình, hãy donate đến trang ko-fi của tui nhá!",
-      "es": "¿Estas disfrutando del plugin? Si es asi, es tu eleccion el mostrar tu generosidad teniendo la consideracion de donar a mi pagina de Ko-fi, ¡Cualquier donacion es apreciada!"
+      "es": "Estas disfrutando del plugin? Si es asi, es tu eleccion el mostrar tu generosidad teniendo la consideracion de donar a mi pagina de Ko-fi, ¡Cualquier donacion es apreciada!"
     },
     "supportText": {
       "en": "Support the developer!",
@@ -162,6 +154,14 @@ export function getLocalizedText(key: string, language: string): string {
       "tl": "I-suporta ang developer!",
       "vi": "Ủng hộ nhà phát triển đê!",
       "es": "¡Apoya al desarrollador!"
+    },
+    "noActiveNote": {
+      "en": "There is no active note at the moment. Please open one to see it's separate value.",
+      "ja": "現在、アクティブノートはありません。個別の価値を確認するには、ノートを開いてください。",
+      "id": "",
+      "tl": "Wala ang aktibong tala sa ngayon. Maaring mag-buksan ng isa para makita ang nahiwalay na halaga nito.",
+      "vi": "Hiện tại không có cái node nào hoạt động cả. Làm ơn mở một cái ra để xem giá trị của chúng.",
+      "es": "No hay ninguna nota activa en este momento. Porfavor, abre una para ver su valor."
     }
   };
   

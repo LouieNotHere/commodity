@@ -150,7 +150,7 @@ export function getLocalizedText(key: string, language: string): string {
     "promotionText": {
       "en": "Enjoying the plugin already? If so, it's your choice to show your generosity by considering a donation to my Ko-fi page!",
       "ja": "もうプラグインを楽しんでいますか？もしそうなら、ご厚意で私の Ko-fi ページへの寄付を検討してみてください！",
-      "id": "",
+      "id": "Apakah anda menikmati plugin ini? Jika ya, anda dapat menunjukkan dukungan dengan memberikan donasi melalui halaman Ko-fi saya!",
       "tl": "Tintangkilik mo ba ang plugin? Kung gayon, ito ang iyong desisyon na ipakita ang iyong pagkabukas-palad sa pamamagitan ng pagsasaalang-alang ang isang donasyon sa aking pahina sa Ko-fi!",
       "vi": "Người anh em, thích cái plugion này chứ? Nếu người anh em muốn chia sẻ sự hào phóng của mình, hãy donate đến trang ko-fi của tui nhá!",
       "es": "¿Estas disfrutando del plugin? Si es asi, es tu eleccion el mostrar tu generosidad teniendo la consideracion de donar a mi pagina de Ko-fi, ¡Cualquier donacion es apreciada!"
@@ -158,7 +158,7 @@ export function getLocalizedText(key: string, language: string): string {
     "supportText": {
       "en": "Support the developer!",
       "ja": "開発者を応援しよう！",
-      "id": "",
+      "id": "Dukung pengembang Sekarang!",
       "tl": "I-suporta ang developer!",
       "vi": "Ủng hộ nhà phát triển đê!",
       "es": "¡Apoya al desarrollador!"

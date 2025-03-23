@@ -147,22 +147,22 @@ export function getLocalizedText(key: string, language: string): string {
       "vi": "Note Value:",
       "es": "Valor de la Nota:"
     },
-	"promotionText": {
-	  "en": "Enjoy having the plugin? If you wish to show your generosity, please consider donating to my Ko-fi page!",
-	  "ja": "プラグインを楽しんでいますか？ご厚意を示したい場合は、ぜひ私の Ko-fi ページへの寄付をご検討ください！",
-	  "id": "",
-	  "tl": "Nasisiyahan ka sa plugin? Kung nais mo ipakita ang iyong pagkabukas-palad, maari kang magbigay ng donasyon sa aking Ko-fi page!",
-	  "vi": "Người anh em, thích cái plugion này chứ? Nếu người anh em muốn chia sẻ sự hào phóng của mình, hãy donate đến trang ko-fi của tui nhá!",
-	  "es": "¿Te gustó usar este plugin? Si deseas mostrar algo de generosidad, ¡Considera donar en mi pagina de ko-fi!"
-	},
+    "promotionText": {
+      "en": "Enjoying the plugin already? If so, it's your choice to show your generosity by considering a donation to my Ko-fi page!",
+      "ja": "もうプラグインを楽しんでいますか？もしそうなら、ご厚意で私の Ko-fi ページへの寄付を検討してみてください！",
+      "id": "",
+      "tl": "Tintangkilik mo ba ang plugin? Kung gayon, ito ang iyong desisyon na ipakita ang iyong pagkabukas-palad sa pamamagitan ng pagsasaalang-alang ang isang donasyon sa aking pahina sa Ko-fi!",
+      "vi": "Người anh em, thích cái plugion này chứ? Nếu người anh em muốn chia sẻ sự hào phóng của mình, hãy donate đến trang ko-fi của tui nhá!",
+      "es": "¿Estas disfrutando del plugin? Si es asi, es tu eleccion el mostrar tu generosidad teniendo la consideracion de donar a mi pagina de Ko-fi, ¡Cualquier donacion es apreciada!"
+    },
     "supportText": {
-	  "en": "Support the developer!",
-	  "ja": "開発者を応援しよう！",
-	  "id": "",
-      "tl": "I-suporta and developer!",
-	  "vi": "Ủng hộ nhà phát triển đê!",
-	  "es": "¡Apoya al desarrollador!"
-	}
+      "en": "Support the developer!",
+      "ja": "開発者を応援しよう！",
+      "id": "",
+      "tl": "I-suporta ang developer!",
+      "vi": "Ủng hộ nhà phát triển đê!",
+      "es": "¡Apoya al desarrollador!"
+    }
   };
   
   return LOCALIZED_STRINGS[key]?.[language] || LOCALIZED_STRINGS[key]?.["en"] || key;

@@ -111,7 +111,7 @@ export class CommoditySettingsTab extends PluginSettingTab {
   });
 
   containerEl.createEl("p", {
-	text: "Note: After setting the new plugin language, please reload the app to fully make the changes take effect.",
+	text: getLocalizedText("changeWarningText", this.plugin.settings.language),
 	cls: "setting-error"
   });
 	  

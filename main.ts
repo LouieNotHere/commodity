@@ -17,32 +17,11 @@ import { App, Plugin, Modal, Vault, WorkspaceLeaf, Notice, TFile } from "obsidia
 import { abbreviateNumber } from "./abbrNum";
 import { CommoditySidebarView, VIEW_TYPE_COMMODITY } from "./views/SidebarView";
 
-function loadOdometer() {
-  if (document.querySelector('script[src="libs/odometer/odometer.min.js"]')) {
-    console.log("Odometer.js is already loaded.");
-    return;
-  }
-  
-  const script = document.createElement("script");
-  script.src = "libs/odometer/odometer.min.js"; // Ensure the file is in your plugin's folder
-  script.onload = () => {
-    console.log("Odometer.js Loaded");
-  };
-  document.head.appendChild(script);
-  
-  const style = document.createElement("link");
-  style.rel = "stylesheet";
-  style.href = "libs/odometer/odometer-theme-default.min.css";
-  document.head.appendChild(style);
-}
-
 export default class CommodityPlugin extends Plugin {
   settings: CommoditySettings;
   language: string;
   
   async onload() {
-    loadOdometer();
-    
     this.registerView(
       VIEW_TYPE_COMMODITY,
       (leaf) => new CommoditySidebarView(leaf, this)
@@ -53,7 +32,7 @@ export default class CommodityPlugin extends Plugin {
     await this.loadSettings();
     this.language = this.settings.language || "en";
     this.addSettingTab(new CommoditySettingsTab(this.app, this));
-    
+
     this.addCommand({
       id: "calculate-vault-value",
       name: "Calculate Vault Value",
@@ -174,25 +153,36 @@ class VaultValueModal extends Modal {
     contentEl.style.textAlign = "center";
     contentEl.style.fontFamily = "var(--font-interface, var(--default-font))";
     
+    const startTime = performance.now();
+    
     contentEl.createEl("h4", {
       text: getLocalizedText("modalTitle", this.language),
       cls: "window-header",
     });
     
     const currencySymbol = getCurrencySymbol(this.currency);
+    const endTime = performance.now();
+    const timeTaken = (endTime - startTime).toFixed(2);
     
-    const valueContainer = contentEl.createEl("h1", { cls: "window-value" });
-    valueContainer.innerHTML = `<span id="odometer-value">${currencySymbol}0</span>`;
+    const formatter = new Intl.NumberFormat(this.language, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     
-    setTimeout(() => {
-      const odometer = new(window as any).Odometer({
-        el: document.getElementById("odometer-value"),
-        value: 0,
-        format: "(,ddd).dd",
-      });
-      
-      odometer.update(this.vaultValue);
-    }, 100);
+    const fullValue = Number(this.vaultValue.toFixed(25));
+    const truncatedValue = Math.trunc(fullValue);
+    var formattedValue: string = formatter.format(truncatedValue);
+    
+    var valueText: string = `${currencySymbol}${this.vaultValue.toFixed(2)}`;
+    
+    if (this.vaultValue >= 1000000) {
+      valueText = `${currencySymbol}${abbreviateNumber(truncatedValue)}`;
+    } else if (this.vaultValue >= 1000) {
+      valueText = `${currencySymbol}${formattedValue}`;
+    }
+    
+    contentEl.createEl("h1", { text: valueText, cls: "window-value" });
+    contentEl.createEl("p", {
+      text: `${getLocalizedText("calculatedTime", this.language)} ${timeTaken} ms`,
+      cls: "window-time",
+    });
   }
   
   onClose() {
@@ -220,25 +210,36 @@ class ReworkedVaultValueModal extends Modal {
     contentEl.style.textAlign = "center";
     contentEl.style.fontFamily = "var(--font-interface, var(--default-font))";
     
+    const startTime = performance.now();
+    
     contentEl.createEl("h4", {
       text: getLocalizedText("modalReworkedTitle", this.language),
       cls: "window-header",
     });
     
     const currencySymbol = getCurrencySymbol(this.currency);
+    const endTime = performance.now();
+    const timeTaken = (endTime - startTime).toFixed(2);
     
-    const valueContainer = contentEl.createEl("h1", { cls: "window-value" });
-    valueContainer.innerHTML = `<span id="odometer-reworked-value">${currencySymbol}0</span>`;
+    const formatter = new Intl.NumberFormat(this.language, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
     
-    setTimeout(() => {
-      const odometer = new(window as any).Odometer({
-        el: document.getElementById("odometer-reworked-value"),
-        value: 0,
-        format: "(,ddd).dd",
-      });
-      
-      odometer.update(this.vaultValue);
-    }, 100);
+    const fullValue = Number(this.vaultValue.toFixed(25));
+    const truncatedValue = Math.trunc(fullValue);
+    var formattedValue: string = formatter.format(truncatedValue);
+    
+    var valueText: string = `${currencySymbol}${this.vaultValue.toFixed(2)}`;
+    
+    if (this.vaultValue >= 1000000) {
+      valueText = `${currencySymbol}${abbreviateNumber(truncatedValue)}`;
+    } else if (this.vaultValue >= 1000) {
+      valueText = `${currencySymbol}${formattedValue}`;
+    }
+    
+    contentEl.createEl("h1", { text: valueText, cls: "window-value" });
+    contentEl.createEl("p", {
+      text: `${getLocalizedText("calculatedTime", this.language)} ${timeTaken} ms`,
+      cls: "window-time",
+    });
   }
   
   onClose() {

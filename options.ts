@@ -110,6 +110,11 @@ export class CommoditySettingsTab extends PluginSettingTab {
     });
   });
 
+  containerEl.createEl("p", {
+	text: "Note: After setting the new plugin language, please reload the app to fully set the changes.",
+	cls: "setting-error"
+  });
+	  
   createPromotionsSection(containerEl, this.plugin.settings.language);
  }
 }

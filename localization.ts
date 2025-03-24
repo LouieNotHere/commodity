@@ -162,6 +162,14 @@ export function getLocalizedText(key: string, language: string): string {
       "tl": "Wala ang aktibong tala sa ngayon. Maaring mag-buksan ng isa para makita ang nahiwalay na halaga nito.",
       "vi": "Hiện tại không có cái node nào hoạt động cả. Làm ơn mở một cái ra để xem giá trị của chúng.",
       "es": "No hay ninguna nota activa en este momento. Porfavor, abre una para ver su valor."
+    },
+    "changeWarningText": {
+      "en": "Reminder: After setting the new plugin language, please reload the app to fully make the changes take effect.",
+      "ja": "リマインダー: 新しいプラグインの言語を設定した後、変更を完全に反映させるためにアプリを再読み込みしてください。",
+      "id": "",
+      "tl": "Paalala: Pagkatapos itakda yung bagong wika ng plugin, i-reload ang app para gawing epektibo ang mga pagbabago.",
+      "vi": "",
+      "es": "Recordatorio: Después de cambiar el lenguaje del plugin, porfavor, recarga la aplicación para que los cambios tomen efecto",
     }
   };
   

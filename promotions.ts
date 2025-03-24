@@ -22,7 +22,7 @@ export function createPromotionsSection(containerEl: HTMLElement, language: stri
     }
   });
 
-  imageEl.style.width = "100%";
+  imageEl.style.width = "150px";
   imageEl.style.borderRadius = "8px";
   imageEl.style.marginTop = "10px";
 }

@@ -39,7 +39,18 @@
 	color: var(--text-error);
 }
 
+/*
 
+  For the ko-fi image...
+
+*/
+
+.ko-fi-image {
+  border-radius: 8px;
+  margin-top: 10px;
+  margin: auto;
+	width: 200px
+}
 #commodity-promotions-tab {
   display: none;
 }

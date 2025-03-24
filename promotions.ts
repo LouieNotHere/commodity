@@ -19,10 +19,7 @@ export function createPromotionsSection(containerEl: HTMLElement, language: stri
     attr: {
       src: "https://storage.ko-fi.com/cdn/kofi5.png?v=6",
       alt: "Ko-fi"
-    }
+    },
+	cls: "ko-fi-image"
   });
-
-  imageEl.style.width = "150px";
-  imageEl.style.borderRadius = "8px";
-  imageEl.style.marginTop = "10px";
 }

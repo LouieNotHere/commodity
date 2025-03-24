@@ -1,7 +1,7 @@
 /*
 
-  This will be the CSS file for the Commodity plugin.
-  If this file is not in the plugin folder itself, it can cause some visual bugs.
+  styles.css: The styling file (CSS) for the Commodity plugin.
+  If this file is not in the plugin folder itself, it may cause some visual bugs.
 
 */
 .vault-value-modal {
@@ -34,6 +34,11 @@
     height: 100%;
     padding: 10px;
 }
+
+.setting-error {
+	color: var(--text-error);
+}
+
 
 #commodity-promotions-tab {
   display: none;

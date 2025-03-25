@@ -164,11 +164,11 @@ export function getLocalizedText(key: string, language: string): string {
       "es": "No hay ninguna nota activa en este momento. Porfavor, abre una para ver su valor."
     },
     "changeWarningText": {
-      "en": "Reminder: After setting the new plugin language, please reload the app to fully make the changes take effect.",
-      "ja": "リマインダー: 新しいプラグインの言語を設定した後、変更を完全に反映させるためにアプリを再読み込みしてください。",
+      "en": "Reminder: After the plugin language has been changed, at some point it wouldn't work straight away on all texts. For this change to fully take effect, it is required to restart the app.",
+      "ja": "リマインダー: プラグインの言語を変更した後、すぐにすべてのテキストに反映されない場合があります。この変更を完全に適用するには、アプリの再起動が必要です。",
       "id": "",
-      "tl": "Paalala: Pagkatapos itakda yung bagong wika ng plugin, i-reload ang app para gawing epektibo ang mga pagbabago.",
-      "vi": "Lưu ý: Sau khi thiết lập ngôn ngữ plugin mới, vui lòng khởi động lại ứng dụng để các thay đổi có hiệu lực hoàn toàn.",
+      "tl": "Paalala: Pagkatapos mapalitan ang wika ng plugin, sa ilang mga punto ay hindi ito gumagana kaagad sa lahat ng mga teksto. Para ganap na magkabisa ang pagbabagong ito, maaring kinakailangang i-restart ang app.",
+      "vi": "Nhắc Nhẹ: Sau khi ngôn ngữ của plugin này được chuyển, sẽ có vài lúc nó không hiển thị đúng cách ở mọi chỗ cả. Để cho sự chuyển ngôn ngữ này có hiệu lực, thì việc khởi động lại là điều cần thiết.",
       "es": "Recordatorio: Después de cambiar el lenguaje del plugin, porfavor, recarga la aplicación para que los cambios tomen efecto",
     }
   };

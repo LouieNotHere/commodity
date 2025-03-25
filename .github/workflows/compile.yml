@@ -39,8 +39,6 @@ jobs:
           cp manifest.json release/
           cp styles.css release/ || true
           cp main.js release/
-          cp README.md release/
-          cp BETAREADME.md release/
           cd release && zip -r ../commodity-plugin.zip .
 
       - name: Export Artifact

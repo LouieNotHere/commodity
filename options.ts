@@ -122,6 +122,8 @@ export class CommoditySettingsTab extends PluginSettingTab {
         } else {
           warningText.style.display = "block";
         }
+
+		warningText.textContent = getLocalizedText("changeWarningText", this.plugin.settings.language);
       });
     });
 

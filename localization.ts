@@ -144,7 +144,7 @@ export function getLocalizedText(key: string, language: string): string {
       "ja": "もうプラグインを楽しんでいますか？もしそうなら、ご厚意で私の Ko-fi ページへの寄付を検討してみてください！",
       "id": "Apakah anda menikmati plugin ini? Jika ya, anda dapat menunjukkan dukungan dengan memberikan donasi melalui halaman Ko-fi saya!",
       "tl": "Tintangkilik mo ba ang plugin? Kung gayon, ito ang iyong desisyon na ipakita ang iyong pagkabukas-palad sa pamamagitan ng pagsasaalang-alang ang isang donasyon sa aking pahina sa Ko-fi!",
-      "vi": "Người anh em, thích cái plugion này chứ? Nếu người anh em muốn chia sẻ sự hào phóng của mình, hãy donate đến trang ko-fi của tui nhá!",
+      "vi": "Người anh em, thích cái plugin này chứ? Nếu người anh em muốn chia sẻ sự hào phóng của mình, hãy donate đến trang ko-fi của tui nhá!",
       "es": "Estas disfrutando del plugin? Si es asi, es tu eleccion el mostrar tu generosidad teniendo la consideracion de donar a mi pagina de Ko-fi, ¡Cualquier donacion es apreciada!"
     },
     "supportText": {

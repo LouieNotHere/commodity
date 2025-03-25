@@ -98,7 +98,7 @@ export class CommoditySettingsTab extends PluginSettingTab {
       "en": "EN - English",
       "ja": "JA - 日本語",
       "id": "ID - Bahasa Indonesia",
-      "tl": "TL - Wikang Pilipino",
+      "tl": "TL - Pilipino",
       "vi": "VI - Tiếng Việt",
       "es": "ES - Español"
     });
@@ -107,12 +107,13 @@ export class CommoditySettingsTab extends PluginSettingTab {
     dropdown.onChange(async (value) => {
       this.plugin.settings.language = value;
       await this.plugin.saveSettings();
+	  warningText.textContent = getLocalizedText("changeWarningText", value);
     });
   });
 
-  containerEl.createEl("p", {
-	text: getLocalizedText("changeWarningText", this.plugin.settings.language),
-	cls: "setting-error"
+  const warningText = containerEl.createEl("p", {
+    text: getLocalizedText("changeWarningText", this.plugin.settings.language),
+    cls: "setting-error"
   });
 	  
   createPromotionsSection(containerEl, this.plugin.settings.language);

@@ -97,31 +97,35 @@ export class CommoditySettingsTab extends PluginSettingTab {
       });
     });
 
-  languageSetting
-    .setName(getLocalizedText("languageSetting", this.plugin.settings.language))
-    .setDesc(getLocalizedText("languageDescription", this.plugin.settings.language))
-    .addDropdown(dropdown => {
-      dropdown.addOptions({
-        "en": "EN - English",
-        "ja": "JA - 日本語",
-        "id": "ID - Bahasa Indonesia",
-        "tl": "TL - Wikang Pilipino",
-        "vi": "VI - Tiếng Việt",
-        "es": "ES - Español"
-      });
+  const promotionsSection = createPromotionsSection(containerEl, this.plugin.settings.language);
 
-      dropdown.setValue(this.plugin.settings.language);
-      dropdown.onChange(async (value) => {
-        this.plugin.settings.language = value;
-        await this.plugin.saveSettings();
-
-        currencySetting.setName(getLocalizedText("currencySetting", value));
-        currencySetting.setDesc(getLocalizedText("currencyDescription", value));
-        languageSetting.setName(getLocalizedText("languageSetting", value));
-        languageSetting.setDesc(getLocalizedText("languageDescription", value));
-        warningText.textContent = getLocalizedText("changeWarningText", value);
-      });
+languageSetting
+  .setName(getLocalizedText("languageSetting", this.plugin.settings.language))
+  .setDesc(getLocalizedText("languageDescription", this.plugin.settings.language))
+  .addDropdown(dropdown => {
+    dropdown.addOptions({
+      "en": "EN - English",
+      "ja": "JA - 日本語",
+      "id": "ID - Bahasa Indonesia",
+      "tl": "TL - Pilipino",
+      "vi": "VI - Tiếng Việt",
+      "es": "ES - Español"
     });
+
+    dropdown.setValue(this.plugin.settings.language);
+    dropdown.onChange(async (value) => {
+      this.plugin.settings.language = value;
+      await this.plugin.saveSettings();
+
+      currencySetting.setName(getLocalizedText("currencySetting", value));
+      currencySetting.setDesc(getLocalizedText("currencyDescription", value));
+      languageSetting.setName(getLocalizedText("languageSetting", value));
+      languageSetting.setDesc(getLocalizedText("languageDescription", value));
+      warningText.textContent = getLocalizedText("changeWarningText", value);
+
+      promotionsSection.updateLanguage(value);
+    });
+  });
 
   createPromotionsSection(containerEl, this.plugin.settings.language);
   } 

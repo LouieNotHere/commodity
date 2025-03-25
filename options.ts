@@ -115,6 +115,8 @@ export class CommoditySettingsTab extends PluginSettingTab {
           currencySetting.setDesc(getLocalizedText("currencyDescription", value));
           languageSetting.setName(getLocalizedText("languageSetting", value));
           languageSetting.setDesc(getLocalizedText("languageDescription", value));
+		  dynamicUpdateSetting.setName(getLocalizedText("dynamicSetting", value));
+		  dynamicUpdateSetting.setDesc(getLocalizedText("dynamicDescription", value));
           warningText.style.display = "none";
           promotionsSection.updateLanguage(value);
         } else {
@@ -132,7 +134,7 @@ export class CommoditySettingsTab extends PluginSettingTab {
     warningText.style.display = "none";
   }
 
-  new Setting(containerEl)
+  var dynamicUpdateSetting = new Setting(containerEl)
     .setName(getLocalizedText("dynamicSetting", this.plugin.settings.language))
     .setDesc(getLocalizedText("dynamicDescription", this.plugin.settings.language))
     .addToggle(toggle => {

@@ -2,9 +2,9 @@ import { App, PluginSettingTab } from "obsidian";
 import { getLocalizedText } from "./localization";
 
 export function createPromotionsSection(containerEl: HTMLElement, language: string) {
-  containerEl.createEl("h2", { text: getLocalizedText("supportText", language) });
+  const headerEl = containerEl.createEl("h2", { text: getLocalizedText("supportText", language) });
 
-  containerEl.createEl("p", {
+  const descriptionEl = containerEl.createEl("p", {
     text: getLocalizedText("promotionText", language)
   });
 
@@ -20,6 +20,13 @@ export function createPromotionsSection(containerEl: HTMLElement, language: stri
       src: "https://storage.ko-fi.com/cdn/kofi5.png?v=6",
       alt: "Ko-fi"
     },
-	cls: "ko-fi-image"
+    cls: "ko-fi-image"
   });
+
+  return {
+    updateLanguage: (newLanguage: string) => {
+      headerEl.textContent = getLocalizedText("supportText", newLanguage);
+      descriptionEl.textContent = getLocalizedText("promotionText", newLanguage);
+    }
+  };
 }

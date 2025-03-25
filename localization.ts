@@ -168,7 +168,7 @@ export function getLocalizedText(key: string, language: string): string {
       "ja": "リマインダー: 新しいプラグインの言語を設定した後、変更を完全に反映させるためにアプリを再読み込みしてください。",
       "id": "",
       "tl": "Paalala: Pagkatapos itakda yung bagong wika ng plugin, i-reload ang app para gawing epektibo ang mga pagbabago.",
-      "vi": "",
+      "vi": "Lưu ý: Sau khi thiết lập ngôn ngữ plugin mới, vui lòng khởi động lại ứng dụng để các thay đổi có hiệu lực hoàn toàn.",
       "es": "Recordatorio: Después de cambiar el lenguaje del plugin, porfavor, recarga la aplicación para que los cambios tomen efecto",
     }
   };

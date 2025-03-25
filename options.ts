@@ -53,69 +53,76 @@ export class CommoditySettingsTab extends PluginSettingTab {
   }
 
   display(): void {
-    const { containerEl } = this;
-
-    containerEl.empty();
-	  
-    new Setting(containerEl)
-      .setName(getLocalizedText("currencySetting", this.plugin.settings.language))
-      .setDesc(getLocalizedText("currencyDescription", this.plugin.settings.language))
-      .addDropdown(dropdown => {
-        dropdown.addOptions({
-          "USD": "USD - US Dollar",
-          "JPY": "JPY - Japanese Yen",
-          "PHP": "PHP - Philippine Peso",
-          "IDR": "IDR - Indonesian Rupiah",
-          "EUR": "EUR - Euro",
-          "GBP": "GBP - Pound Sterling",
-          "KRW": "KRW - South Korean Won",
-          "CNY": "CNY - Chinese Yuan",
-          "AUD": "AUD - Australian Dollar",
-          "HKD": "HKD - Hong Kong Dollar",
-          "CAD": "CAD - Canadian Dollar",
-          "MYR": "MYR - Malaysian Ringgit",
-          "UAH": "UAH - Ukrainian Hryvnia",
-          "NZD": "NZD - New Zealand Dollar",
-          "CHF": "CHF - Swiss Franc",
-          "TWD": "TWD - New Taiwan Dollar",
-          "INR": "INR - Indian Rupee",
-          "BND": "BND - Brunei Dollar",
-          "IRR": "IRR - Iranian Rial"
-        });
-
-        dropdown.setValue(this.plugin.settings.currency);
-        dropdown.onChange(async (value) => {
-          this.plugin.settings.currency = value;
-          await this.plugin.saveSettings();
-        });
-      });
-
-    new Setting(containerEl)
-  .setName(getLocalizedText("languageSetting", this.plugin.settings.language))
-  .setDesc(getLocalizedText("languageDescription", this.plugin.settings.language))
-  .addDropdown(dropdown => {
-    dropdown.addOptions({
-      "en": "EN - English",
-      "ja": "JA - 日本語",
-      "id": "ID - Bahasa Indonesia",
-      "tl": "TL - Pilipino",
-      "vi": "VI - Tiếng Việt",
-      "es": "ES - Español"
-    });
-
-    dropdown.setValue(this.plugin.settings.language);
-    dropdown.onChange(async (value) => {
-      this.plugin.settings.language = value;
-      await this.plugin.saveSettings();
-	  warningText.textContent = getLocalizedText("changeWarningText", value);
-    });
-  });
+  const { containerEl } = this;
+  containerEl.empty();
+  
+  const currencySetting = new Setting(containerEl);
+  const languageSetting = new Setting(containerEl);
 
   const warningText = containerEl.createEl("p", {
     text: getLocalizedText("changeWarningText", this.plugin.settings.language),
     cls: "setting-error"
   });
-	  
+
+  currencySetting
+    .setName(getLocalizedText("currencySetting", this.plugin.settings.language))
+    .setDesc(getLocalizedText("currencyDescription", this.plugin.settings.language))
+    .addDropdown(dropdown => {
+      dropdown.addOptions({
+        "USD": "USD - US Dollar",
+        "JPY": "JPY - Japanese Yen",
+        "PHP": "PHP - Philippine Peso",
+        "IDR": "IDR - Indonesian Rupiah",
+        "EUR": "EUR - Euro",
+        "GBP": "GBP - Pound Sterling",
+        "KRW": "KRW - South Korean Won",
+        "CNY": "CNY - Chinese Yuan",
+        "AUD": "AUD - Australian Dollar",
+        "HKD": "HKD - Hong Kong Dollar",
+        "CAD": "CAD - Canadian Dollar",
+        "MYR": "MYR - Malaysian Ringgit",
+        "UAH": "UAH - Ukrainian Hryvnia",
+        "NZD": "NZD - New Zealand Dollar",
+        "CHF": "CHF - Swiss Franc",
+        "TWD": "TWD - New Taiwan Dollar",
+        "INR": "INR - Indian Rupee",
+        "BND": "BND - Brunei Dollar",
+        "IRR": "IRR - Iranian Rial"
+      });
+
+      dropdown.setValue(this.plugin.settings.currency);
+      dropdown.onChange(async (value) => {
+        this.plugin.settings.currency = value;
+        await this.plugin.saveSettings();
+      });
+    });
+
+  languageSetting
+    .setName(getLocalizedText("languageSetting", this.plugin.settings.language))
+    .setDesc(getLocalizedText("languageDescription", this.plugin.settings.language))
+    .addDropdown(dropdown => {
+      dropdown.addOptions({
+        "en": "EN - English",
+        "ja": "JA - 日本語",
+        "id": "ID - Bahasa Indonesia",
+        "tl": "TL - Wikang Pilipino",
+        "vi": "VI - Tiếng Việt",
+        "es": "ES - Español"
+      });
+
+      dropdown.setValue(this.plugin.settings.language);
+      dropdown.onChange(async (value) => {
+        this.plugin.settings.language = value;
+        await this.plugin.saveSettings();
+
+        currencySetting.setName(getLocalizedText("currencySetting", value));
+        currencySetting.setDesc(getLocalizedText("currencyDescription", value));
+        languageSetting.setName(getLocalizedText("languageSetting", value));
+        languageSetting.setDesc(getLocalizedText("languageDescription", value));
+        warningText.textContent = getLocalizedText("changeWarningText", value);
+      });
+    });
+
   createPromotionsSection(containerEl, this.plugin.settings.language);
- }
+  } 
 }

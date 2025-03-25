@@ -58,8 +58,6 @@ export class CommoditySettingsTab extends PluginSettingTab {
   const { containerEl } = this;
   containerEl.empty();
   
-  const promotionsSection = createPromotionsSection(containerEl, this.plugin.settings.language);
-  
   const currencySetting = new Setting(containerEl)
     .setName(getLocalizedText("currencySetting", this.plugin.settings.language))
     .setDesc(getLocalizedText("currencyDescription", this.plugin.settings.language))
@@ -150,7 +148,7 @@ export class CommoditySettingsTab extends PluginSettingTab {
         }
       });
     });
-
-  createPromotionsSection(containerEl, this.plugin.settings.language);
+	const promotionsSection = createPromotionsSection(containerEl, this.plugin.settings.language);
+  
   }
 }

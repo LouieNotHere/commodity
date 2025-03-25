@@ -101,9 +101,10 @@ export class CommoditySettingsTab extends PluginSettingTab {
         "en": "EN - English",
         "ja": "JA - 日本語",
         "id": "ID - Bahasa Indonesia",
-        "tl": "TL - Wikang Pilipino",
+        "tl": "TL - Pilipino",
         "vi": "VI - Tiếng Việt",
-        "es": "ES - Español"
+        "es": "ES - Español",
+		"bg": "BG - български"
       });
 
       dropdown.setValue(this.plugin.settings.language);

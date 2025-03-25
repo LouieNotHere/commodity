@@ -140,15 +140,8 @@ export class CommoditySettingsTab extends PluginSettingTab {
       toggle.onChange(async (value) => {
         this.plugin.settings.dynamicUpdate = value;
         await this.plugin.saveSettings();
-
-        if (value) {
-          warningText.style.display = "none";
-        } else {
-          warningText.style.display = "block";
-        }
       });
     });
 	const promotionsSection = createPromotionsSection(containerEl, this.plugin.settings.language);
-  
   }
 }

@@ -15,11 +15,13 @@ import { createPromotionsSection } from "./promotions";
 export interface CommoditySettings {
   currency: string;
   language: string;
+  dynamicUpdate: boolean;
 }
 
 export const DEFAULT_SETTINGS: CommoditySettings = {
   currency: "USD",
   language: "en",
+  dynamicUpdate: true
 };
 
 export const CURRENCY_MULTIPLIERS: Record<string, number> = {
@@ -56,15 +58,9 @@ export class CommoditySettingsTab extends PluginSettingTab {
   const { containerEl } = this;
   containerEl.empty();
   
-  const currencySetting = new Setting(containerEl);
-  const languageSetting = new Setting(containerEl);
-
-  const warningText = containerEl.createEl("p", {
-    text: getLocalizedText("changeWarningText", this.plugin.settings.language),
-    cls: "setting-error"
-  });
-
-  currencySetting
+  const promotionsSection = createPromotionsSection(containerEl, this.plugin.settings.language);
+  
+  const currencySetting = new Setting(containerEl)
     .setName(getLocalizedText("currencySetting", this.plugin.settings.language))
     .setDesc(getLocalizedText("currencyDescription", this.plugin.settings.language))
     .addDropdown(dropdown => {
@@ -97,36 +93,63 @@ export class CommoditySettingsTab extends PluginSettingTab {
       });
     });
 
-  const promotionsSection = createPromotionsSection(containerEl, this.plugin.settings.language);
+  const languageSetting = new Setting(containerEl)
+    .setName(getLocalizedText("languageSetting", this.plugin.settings.language))
+    .setDesc(getLocalizedText("languageDescription", this.plugin.settings.language))
+    .addDropdown(dropdown => {
+      dropdown.addOptions({
+        "en": "EN - English",
+        "ja": "JA - 日本語",
+        "id": "ID - Bahasa Indonesia",
+        "tl": "TL - Wikang Pilipino",
+        "vi": "VI - Tiếng Việt",
+        "es": "ES - Español"
+      });
 
-languageSetting
-  .setName(getLocalizedText("languageSetting", this.plugin.settings.language))
-  .setDesc(getLocalizedText("languageDescription", this.plugin.settings.language))
-  .addDropdown(dropdown => {
-    dropdown.addOptions({
-      "en": "EN - English",
-      "ja": "JA - 日本語",
-      "id": "ID - Bahasa Indonesia",
-      "tl": "TL - Pilipino",
-      "vi": "VI - Tiếng Việt",
-      "es": "ES - Español"
+      dropdown.setValue(this.plugin.settings.language);
+      dropdown.onChange(async (value) => {
+        this.plugin.settings.language = value;
+        await this.plugin.saveSettings();
+
+        if (this.plugin.settings.liveLanguageUpdate) {
+          currencySetting.setName(getLocalizedText("currencySetting", value));
+          currencySetting.setDesc(getLocalizedText("currencyDescription", value));
+          languageSetting.setName(getLocalizedText("languageSetting", value));
+          languageSetting.setDesc(getLocalizedText("languageDescription", value));
+          warningText.style.display = "none";
+          promotionsSection.updateLanguage(value);
+        } else {
+          warningText.style.display = "block";
+        }
+      });
     });
 
-    dropdown.setValue(this.plugin.settings.language);
-    dropdown.onChange(async (value) => {
-      this.plugin.settings.language = value;
-      await this.plugin.saveSettings();
-
-      currencySetting.setName(getLocalizedText("currencySetting", value));
-      currencySetting.setDesc(getLocalizedText("currencyDescription", value));
-      languageSetting.setName(getLocalizedText("languageSetting", value));
-      languageSetting.setDesc(getLocalizedText("languageDescription", value));
-      warningText.textContent = getLocalizedText("changeWarningText", value);
-
-      promotionsSection.updateLanguage(value);
-    });
+  const warningText = containerEl.createEl("p", {
+    text: getLocalizedText("changeWarningText", this.plugin.settings.language),
+    cls: "setting-error"
   });
 
+  if (this.plugin.settings.dynamicUpdate) {
+    warningText.style.display = "none";
+  }
+
+  new Setting(containerEl)
+    .setName(getLocalizedText("dynamicSetting", this.plugin.settings.language))
+    .setDesc(getLocalizedText("dynamicDescription", this.plugin.settings.language))
+    .addToggle(toggle => {
+      toggle.setValue(this.plugin.settings.dynamicUpdate);
+      toggle.onChange(async (value) => {
+        this.plugin.settings.dynamicUpdate = value;
+        await this.plugin.saveSettings();
+
+        if (value) {
+          warningText.style.display = "none";
+        } else {
+          warningText.style.display = "block";
+        }
+      });
+    });
+
   createPromotionsSection(containerEl, this.plugin.settings.language);
-  } 
+  }
 }

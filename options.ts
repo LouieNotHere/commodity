@@ -110,7 +110,7 @@ export class CommoditySettingsTab extends PluginSettingTab {
         this.plugin.settings.language = value;
         await this.plugin.saveSettings();
 
-        if (this.plugin.settings.liveLanguageUpdate) {
+        if (this.plugin.settings.dynamicUpdate) {
           currencySetting.setName(getLocalizedText("currencySetting", value));
           currencySetting.setDesc(getLocalizedText("currencyDescription", value));
           languageSetting.setName(getLocalizedText("languageSetting", value));

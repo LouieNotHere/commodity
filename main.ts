@@ -323,7 +323,7 @@ function getCurrencySymbol(currency: string): string {
     "USD": "US$",
     "JPY": "JP¥",
     "PHP": "₱",
-    "IDR": "RP ",
+    "IDR": "Rp ",
     "EUR": "€",
     "GBP": "£",
     "KRW": "₩",

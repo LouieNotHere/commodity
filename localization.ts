@@ -11,7 +11,7 @@
   - There is no need to translate Commodity, just leave it be.
 
   Huge thanks to:
-  - @luminepokee, @anatasim, @cookedfish01 and @kntdys for the Indonesian localization
+  - @luminepokee, @anatasim, @cookedfish01, @cleosagaming and @kntdys for the Indonesian localization
   - @nekorin727 and @maideprofessor for the Vietnamese localization
   - @operagx0535 for the Spanish localization
   - @sunrize9784 for the Bulgarian localization
@@ -122,7 +122,7 @@ export function getLocalizedText(key: string, language: string): string {
     "dynamicSetting": {
       "en": "Dynamic Language Updates",
       "ja": "動的言語更新",
-      "id": "",
+      "id": "Pembaruan Bahasa Dinamis",
       "tl": "Dinamikong Update sa Wika",
       "vi": "Cập nhật ngôn ngữ linh hoạt",
       "es": "Actualización dinámica del lenguaje",
@@ -131,7 +131,7 @@ export function getLocalizedText(key: string, language: string): string {
     "dynamicDescription": {
       "en": "Dynamically updates the texts when this option is enabled (gives a low performance impact)",
       "ja": "このオプションを有効にすると、テキストが動的に更新されます（パフォーマンスへの影響は低い）",
-      "id": "",
+      "id": "Memperbarui teks secara dinamis saat opsi ini diaktifkan (memberikan dampak kinerja yang rendah)",
       "tl": "Dinamiko na ina-update ang mga teksto kapag ang opsyon na ito ay pinagana (nagbibigay ng mababang epekto sa pagganap)",
       "vi": "Văn tự sẽ được cập nhật một cách linh hoạt hơn khi lựa chọn này được bật (có thể gây ảnh hưởng đến hiệu suất sử dụng)",
       "es": "Actualiza dinámicamente los textos cuando esta opción está activada (afecta muy poco al rendimiento)",
@@ -140,7 +140,7 @@ export function getLocalizedText(key: string, language: string): string {
     "sidebarRibbonTitle": {
       "en": "Commodity: View Active Note Value",
       "ja": "Commodity: アクティブノートの価値を表示",
-      "id": "Commodity: Lahat Cacatan Nilai Aktif",
+      "id": "Commodity: Lihat Cacatan Nilai Aktif",
       "tl": "Commodity: Tignan ang Halaga ng Aktibong Tala",
       "vi": "Commodity: Xem ghi chú hiện hành",
       "es": "Commodity: Ver Valor de la Nota Actual",
@@ -194,7 +194,7 @@ export function getLocalizedText(key: string, language: string): string {
     "noActiveNote": {
       "en": "There is no active note at the moment. Please open one to see it's separate value.",
       "ja": "現在、アクティブノートはありません。個別の価値を確認するには、ノートを開いてください。",
-      "id": "",
+      "id": "Tidak ada catatan aktif saat ini. Silahkan buka satu untuk melihat nilai terpisahnya",
       "tl": "Wala ang aktibong tala sa ngayon. Maaring mag-buksan ng isa para makita ang nahiwalay na halaga nito.",
       "vi": "Hiện tại không có cái node nào hoạt động cả. Làm ơn mở một cái ra để xem giá trị của chúng.",
       "es": "No hay ninguna nota activa en este momento. Porfavor, abre una para ver su valor.",
@@ -203,7 +203,7 @@ export function getLocalizedText(key: string, language: string): string {
     "changeWarningText": {
       "en": "Reminder: After the plugin language has been changed, at some point it wouldn't work straight away on all texts. For this change to fully take effect, it is required to restart the app.",
       "ja": "リマインダー: プラグインの言語を変更した後、すぐにすべてのテキストに反映されない場合があります。この変更を完全に適用するには、アプリの再起動が必要です。",
-      "id": "",
+      "id": "Peringatan: Setelah bahasa plugin diubah, pada saat tertentu, plugin tidak akan langsung berfungsi pada semua teks. Agar perubahan ini berlaku sepenuhnya, diperlukan untuk memulai ulang aplikasi.",
       "tl": "Paalala: Pagkatapos mapalitan ang wika ng plugin, sa ilang mga punto ay hindi ito gumagana kaagad sa lahat ng mga teksto. Para ganap na magkabisa ang pagbabagong ito, maaring kinakailangang i-restart ang app.",
       "vi": "Nhắc Nhẹ: Sau khi ngôn ngữ của plugin này được chuyển, sẽ có vài lúc nó không hiển thị đúng cách ở mọi chỗ cả. Để cho sự chuyển ngôn ngữ này có hiệu lực, thì việc khởi động lại là điều cần thiết.",
       "es": "Recuerda: Después de cambiar el lenguaje del plugin, no funcionará para todos los textos, reinicia la aplicación",

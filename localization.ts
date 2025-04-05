@@ -11,7 +11,7 @@
   - There is no need to translate Commodity, just leave it be.
 
   Huge thanks to:
-  - @luminepokee, @anatasim, @cookedfish01, @cleosagaming and @kntdys for the Indonesian localization
+  - @luminepokee, @anatasim, @cookedfish01, @cleosagaming, @kyoko_kairi and @kntdys for the Indonesian localization
   - @nekorin727 and @maideprofessor for the Vietnamese localization
   - @operagx0535 for the Spanish localization
   - @sunrize9784 for the Bulgarian localization
@@ -212,7 +212,7 @@ export function getLocalizedText(key: string, language: string): string {
 	"walletTitle": {
 	  "en": "Wallet Value",
 	  "ja": "ウォレットの価値",
-	  "id": "",
+	  "id": "Nilai Dompet",
 	  "tl": "Halaga ng Pitaka",
 	  "vi": "Giá trị của Ví",
 	  "es": "",
@@ -221,7 +221,7 @@ export function getLocalizedText(key: string, language: string): string {
 	"walletLabel": {
 	  "en": "Open Wallet Value",
 	  "ja": "ウォレットの価値を開く",
-	  "id": "",
+	  "id": "Nilai Dompet Terbuka",
 	  "tl": "Buksan ang Halaga ng Pitaka",
 	  "vi": "Mở Ví xem giá trị",
 	  "es": "",
@@ -230,7 +230,7 @@ export function getLocalizedText(key: string, language: string): string {
     "walletDesc": {
 	  "en": "Open and check the contents of the wallet and see how much money has been added from all calculated values",
 	  "ja": "ウォレットを開いて中身を確認し、各計算された価値からいくら追加されたかを確認してください",
-      "id": "",
+      "id": "Buka dan periksa isi dompet dan lihat berapa banyak uang yang telah ditambahkan Dari setiap nilai yang dihitung",
       "tl": "Buksan at suriin ang mga nilalaman ng pitaka at tignan kung gaano karaming pera ang naidagdag galing sa lahat ng naikalkula na halaga",
 	  "vi": "Mở Ví lên và kiểm tra những thứ ở trong đó cũng như xem lượng tiền đã được thêm vào sau khi tính toán",
 	  "es": "",
@@ -239,7 +239,7 @@ export function getLocalizedText(key: string, language: string): string {
 	"openWallet": {
 	  "en": "Open Wallet",
 	  "ja": "ウォレットを開く",
-	  "id": "",
+	  "id": "Dompet Terbuka",
 	  "tl": "Buksan ang Pitaka",
 	  "vi": "Mở Ví",
 	  "es": "",

@@ -11,6 +11,7 @@
 import { App, PluginSettingTab, Setting } from "obsidian";
 import { getLocalizedText } from "./localization";
 import { createPromotionsSection } from "./promotions";
+import { WalletModal } from "./modals/walletModal";
 
 export interface CommoditySettings {
   currency: string;

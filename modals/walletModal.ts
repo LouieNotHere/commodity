@@ -31,7 +31,7 @@ export class WalletModal extends Modal {
 
     var valueText: string = `${currencySymbol}${formattedValueAlt}`;
 
-	if (walletValue >= 1000000) {
+	if (walletValue >= 1000000000) {
       valueText = `${currencySymbol}${abbreviateNumber(truncatedValue)}`;
     } else if (walletValue >= 10000) {
       valueText = `${currencySymbol}${formattedValue}`;

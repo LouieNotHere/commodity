@@ -26,8 +26,9 @@ export class WalletModal extends Modal {
 	var fullValue = Number(walletValue.toFixed(25)); 
 	const truncatedValue = Math.trunc(fullValue);
 	var formattedValue: string = formatter.format(truncatedValue);
+	var formattedValueAlt: string = formatter.format(walletValue);
 
-    var valueText: string = `${currencySymbol}${formatter.format(walletValue.toFixed(2))}`;
+    var valueText: string = `${currencySymbol}${formattedValueAlt.toFixed(2)}`;
 
 	if (walletValue >= 1000000) {
       valueText = `${currencySymbol}${abbreviateNumber(truncatedValue)}`;

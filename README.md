@@ -8,6 +8,7 @@ This plugin simulates the estimated cost of your Vault in just a matter of secon
 # Features
 - The **Active Note Value** feature, which redirects you to the right sidebar when clicked from the list of ribbons.
 - The **Vault Value** feature, which pops up a window when clicked from the list of ribbons.
+- The **Wallet Value** feature, where you can see the amount of money stored from all calculations.
 
 # How to install it?
 1. Go to **Community Plugins > Browse**.

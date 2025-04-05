@@ -214,7 +214,7 @@ export function getLocalizedText(key: string, language: string): string {
 	  "ja": "ウォレットの価値",
 	  "id": "",
 	  "tl": "Halaga ng Pitaka",
-	  "vi": "",
+	  "vi": "Giá trị của Ví",
 	  "es": "",
 	  "bg": ""
     },
@@ -223,7 +223,7 @@ export function getLocalizedText(key: string, language: string): string {
 	  "ja": "ウォレットの価値を開く",
 	  "id": "",
 	  "tl": "Buksan ang Halaga ng Pitaka",
-	  "vi": "",
+	  "vi": "Mở Ví xem giá trị",
 	  "es": "",
 	  "bg": ""
 	},
@@ -232,7 +232,7 @@ export function getLocalizedText(key: string, language: string): string {
 	  "ja": "ウォレットを開いて中身を確認し、各計算された価値からいくら追加されたかを確認してください",
       "id": "",
       "tl": "Buksan at suriin ang mga nilalaman ng pitaka at tignan kung gaano karaming pera ang naidagdag galing sa lahat ng naikalkula na halaga",
-	  "vi": "",
+	  "vi": "Mở Ví lên và kiểm tra những thứ ở trong đó cũng như xem lượng tiền đã được thêm vào sau khi tính toán",
 	  "es": "",
 	  "bg": ""
 	},
@@ -241,7 +241,7 @@ export function getLocalizedText(key: string, language: string): string {
 	  "ja": "ウォレットを開く",
 	  "id": "",
 	  "tl": "Buksan ang Pitaka",
-	  "vi": "",
+	  "vi": "Mở Ví",
 	  "es": "",
 	  "bg": ""
     }

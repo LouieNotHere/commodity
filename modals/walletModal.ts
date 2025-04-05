@@ -23,9 +23,8 @@ export class WalletModal extends Modal {
     let walletValue: number = this.value * (CURRENCY_MULTIPLIERS[currency] || 1);
 	const formatter = new Intl.NumberFormat(this.language, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
+	var fullValue = Number(walletValue.toFixed(25)); 
 	const truncatedValue = Math.trunc(fullValue);
-    
-	var fullValue = Number(walletValue.toFixed(25));
 	var formattedValue: string = formatter.format(truncatedValue);
 
     var valueText: string = `${currencySymbol}${walletValue}`;

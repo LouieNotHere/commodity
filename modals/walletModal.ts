@@ -24,7 +24,7 @@ export class WalletModal extends Modal {
 	  cls: "wallet-header"
 	});
     contentEl.createEl("p", {
-	  text: `${getCurrencySymbol(this.currency)}${this.value.toFixed(2)}`,      ,
+	  text: `${getCurrencySymbol(this.currency)}${this.value.toFixed(2)}`,
       cls: "wallet-value"
     });
   }

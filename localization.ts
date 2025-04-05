@@ -208,7 +208,34 @@ export function getLocalizedText(key: string, language: string): string {
       "vi": "Nhắc Nhẹ: Sau khi ngôn ngữ của plugin này được chuyển, sẽ có vài lúc nó không hiển thị đúng cách ở mọi chỗ cả. Để cho sự chuyển ngôn ngữ này có hiệu lực, thì việc khởi động lại là điều cần thiết.",
       "es": "Recuerda: Después de cambiar el lenguaje del plugin, no funcionará para todos los textos, reinicia la aplicación",
       "bg": "Напомняне: След Промяна на Езика на Плъгина, Промяната Няма да Бъде в Ефект Веднага и на Всички Текстове. За да Бъде Промяната Напълно Активна е Нужно да Рестартирате Приложението."
-    }
+    },
+	"walletTitle": {
+	  "en": "Wallet Value",
+	  "ja": "ウォレットの価値",
+	  "id": "",
+	  "tl": "Halaga ng Pitaka",
+	  "vi": "",
+	  "es": "",
+	  "bg": ""
+    },
+	"walletLabel": {
+	  "en": "Open Wallet Value",
+	  "ja": "ウォレットの価値を開く",
+	  "id": "",
+	  "tl": "Buksan ang Halaga ng Pitaka",
+	  "vi": "",
+	  "es": "",
+	  "bg": ""
+	},
+    "walletDesc": {
+	  "en": "Check the contents of the wallet and see how much money has been added from all of the value calculations",
+	  "ja": "ウォレットの中身を確認して、すべての価値計算からどれだけのお金が追加されたかを確認しましょう",
+      "id": "",
+      "tl": "Suriin ang mga nilalaman ng pitaka at tignan kung gaano karaming pera ang naidagdag galing sa lahat ng pagkalkula ng halaga",
+	  "vi": "",
+	  "es": "",
+	  "bg": ""
+	}
   };
   
   return LOCALIZED_STRINGS[key]?.[language] || LOCALIZED_STRINGS[key]?.["en"] || key;

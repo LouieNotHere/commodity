@@ -146,6 +146,18 @@ export class CommoditySettingsTab extends PluginSettingTab {
         await this.plugin.saveSettings();
       });
     });
+
+    new Setting(containerEl)
+    .setName(getLocalizedText("walletLabel", this.plugin.settings.language))
+    .setDesc(getLocalizedText("walletDesc", this.plugin.settings.language))
+    .addButton(button => {
+      button.setButtonText(getLocalizedText("openWallet", this.plugin.settings.language));
+      button.onClick(() => {
+        const modal = new WalletModal(this.app, this.plugin.settings.walletValue, this.plugin.settings.currency, this.plugin.settings.language);
+        modal.open();
+      });
+    }); 
+	
 	const promotionsSection = createPromotionsSection(containerEl, this.plugin.settings.language);
   }
 }

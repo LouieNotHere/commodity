@@ -373,6 +373,7 @@ export function getCurrencySymbol(currency: string): string {
     "INR": "₹",
     "BND": "B$",
     "IRR": "Rls ",
+	"VND": "₫"
   };
   return symbols[currency] || "$";
 }

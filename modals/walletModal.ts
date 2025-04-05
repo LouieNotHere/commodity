@@ -1,3 +1,4 @@
+import { CommoditySettingsTab, DEFAULT_SETTINGS, CURRENCY_MULTIPLIERS, CommoditySettings } from "../options";
 import { Modal, App } from "obsidian";
 import { getLocalizedText } from "../localization";
 import { getCurrencySymbol } from "../main";
@@ -16,6 +17,9 @@ export class WalletModal extends Modal {
 
   onOpen() {
     const { contentEl } = this;
+
+    let num: walletValue = this.value * (CURRENCY_MULTIPLIERS[currency] || 1);
+
 	contentEl.style.textAlign = "center";
 	contentEl.style.fontFamily = "var(--font-interface, var(--default-font))";
 	  
@@ -24,7 +28,7 @@ export class WalletModal extends Modal {
 	  cls: "wallet-header"
 	});
     contentEl.createEl("p", {
-	  text: `${getCurrencySymbol(this.currency)}${this.value.toFixed(2)}`,
+	  text: `${getCurrencySymbol(this.currency)}${walletValue.toFixed(2)}`,
       cls: "wallet-value"
     });
   }

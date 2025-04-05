@@ -21,7 +21,7 @@ export class WalletModal extends Modal {
 	const currencySymbol = getCurrencySymbol(this.currency);
 
     let walletValue: number = this.value * (CURRENCY_MULTIPLIERS[this.currency] || 1);
-	const formatter = new Intl.NumberFormat(this.language, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+	const formatter = new Intl.NumberFormat(this.language, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 	var fullValue = Number(walletValue.toFixed(25));
 	var fixedValue = Number(walletValue.toFixed(2));

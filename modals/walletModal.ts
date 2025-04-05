@@ -16,8 +16,17 @@ export class WalletModal extends Modal {
 
   onOpen() {
     const { contentEl } = this;
-    contentEl.createEl("h2", { text: getLocalizedText("walletTitle", this.language) });
-    contentEl.createEl("p", { text: `${getCurrencySymbol(this.currency)}${this.value.toFixed(2)}` });
+	contentEl.style.textAlign = "center";
+	contentEl.style.fontFamily = "var(--font-interface, var(--default-font))";
+	  
+    contentEl.createEl("h2", {
+	  text: getLocalizedText("walletTitle", this.language),
+	  cls: "wallet-header"
+	});
+    contentEl.createEl("p", {
+	  text: `${getCurrencySymbol(this.currency)}${this.value.toFixed(2)}`,      ,
+      cls: "wallet-value"
+    });
   }
 
   onClose() {

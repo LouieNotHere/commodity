@@ -215,7 +215,7 @@ export function getLocalizedText(key: string, language: string): string {
 	  "id": "Nilai Dompet",
 	  "tl": "Halaga ng Pitaka",
 	  "vi": "Giá trị của Ví",
-	  "es": "",
+	  "es": "Valor de la Billetera",
 	  "bg": ""
     },
 	"walletLabel": {
@@ -224,7 +224,7 @@ export function getLocalizedText(key: string, language: string): string {
 	  "id": "Nilai Dompet Terbuka",
 	  "tl": "Buksan ang Halaga ng Pitaka",
 	  "vi": "Mở Ví xem giá trị",
-	  "es": "",
+	  "es": "Abrir el Valor de la Billetera",
 	  "bg": ""
 	},
     "walletDesc": {
@@ -233,7 +233,7 @@ export function getLocalizedText(key: string, language: string): string {
       "id": "Buka dan periksa isi dompet dan lihat berapa banyak uang yang telah ditambahkan Dari setiap nilai yang dihitung",
       "tl": "Buksan at suriin ang mga nilalaman ng pitaka at tignan kung gaano karaming pera ang naidagdag galing sa lahat ng naikalkula na halaga",
 	  "vi": "Mở Ví lên và kiểm tra những thứ ở trong đó cũng như xem lượng tiền đã được thêm vào sau khi tính toán",
-	  "es": "",
+	  "es": "Abre y revisa el contenido de la billetera y verás cuanto dinero ha sido añadido de todos los valores calculados",
 	  "bg": ""
 	},
 	"openWallet": {
@@ -242,7 +242,7 @@ export function getLocalizedText(key: string, language: string): string {
 	  "id": "Dompet Terbuka",
 	  "tl": "Buksan ang Pitaka",
 	  "vi": "Mở Ví",
-	  "es": "",
+	  "es": "Abrir Billetera",
 	  "bg": ""
     }
   };

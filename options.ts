@@ -17,12 +17,14 @@ export interface CommoditySettings {
   currency: string;
   language: string;
   dynamicUpdate: boolean;
+  walletValue: number;
 }
 
 export const DEFAULT_SETTINGS: CommoditySettings = {
   currency: "USD",
   language: "en",
-  dynamicUpdate: true
+  dynamicUpdate: true,
+  walletValue: 0
 };
 
 export const CURRENCY_MULTIPLIERS: Record<string, number> = {

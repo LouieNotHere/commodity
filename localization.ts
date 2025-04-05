@@ -235,7 +235,16 @@ export function getLocalizedText(key: string, language: string): string {
 	  "vi": "",
 	  "es": "",
 	  "bg": ""
-	}
+	},
+	"openWallet": {
+	  "en": "Open Wallet",
+	  "ja": "ウォレットを開く",
+	  "id": "",
+	  "tl": "Buksan ang Pitaka",
+	  "vi": "",
+	  "es": "",
+	  "bg": ""
+    }
   };
   
   return LOCALIZED_STRINGS[key]?.[language] || LOCALIZED_STRINGS[key]?.["en"] || key;

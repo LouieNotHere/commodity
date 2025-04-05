@@ -46,7 +46,8 @@ export const CURRENCY_MULTIPLIERS: Record<string, number> = {
   "TWD": 31,
   "INR": 83,
   "BND": 1.35,
-  "IRR": 420000
+  "IRR": 420000,
+  "VND": 25000
 };
 
 export class CommoditySettingsTab extends PluginSettingTab {
@@ -84,7 +85,8 @@ export class CommoditySettingsTab extends PluginSettingTab {
         "TWD": "TWD - New Taiwan Dollar",
         "INR": "INR - Indian Rupee",
         "BND": "BND - Brunei Dollar",
-        "IRR": "IRR - Iranian Rial"
+        "IRR": "IRR - Iranian Rial",
+		"VND": "VND - Vietnamese Dong"
       });
 
       dropdown.setValue(this.plugin.settings.currency);

@@ -116,6 +116,9 @@ export class CommoditySettingsTab extends PluginSettingTab {
           currencySetting.setDesc(getLocalizedText("currencyDescription", value));
           languageSetting.setName(getLocalizedText("languageSetting", value));
           languageSetting.setDesc(getLocalizedText("languageDescription", value));
+		  walletSetting.setName(getLocalizedText("walletLabel", value));
+	      walletSetting.setName(getLocalizedText("walletDesc", value));
+		  walletSetting.setName(getLocalizedText("openWallet", value));
 		  dynamicUpdateSetting.setName(getLocalizedText("dynamicSetting", value));
 		  dynamicUpdateSetting.setDesc(getLocalizedText("dynamicDescription", value));
           warningText.style.display = "none";
@@ -148,7 +151,7 @@ export class CommoditySettingsTab extends PluginSettingTab {
       });
     });
 
-    new Setting(containerEl)
+  var walletSetting = new Setting(containerEl)
     .setName(getLocalizedText("walletLabel", this.plugin.settings.language))
     .setDesc(getLocalizedText("walletDesc", this.plugin.settings.language))
     .addButton(button => {

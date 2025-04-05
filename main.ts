@@ -318,7 +318,7 @@ async function getVaultAgeInDays(vault: Vault): Promise < number > {
   }
 }
 
-function getCurrencySymbol(currency: string): string {
+export function getCurrencySymbol(currency: string): string {
   const symbols: Record < string, string > = {
     "USD": "US$",
     "JPY": "JP¥",

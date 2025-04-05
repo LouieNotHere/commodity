@@ -4,6 +4,12 @@
   If this file is not in the plugin folder itself, it may cause some visual bugs.
 
 */
+
+/*
+
+  for the main modal (vault value)
+
+*/
 .vault-value-modal {
     text-align: center;
     font-family: var(--font-interface);
@@ -53,4 +59,20 @@
 }
 #commodity-promotions-tab {
   display: none;
+}
+
+/*
+
+  for the wallet modal
+
+*/
+
+.wallet-header {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.wallet-value {
+    font-size: 2em;
+    font-weight: bold;
 }

@@ -119,8 +119,8 @@ export class CommoditySettingsTab extends PluginSettingTab {
           languageSetting.setName(getLocalizedText("languageSetting", value));
           languageSetting.setDesc(getLocalizedText("languageDescription", value));
 		  walletSetting.setName(getLocalizedText("walletLabel", value));
-	      walletSetting.setName(getLocalizedText("walletDesc", value));
-		  walletSetting.setName(getLocalizedText("openWallet", value));
+	      walletSetting.setDesc(getLocalizedText("walletDesc", value));
+		  walletButton.setButtonText(getLocalizedText("openWallet", value));
 		  dynamicUpdateSetting.setName(getLocalizedText("dynamicSetting", value));
 		  dynamicUpdateSetting.setDesc(getLocalizedText("dynamicDescription", value));
           warningText.style.display = "none";
@@ -153,11 +153,13 @@ export class CommoditySettingsTab extends PluginSettingTab {
       });
     });
 
+  let walletButton: ButtonComponent;
+
   var walletSetting = new Setting(containerEl)
     .setName(getLocalizedText("walletLabel", this.plugin.settings.language))
     .setDesc(getLocalizedText("walletDesc", this.plugin.settings.language))
     .addButton(button => {
-      button.setButtonText(getLocalizedText("openWallet", this.plugin.settings.language));
+      walletButton = button.setButtonText(getLocalizedText("openWallet", this.plugin.settings.language));
       button.onClick(() => {
         const modal = new WalletModal(this.app, this.plugin.settings.walletValue, this.plugin.settings.currency, this.plugin.settings.language);
         modal.open();

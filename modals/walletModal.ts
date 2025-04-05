@@ -2,6 +2,7 @@ import { CommoditySettingsTab, DEFAULT_SETTINGS, CURRENCY_MULTIPLIERS, Commodity
 import { Modal, App } from "obsidian";
 import { getLocalizedText } from "../localization";
 import { getCurrencySymbol } from "../main";
+import { abbreviateNumber } from "../abbrNum";
 
 export class WalletModal extends Modal {
   value: number;
@@ -18,8 +19,20 @@ export class WalletModal extends Modal {
   onOpen() {
     const { contentEl } = this;
 
-    let num: walletValue = this.value * (CURRENCY_MULTIPLIERS[currency] || 1);
+    let walletValue: number = this.value * (CURRENCY_MULTIPLIERS[currency] || 1);
+	const formatter = new Intl.NumberFormat(this.language, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    
+	var fullValue: number = walletValue.toFixed(25);
+	var formattedValue: string = formatter.format(Math.trunc(walletValue));
 
+    var valueText: string = `${getCurrencySymbol(this.currency)}${}`;
+
+	if (walletValue >= 1000000) {
+      valueText = `${currencySymbol}${abbreviateNumber(walletValue)}`;
+    } else if (walletValue>= 1000) {
+      valueText = `${currencySymbol}${formattedValue}`;
+	}
+	  
 	contentEl.style.textAlign = "center";
 	contentEl.style.fontFamily = "var(--font-interface, var(--default-font))";
 	  
@@ -28,7 +41,7 @@ export class WalletModal extends Modal {
 	  cls: "wallet-header"
 	});
     contentEl.createEl("p", {
-	  text: `${getCurrencySymbol(this.currency)}${walletValue.toFixed(2)}`,
+	  text: valueText,
       cls: "wallet-value"
     });
   }

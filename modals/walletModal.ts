@@ -1,5 +1,5 @@
 import { Modal, App } from "obsidian";
-import { getLocalizedText } from "./localization";
+import { getLocalizedText } from "../localization";
 
 export class WalletModal extends Modal {
   value: number;

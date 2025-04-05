@@ -40,6 +40,10 @@ export default class CommodityPlugin extends Plugin {
         const vaultStats = await calculateVaultStats(this.app.vault);
         const vaultValue = await calculateVaultValue(vaultStats, this.settings.currency, this.app.vault);
         new VaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
+
+	    const rawValue = await calculateRawValue(vaultStats, this.settings.currency, this.app.vault);
+		this.settings.walletValue += rawValue;
+		await this.saveSettings();
       },
       hotkeys: [
       {
@@ -55,6 +59,10 @@ export default class CommodityPlugin extends Plugin {
         const vaultStats = await calculateVaultStats(this.app.vault);
         const vaultValue = await calculateVaultValue(vaultStats, this.settings.currency, this.app.vault);
         new VaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
+
+        const rawValue = await calculateRawValue(vaultStats, this.settings.currency, this.app.vault);
+		this.settings.walletValue += rawValue;
+		await this.saveSettings();
       }
     );
     
@@ -65,6 +73,10 @@ export default class CommodityPlugin extends Plugin {
         const vaultStats = await calculateVaultStats(this.app.vault);
         const vaultValue = await calculateReworkedValue(vaultStats, this.settings.currency, this.app.vault);
         new ReworkedVaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
+
+        const rawValue = await calculateRawReworkedValue(vaultStats, this.settings.currency, this.app.vault);
+		this.settings.walletValue += rawValue;
+		await this.saveSettings();
       },
       hotkeys: [
       {
@@ -80,6 +92,10 @@ export default class CommodityPlugin extends Plugin {
         const vaultStats = await calculateVaultStats(this.app.vault);
         const vaultValue = await calculateReworkedValue(vaultStats, this.settings.currency, this.app.vault);
         new ReworkedVaultValueModal(this.app, vaultValue, this.settings.currency, this.language).open();
+
+		const rawValue = await calculateRawReworkedValue(vaultStats, this.settings.currency, this.app.vault);
+		this.settings.walletValue += rawValue;
+		await this.saveSettings();
       }
     );
     
@@ -290,6 +306,24 @@ async function calculateReworkedValue(stats: VaultStats, currency: string, vault
   let value = (a / 92500) * (1 + (b / 105000)) + (c / 50) + (d / 12250) + (e / 30);
   
   return Number((value * (CURRENCY_MULTIPLIERS[currency] || 1)).toFixed(50));
+}
+
+async function calculateRawReworkedValue(stats: VaultStats, currency: string, vault: Vault): Promise < number > {
+  const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
+  const e = await getVaultAgeInDays(vault) / 30;
+  
+  let value = (a / 92500) * (1 + (b / 105000)) + (c / 50) + (d / 12250) + (e / 30);
+
+  return Number((value).toFixed(50));
+}
+
+async function calculateRawValue(stats: VaultStats, currency: string, vault: Vault): Promise < number > {
+  const { totalCharacters: a, totalWords: b, totalFiles: c, totalSentences: d } = stats;
+  const e = await getVaultAgeInDays(vault) / 30;
+  
+  let value = (a / 122000) * (1 + (b / 130000)) + (c / 200) + (d / 21000) + (e / 60);
+
+  return Number((value).toFixed(50));
 }
 
 async function getVaultAgeInDays(vault: Vault): Promise < number > {

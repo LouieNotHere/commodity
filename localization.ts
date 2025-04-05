@@ -228,10 +228,10 @@ export function getLocalizedText(key: string, language: string): string {
 	  "bg": ""
 	},
     "walletDesc": {
-	  "en": "Check the contents of the wallet and see how much money has been added from all of the value calculations",
-	  "ja": "ウォレットの中身を確認して、すべての価値計算からどれだけのお金が追加されたかを確認しましょう",
+	  "en": "Open and check the contents of the wallet and see how much money has been added from all calculated values",
+	  "ja": "ウォレットを開いて中身を確認し、各計算された価値からいくら追加されたかを確認してください",
       "id": "",
-      "tl": "Suriin ang mga nilalaman ng pitaka at tignan kung gaano karaming pera ang naidagdag galing sa lahat ng pagkalkula ng halaga",
+      "tl": "Buksan at suriin ang mga nilalaman ng pitaka at tignan kung gaano karaming pera ang naidagdag galing sa lahat ng naikalkula na halaga",
 	  "vi": "",
 	  "es": "",
 	  "bg": ""

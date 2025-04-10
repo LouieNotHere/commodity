@@ -28,4 +28,4 @@ This plugin is currently open for beta testing. If you want early access to the 
 # Support the Developer
 Feeling generous enough? Feel free to share some money, and it'd be great if you consider donating to the developer's Ko-fi page!
 
-[![](https://poweredbyrobots.com/wp-content/uploads/2021/01/support-me-ko-fi.png)](https://ko-fi.com/paytouse1774)
+[![](https://poweredbyrobots.com/wp-content/uploads/2021/01/support-me-ko-fi.png)](https://ko-fi.com/ruikurenaii)
